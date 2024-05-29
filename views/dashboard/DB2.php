@@ -33,6 +33,7 @@ VALUES ('$nombre', '$apellido', '$usuario', '$tipoDocumento', '$numeroDocumento'
   echo "El usuario ha sido registrado exitosamente";
   header("Location: ../administrador/?c=administrador&m=index", true, 301);
 
+
   if (mysqli_connect_errno()) {
     echo "Error al conectar con MySQL: " . mysqli_connect_error();
     exit();
@@ -44,6 +45,12 @@ VALUES ('$nombre', '$apellido', '$usuario', '$tipoDocumento', '$numeroDocumento'
   mysqli_close($conexion);
   echo "El usuario ha sido registrado exitosamente";
   header("Location: ../administrador/?c=administrador&m=index", true, 301);
+
+$resultado = mysqli_query($conexion, $query) or die("error: " . mysqli_error($conexion));
+mysqli_close($conexion);
+echo "El usuario ha sido registrado exitosamente";
+header("Location: /SENA/ADMIREDD/?c=administrador&m=index", true, 301);
+
 
   if (mysqli_connect_errno()) {
     echo "Error al conectar con MySQL: " . mysqli_connect_error();

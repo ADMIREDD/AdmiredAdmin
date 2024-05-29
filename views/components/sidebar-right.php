@@ -36,7 +36,8 @@
                         <label class="custom-control-label" for="rtl-mode-switch">RTL Mode</label>
                     </div>
 
-                    <a href="https://1.envato.market/XY7j5" class="btn btn-danger btn-block mt-3" target="_blank"><i class="mdi mdi-download mr-1"></i> Download Now</a>
-                </div>
-            </div> <!-- end slimscroll-menu-->
+            <a href="https://1.envato.market/XY7j5" class="btn btn-danger btn-block mt-3" target="_blank"><i
+                    class="mdi mdi-download mr-1"></i> Download Now</a>
         </div>
+    </div> <!-- end slimscroll-menu-->
+</div>

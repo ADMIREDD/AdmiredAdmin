@@ -1,0 +1,17 @@
+[
+    {
+      "id": 1,
+      "nombre": "jose",
+      "apellido": "rosellon",
+      "usuario": "joserosellon",
+      "tipo_documento_id": "C.C",
+      "no_documento": "12345678",
+      "fecha_nacimiento": "20/07/1990",
+      "email": "joser@gmail.com",
+      "contrasena": "12345678",
+      "telefono": "312345678",
+      "cargo_id": "propietario",
+      "torre": "2",
+      "apto": "2244"
+    }
+] 
