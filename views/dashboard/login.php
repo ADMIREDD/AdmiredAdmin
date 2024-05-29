@@ -3,74 +3,66 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login y Register - MagtimusPro</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-
-
-    <link rel="stylesheet" href="./assets/css/login.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--Favicons-->
+    <link rel="icon" type="image/x-icon" href="/SENA/ADMIREDD/assets/img/logos/logo.png" />
+    <link rel="shortcut icon" type="image/x-icon" href="/SENA/ADMIREDD/assets/img/logos/logo.png" />
+    <!--Css Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!--Css App-->
+    <link href="/SENA/ADMIREDD/assets/css/style.css" rel="stylesheet">
+    <title>LOGIN FIREBASE</title>
 </head>
 
 <body>
+    <!--Container-->
+    <div class="container">
+        <!--Container Form-->
+        <div class="row">
+            <div class="col-6 mx-auto mt-5 p-2 container-form">
+                <h3 class="text-center mt-1">LOGIN USER</h3>
 
-    <main>
-
-        <div class="contenedor__todo">
-            <div class="caja__trasera">
-                <div class="caja__trasera-login">
-                    <h3>¿Ya tienes una cuenta?</h3>
-                    <p>Inicia sesión para entrar en la página</p>
-                    <button id="btn__iniciar-sesion">Iniciar Sesión</button>
-                </div>
-                <div class="caja__trasera-register">
-                    <h3>¿Aún no tienes una cuenta?</h3>
-                    <p>Regístrate para que puedas iniciar sesión</p>
-                    <button id="btn__registrarse">Regístrarse</button>
-                </div>
-            </div>
-
-            <!--Formulario de Login y registro-->
-            <div class="contenedor__login-register">
-                <!--Login-->
-            <form action="views/administrador/login1.php" method="post">
-                    <label for="email">Correo electrónico:</label><br>
-                    <input type="email" id="email" name="email" required><br>
-                    <label for="password">Contraseña:</label><br>
-                    <input type="password" id="password" name="password" required><br><br>
-                    <input type="submit" value="Iniciar sesión">
+                <form id="formLogin" class="mt-5 p-2 mb-5 ">
+                    <div class="form-floating mb-3">
+                        <input type="email" minlength="6" maxlength="30" title="Validate the data entered"
+                            class="form-control" id="user" placeholder="Enter User" required>
+                        <label for="user">User</label>
+                    </div>
+                    <label for="password">Password</label>
+                    <div class="input-group mb-3">
+                        <input type="password" minlength="6" maxlength="12" title="Validate the data entered"
+                            class="form-control" id="password" placeholder="Enter Password" required>
+                        <button class="btn btn-outline-secondary" type="button" id="btn-password"><img
+                                src="/SENA/ADMIREDD/assets/img/icons/eye-slash-fill.svg" alt></button>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary w-100 mb-3">SIGN
+                            IN</button>
+                        <a href="/SENA/ADMIREDD/views/dashboard/create.php" class="btn btn-secondary w-100">CREATE
+                            USER</a>
+                        <a href="/SENA/ADMIREDD/views/dashboard/recoverPassword.php" class="link-success">Recover your
+                            password</a>
+                    </div>
                 </form>
-                
 
-                <!--Register-->
-                <form action="views/dashboard/DB2.php" method="post" class="formulario__register">
-                    <h2>Regístrarse</h2>
-                    <input type="text" name="nombre" placeholder="Nombre">
-                    <input type="text" name="apellido" placeholder="Apellido">
-                    <input type="text" name="usuario" placeholder="Usuario">
-                    <select name="tipo_documento">
-                        <option value="1">C.C.</option>
-                        <option value="2">C.E.</option>
-                        <option value="3">NIT.</option>
-                    </select>
-                    <input type="text" name="no_documento" placeholder="no_documento">
-                    <input type="date" name="fecha_nacimiento" placeholder="Fecha nacimiento">
-                    <input type="text" name="email" placeholder="Email">
-                    <input type="password" name="contrasena" placeholder="Contrasena">
-                    <input type="text" name="telefono" placeholder="Telefono">
-                    <select name="cargo">
-                        <option value="2">administrador</option>
-                    </select>
-                    <input type="text" name="torre" placeholder="Torre">
-                    <input type="text" name="apto" placeholder="Apto">
-                    <button type="submit"> Regístrarse</button>
-                </form>
             </div>
         </div>
+        <!--End Container Form-->
+    </div>
+    <!--End Container-->
+    <!--Script bootstrap-->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+        crossorigin="anonymous"></script>
+    <!--Script app-->
 
-    </main>
+    <!--Script module-->
+    <script src="/SENA/ADMIREDD/assets/js/user/main.js" type="module"></script>
 
-    <script src="./assets/js/scrip.js"></script>
 </body>
 
 </html>

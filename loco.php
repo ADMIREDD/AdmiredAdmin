@@ -8,8 +8,8 @@
             <!-- start page title -->
             <div class="row">
                 <div class="col-12">
-                        <h4 class="page-title">Crear Usuario</h4>
-                        <div class="page-title-box"><a href="?c=administrador&m=index" class="btn btn-success">Volver</a>
+                    <h4 class="page-title">Crear Usuario</h4>
+                    <div class="page-title-box"><a href="?c=administrador&m=index" class="btn btn-success">Volver</a>
                         <section class="form-register">
                             <h3>Crear Usuario</h3>
                             <input class="controls" type="text" name="nombres" id="nombres"
