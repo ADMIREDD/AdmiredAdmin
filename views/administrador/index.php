@@ -1,3 +1,6 @@
+
+<link rel="stylesheet" href="../../assets/css/index.css">
+=======
 <!-- <head>-->
 <link type="image/x-icon" href="../assets/img/logos/logo.png" rel="icon">
 <!--Bootstrap css-->

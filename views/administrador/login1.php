@@ -28,7 +28,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($resultado->num_rows > 0) {
         // Inicio de sesión exitoso
         echo "Inicio de sesión exitoso";
+        header("Location: ./?c=pqr&m=pqr", true, 301);
         header("Location: /SENA/ADMIREDD/?c=pqr&m=pqr", true, 301);
+
         // Puedes redirigir o realizar acciones posteriores al inicio de sesión aquí
     } else {
         // Credenciales incorrectas
