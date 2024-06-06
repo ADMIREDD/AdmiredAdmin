@@ -43,11 +43,11 @@
                                                     <th>ID</th>
                                                     <th>NOMBRE</th>
                                                     <th>APELLIDO</th>
-                                                    <th>USUARIO</th>
                                                     <th>TIPO_DOCUMENTO_ID</th>
                                                     <th>NO_DOCUMENTO</th>
                                                     <th>FECHA_NACIMIENTO</th>
-                                                    <th>EMAIL</th>                                
+                                                    <th>EMAIL</th>
+                                                    <th>CONTRASENA</th>                             
                                                     <th>TELEFONO</th>
                                                     <th>CARGO_ID</th>
                                                     <th>TORRE</th>
@@ -65,7 +65,6 @@
                                                         <td><?php echo $rows['ID']; ?></td>
                                                         <td><?php echo $rows['NOMBRE']; ?></td>
                                                         <td><?php echo $rows['APELLIDO']; ?></td>
-                                                        <td><?php echo $rows['USUARIO']; ?></td>
                                                         <td><?php echo $rows['TIPO_DOCUMENTO_ID']; ?></td>
                                                         <td><?php echo $rows['NO_DOCUMENTO']; ?></td>
                                                         <td><?php echo $rows['FECHA_NACIEMIENTO']; ?></td>
@@ -75,33 +74,33 @@
                                                         <td><?php echo $rows['CARGO_ID']; ?></td>
                                                         <td><?php echo $rows['TORRE']; ?></td>
                                                         <td><?php echo $rows['APTO']; ?></td>
-                                                    <td>
+                                                        <td>
                                                         <a href="?c=administrador&m=edit&userId=<?php echo $rows['ID']; ?>" class="boton2">Editar</a>
                                                         <a href="?c=administrador&m=destroy&userId=<?php echo $rows['ID']; ?>" class="boton3">Eliminar</a>
-
-
+                                                    </td>
+                                                </tr>
+                                            <?php
+                                            }
+                                            ?>
 
                                             <tbody id="tbody">
-
                                             
                                             <thead>
                                                 <tr class="text-center">
                                                     <th>ID</th>
                                                     <th>NOMBRE</th>
                                                     <th>APELLIDO</th>
-                                                    <th>USUARIO</th>
                                                     <th>TIPO_DOCUMENTO_ID</th>
                                                     <th>NO_DOCUMENTO</th>
                                                     <th>FECHA_NACIMIENTO</th>
                                                     <th>EMAIL</th> 
+                                                    <th>CONTRASENA</th>
                                                     <th>TELEFONO</th>
                                                     <th>CARGO_ID</th>
                                                     <th>TORRE</th>
                                                     <th>APTO</th>
                                                 </tr>
                                             </thead>
-                                            
-
                                         </table>
 
                                     </div>
@@ -137,10 +136,6 @@
                             <input class="controls" type="text" name="apellido" id="apellido"
                                 placeholder="Ingrese su Apellido">
                             </div>
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="usuario" placeholder="usuario" required>
-                                <label for="name">Ingrese su usuario</label>
-                            </div>
                             <div class="form-floating mb-3" id="tipo_documento_id">
                                 <select name="tipo_documento">
                                 <option value="1">C.C.</option>
@@ -155,8 +150,13 @@
                             <div class="form-floating mb-3">
                             <input type="date" class="controls" name="fecha_nacimiento" id="fecha_nacimiento" placeholder="Ingrese su Fecha de Nacimiento">
                             </div>
+                            <div class="form-floating mb-3">
                                 <input type="text" class="form-control" id="email" placeholder="ingrese su correo" required>
-
+                                <label for="name">ingrese su correo</label>
+                            </div>
+                                <div class="form-floating mb-3">
+                                <input type="password" class="form-control" id="contrasena" placeholder="ingrese su contrasena" required>
+                                <label for="name">ingrese su contraseña</label>
                             </div>
                             
                             <div class="form-floating mb-3">
@@ -185,8 +185,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" id="btnSubmit" form="formUser" class="btn btn-primary">Save
-                    changes</button>
+                <button type="submit" id="btnSubmit" form="formUser" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>

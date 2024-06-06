@@ -5,8 +5,8 @@
  */
 
 const icons = new Array(
-  "/SENA/ADMIREDD/assets/img/icons/eye-fill.svg",
-  "/SENA/ADMIREDD/assets/img/icons/eye-slash-fill.svg"
+  "/SENA/AdmiredAdmin/assets/img/icons/eye-fill.svg",
+  "/SENA/AdmiredAdmin/assets/img/icons/eye-slash-fill.svg"
 );
 
 /**

@@ -99,8 +99,6 @@ implementando-login-crud-firebase
                                         placeholder="Ingrese su nombre">
                                     <input class="controls" type="text" name="apellido" id="apellido"
                                         placeholder="Ingrese su Apellido">
-                                    <input class="controls" type="text" name="usuario" id="usuario"
-                                        placeholder="Ingrese su usuario">
                                     <select name="tipo_documento">
                                         <option value="1">C.C.</option>
                                         <option value="2">C.E.</option>

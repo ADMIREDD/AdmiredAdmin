@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Inicio de sesión exitoso
         echo "Inicio de sesión exitoso";
         header("Location: ./?c=pqr&m=pqr", true, 301);
-        header("Location: /SENA/ADMIREDD/?c=pqr&m=pqr", true, 301);
+        header("Location: /SENA/AdmiredAdmin/?c=pqr&m=pqr", true, 301);
 
         // Puedes redirigir o realizar acciones posteriores al inicio de sesión aquí
     } else {

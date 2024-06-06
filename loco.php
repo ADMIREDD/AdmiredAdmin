@@ -24,6 +24,8 @@
                                 placeholder="Ingrese su Fecha de Nacimiento">
                             <input class="controls" type="text" name="correo_electronico" id="correo_electronico"
                                 placeholder="Ingrese su Correo Electronico">
+                                <input class="controls" type="text" name="contrasena" id="contrasena"
+                                placeholder="Ingrese su Contrasena">
                             <input class="controls" type="text" name="numero_telefono" id="numero_telefono"
                                 placeholder="Ingrese su Numero de telefono">
                             <input class="controls" type="password" name="correo" id="correo"
