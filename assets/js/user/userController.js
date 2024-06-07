@@ -54,7 +54,7 @@ if (objForm)
           //console.log(data);
           alert("User Create");
           FunApp.cleanForm(objForm);
-          window.location.href = "/SENA/ADMIREDD/?c=pqr&m=pqr";
+          window.location.href = "/SENA/AdmiredAdmin/?c=pqr&m=pqr";
         });
       } catch (error) {
         const errorCode = error.code;
@@ -119,7 +119,7 @@ if (objFormLogin)
           pass
         ).then((userCredential) => {
           console.log(userCredential.user);
-          window.location.href = "/SENA/ADMIREDD/?c=pqr&m=pqr";
+          window.location.href = "/SENA/AdmiredAdmin/?c=pqr&m=pqr";
         });
       } catch (error) {
         const errorCode = error.code;

@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (mysqli_query($conexion, $query)) {
         echo "El usuario ha sido eliminado exitosamente";
-        header("Location: /SENA/ADMIREDD/?c=administrador&m=index", true, 301);
+        header("Location: /SENA/AdmiredAdmin/?c=administrador&m=index", true, 301);
     } else {
         echo "Error al eliminar usuario: " . mysqli_error($conexion);
     }

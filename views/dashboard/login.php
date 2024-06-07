@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--Favicons-->
-    <link rel="icon" type="image/x-icon" href="/SENA/ADMIREDD/assets/img/logos/logo.png" />
-    <link rel="shortcut icon" type="image/x-icon" href="/SENA/ADMIREDD/assets/img/logos/logo.png" />
+    <link rel="icon" type="image/x-icon" href="/SENA/AdmiredAdmin/assets/img/logos/logo.png" />
+    <link rel="shortcut icon" type="image/x-icon" href="/SENA/AdmiredAdmin/assets/img/logos/logo.png" />
     <!--Css Bootstrap-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -34,14 +34,14 @@
                         <input type="password" minlength="6" maxlength="12" title="Validate the data entered"
                             class="form-control" id="password" placeholder="Enter Password" required>
                         <button class="btn btn-outline-secondary" type="button" id="btn-password"><img
-                                src="/SENA/ADMIREDD/assets/img/icons/eye-slash-fill.svg" alt></button>
+                                src="/SENA/AdmiredAdmin/assets/img/icons/eye-slash-fill.svg" alt></button>
                     </div>
                     <div>
                         <button type="submit" class="btn btn-primary w-100 mb-3">SIGN
                             IN</button>
-                        <a href="/SENA/ADMIREDD/views/dashboard/create.php" class="btn btn-secondary w-100">CREATE
+                        <a href="/SENA/AdmiredAdmin/views/dashboard/create.php" class="btn btn-secondary w-100">CREATE
                             USER</a>
-                        <a href="/SENA/ADMIREDD/views/dashboard/recoverPassword.php" class="link-success">Recover your
+                        <a href="/SENA/AdmiredAdmin/views/dashboard/recoverPassword.php" class="link-success">Recover your
                             password</a>
                     </div>
                 </form>
@@ -61,7 +61,7 @@
     <!--Script app-->
 
     <!--Script module-->
-    <script src="/SENA/ADMIREDD/assets/js/user/main.js" type="module"></script>
+    <script src="/SENA/AdmiredAdmin/assets/js/user/main.js" type="module"></script>
 
 </body>
 
