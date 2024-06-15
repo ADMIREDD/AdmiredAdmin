@@ -1,0 +1,43 @@
+.content-page {
+    padding: 20px;
+    background-color: #fffcfb; 
+}
+
+.page-title-box {
+    background-color: #fdf9f8;
+    padding: 15px;
+    border-bottom:2px solid #f8f6f5;
+    margin-bottom: 20px;
+    color: rgb(250, 244, 244);
+}
+
+.page-title {
+    margin: 0;
+    font-size: 10px;
+}
+
+h1, h2 {
+    margin: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 2px solid #fffcfc;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 2px solid #000000;
+}
+td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 2px solid #f9f3f3;
+    color: #000000;
+}
+th {
+    color: #000000;
+}
+

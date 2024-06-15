@@ -22,11 +22,23 @@ $torre = mysqli_real_escape_string($conexion, $_POST['torre']);
 $apto = mysqli_real_escape_string($conexion, $_POST['apto']);
 
 if (empty($nombre) || empty($apellido) || empty($tipoDocumento) || empty($numeroDocumento) || empty($fechaNacimiento) || empty($email) || empty($contrasena) || empty($telefono) || empty($cargo) || empty($torre) || empty($apto)) {
-  die("Todos los campos son obligatorios.");
+  echo "Todos los campos son obligatorios.";
+  exit();
 }
 
-$query = "INSERT INTO usuarios (NOMBRE, APELLIDO, TIPO_DOCUMENTO_ID, NO_DOCUMENTO, FECHA_NACIMIENTO, EMAIL, CONTRASENA, TELEFONO, CARGO_ID, TORRE, APTO) 
-          VALUES ('$nombre', '$apellido', '$usuario', '$tipoDocumento', '$numeroDocumento', '$fechaNacimiento', '$email', '$contrasena', '$telefono', '$cargo', '$torre', '$apto')";
+$query = "INSERT INTO usuarios SET
+NOMBRE = '$nombre',
+APELLIDO = '$apellido',
+TIPO_DOCUMENTO_ID = '$tipoDocumento',
+NO_DOCUMENTO = '$numeroDocumento',
+FECHA_NACIMIENTO = '$fechaNacimiento',
+EMAIL = '$email',
+CONTRASENA = '$contrasena',
+TELEFONO = '$telefono',
+CARGO_ID = '$cargo',
+TORRE = '$torre',
+APTO = '$apto' 
+WHERE ID = $userId";
 
 if (mysqli_query($conexion, $query)) {
   echo "El usuario ha sido creado exitosamente";

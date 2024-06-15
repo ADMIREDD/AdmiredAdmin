@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -9,9 +8,9 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    
+
     <!-- Tus estilos específicos para los botones -->
-    <link href="./assets/css/style.css" rel="stylesheet">
+
 
     <!-- Estilos generales -->
     <link rel="stylesheet" href="assets/css/index.css">
@@ -39,7 +38,9 @@
                                     <div class="table-responsive mt-2">
                                         <!--btn add-->
                                         <div class="d-flex">
-                                            <button type="button" onclick="createUser()" class="btn btn-success"><img class="img img-fluid" src="assets/img/icons/plus-square-fill.svg">Crear usuario</button>
+                                            <button type="button" onclick="window.location.href = '?c=administrador&m=create';" class="btn btn-success">
+                                                <i class="fas fa-plus"></i> Crear usuario
+                                            </button>
                                         </div>
                                         <hr>
                                         <table class="table table-dark table-striped table-hover">
@@ -120,77 +121,89 @@
         </div> <!-- end container-fluid -->
 
 
+        <!-- Modal -->
         <div class="modal fade" id="modalApp" tabindex="-1" aria-labelledby="modalAppLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="modalAppLabel">Crear usuario</h5>
+                        <h5 class="modal-title" id="modalAppLabel">Registrar Nuevo Usuario</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <!-- Form -->
-                        <form action="views/dashboard/DB2.php" method="post" id="formUser">
-                            <input type="hidden" class="form-control" id="id" name="id" value="">
-                            <div class="form-floating mb-3">
-                                <input class="controls" type="text" name="nombre" id="nombre" placeholder="Ingrese su nombre" required>
+                        <!-- Formulario para crear usuario -->
+                        <form action="?c=administrador&m=create" method="POST" id="formUser">
+                            <div class="mb-3">
+                                <label for="nombre" class="form-label">Nombre</label>
+                                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese su Nombre" required>
                             </div>
-                            <div class="form-floating mb-3">
-                                <input class="controls" type="text" name="apellido" id="apellido" placeholder="Ingrese su Apellido" required>
+                            <div class="mb-3">
+                                <label for="apellido" class="form-label">Apellido</label>
+                                <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Ingrese su Apellido" required>
                             </div>
-                            <div class="form-floating mb-3">
-                                <select class="form-control" name="tipo_documento" id="tipo_documento" required>
-                                    <option value="">Seleccione el tipo de documento</option>
+                            <div class="mb-3">
+                                <label for="tipo_documento" class="form-label">Tipo de Documento</label>
+                                <select class="form-control" id="tipo_documento" name="tipo_documento" required>
                                     <option value="1">C.C.</option>
                                     <option value="2">C.E.</option>
                                     <option value="3">NIT</option>
                                 </select>
-
                             </div>
-                            <div class="form-floating mb-3">
-                                <input class="form-control" type="text" name="no_documento" id="no_documento" placeholder="Ingrese su Documento" required>
+                            <div class="mb-3">
+                                <label for="no_documento" class="form-label">Número de Documento</label>
+                                <input type="text" class="form-control" id="no_documento" name="no_documento" placeholder="Ingrese su Número de Documento" required>
                             </div>
-                            <div class="form-floating mb-3">
-                                <input type="date" class="controls" name="fecha_nacimiento" id="fecha_nacimiento" placeholder="Ingrese su Fecha de Nacimiento" required>
-                                <label for="fecha_nacimiento"></label>
+                            <div class="mb-3">
+                                <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento</label>
+                                <input type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" required>
                             </div>
-                            <div class="form-floating mb-3">
-                                <input type="email" class="form-control" name="email" id="email" placeholder="Ingrese su Correo" required>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Correo Electrónico</label>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Ingrese su Correo Electrónico" required>
                             </div>
-                            <div class="form-floating mb-3">
-                                <input type="password" class="form-control" name="contrasena" id="contrasena" placeholder="Ingrese su Contraseña" required>
+                            <div class="mb-3">
+                                <label for="contrasena" class="form-label">Contraseña</label>
+                                <input type="password" class="form-control" id="contrasena" name="contrasena" placeholder="Ingrese su Contraseña" required>
                             </div>
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" name="telefono" id="telefono" placeholder="Ingrese su Teléfono" required>
+                            <div class="mb-3">
+                                <label for="telefono" class="form-label">Teléfono</label>
+                                <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Ingrese su Número de Teléfono" required>
                             </div>
-                            <div class="form-floating mb-3">
-                                <select class="form-control" name="cargo" id="cargo" required>
-                                    <option value="">Seleccione el cargo</option>
+                            <div class="mb-3">
+                                <label for="cargo" class="form-label">Cargo</label>
+                                <select class="form-control" id="cargo" name="cargo" required>
                                     <option value="1">Empleado</option>
-                                    <option value="2">Propietario</option>
-                                    <option value="3">Residente</option>
+                                    <option value="3">Propietario</option>
+                                    <option value="4">Residente</option>
                                 </select>
                             </div>
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" name="torre" id="torre" placeholder="Ingrese su Torre" required>
+                            <div class="mb-3">
+                                <label for="torre" class="form-label">Torre</label>
+                                <input type="text" class="form-control" id="torre" name="torre" placeholder="Ingrese su Torre" required>
                             </div>
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" name="apto" id="apto" placeholder="Ingrese su Apartamento" required>
+                            <div class="mb-3">
+                                <label for="apto" class="form-label">Apartamento</label>
+                                <input type="text" class="form-control" id="apto" name="apto" placeholder="Ingrese su Apartamento" required>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="submit" id="btnSubmit" form="formUser" class="btn btn-primary">Guardar</button>
+
+                                <button type="submit" class="btn btn-primary">Guardar</button>
                             </div>
                         </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Salir</button>
-                        <button type="submit" id="btnSubmit" form="formUser" class="btn btn-primary">Guardar</button>
                     </div>
                 </div>
             </div>
         </div>
-        <!--Container modal-->
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-        <!--Script RFC4122-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/node-uuid/1.4.7/uuid.min.js"></script>
-        <!--Script my script-->
-        <script src="./assets/js/FirebaseGame.js"></script>
-        <!--Script my script-->
-        <script src="./assets/js/main.js"></script>
+    </div>
+</div>
+<!--Container modal-->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<!--Script RFC4122-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/node-uuid/1.4.7/uuid.min.js"></script>
+<!--Script my script-->
+<script src="./assets/js/FirebaseGame.js"></script>
+<!--Script my script-->
+<script src="./assets/js/main.js"></script>
