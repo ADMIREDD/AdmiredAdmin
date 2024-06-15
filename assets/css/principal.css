@@ -1071,4 +1071,34 @@ html {
 	.content p{
 		font-size: 1.6rem;
 	}
+
+
 }
+	/* Estilos para los botones "Ver", "Editar" y "Eliminar" */
+	.boton1, .boton2, .boton3 {
+		padding: 0.5rem 1rem;
+		border-radius: 5px;
+		font-size: 1rem;
+		text-transform: uppercase;
+		cursor: pointer;
+	  }
+	  
+	  .boton1 {
+		background-color: #28a745; /* Color para el botón "Ver" */
+		color: #fff;
+	  }
+	  
+	  .boton2 {
+		background-color: #ffc107; /* Color para el botón "Editar" */
+		color: #212529;
+	  }
+	  
+	  .boton3 {
+		background-color: #dc3545; /* Color para el botón "Eliminar" */
+		color: #fff;
+	  }
+	  
+	  .boton1:hover, .boton2:hover, .boton3:hover {
+		filter: brightness(85%);
+	  }
+
