@@ -38,7 +38,8 @@
                                     </select>
                                     <input class="controls" type="text" name="torre" id="torre" placeholder="Ingrese su Torre" value="<?php echo htmlspecialchars($user['TORRE']) ?>" disabled>
                                     <input class="controls" type="text" name="apto" id="apto" placeholder="Ingrese su Apartamento" value="<?php echo htmlspecialchars($user['APTO']) ?>" disabled>
-                                </form>
+                                    <a href="?c=administrador&m=index" class="btn btn-success">Volver</a>
+                                </form>           
                             </section>
                         </div>
                     </div>

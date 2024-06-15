@@ -19,7 +19,7 @@
                             <a href="?c=administrador&m=index" class="btn btn-success">Volver</a>
                             <section class="form-register">
                                 <form action="views/dashboard/editUser.php?userId=<?php echo $_GET['userId']; ?>" method="post" class="formulario__register">
-                                    <h3>Editar Usuario</h3>
+                                                                       
                                     <input class="controls" type="text" name="nombre" id="nombre" placeholder="Ingrese su Nombre" value="<?php echo htmlspecialchars($user['NOMBRE']) ?>">
                                     <input class="controls" type="text" name="apellido" id="apellido" placeholder="Ingrese su Apellido" value="<?php echo htmlspecialchars($user['APELLIDO']) ?>">
                                     <select name="tipo_documento">

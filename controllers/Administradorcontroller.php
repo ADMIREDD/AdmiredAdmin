@@ -94,6 +94,8 @@ class AdministradorController
             $torre = mysqli_real_escape_string($conexion, $_POST['torre']);
             $apto = mysqli_real_escape_string($conexion, $_POST['apto']);
 
+              
+
             // Consulta para insertar un nuevo usuario
             $query = "INSERT INTO usuarios (NOMBRE, APELLIDO, TIPO_DOCUMENTO_ID, NO_DOCUMENTO, FECHA_NACIMIENTO, EMAIL, CONTRASENA, TELEFONO, CARGO_ID, TORRE, APTO) 
                       VALUES ('$nombre', '$apellido', $tipo_documento, '$no_documento', '$fecha_nacimiento', '$email', '$contrasena', '$telefono', $cargo, '$torre', '$apto')";

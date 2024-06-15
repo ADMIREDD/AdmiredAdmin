@@ -24,7 +24,7 @@
 
                                                         <div class="table-responsive mt-2">
                                                             <table class="table table-border table-hover striped">
-                                                                <h3>Vas a eliminar el usuario</h3>
+                                                           
                                                                 <input class="controls" type="text" name="nombre" id="nombre" placeholder="Ingrese su Nombre" value="<?php echo $user['NOMBRE'] ?>" readonly>
                                                                 <input class="controls" type="text" name="apellido" id="apellido" placeholder="Ingrese su Apellido" value="<?php echo $user['APELLIDO'] ?>" readonly>
                                                                 <input class="controls" type="text" name="usuario" id="usuario" placeholder="Ingrese su Apellido" value="<?php echo $user['USUARIO'] ?>" readonly>
