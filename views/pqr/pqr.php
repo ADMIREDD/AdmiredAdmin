@@ -35,6 +35,7 @@
                                                         <th>ESTADO_ID</th>
                                                         <th>USUARIO_ID</th>
                                                         <th>PQR_TIPO</th>
+                                                        <th>FUNCION</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -70,6 +71,7 @@
                                                         <th>ESTADO_ID</th>
                                                         <th>USUARIO_ID</th>
                                                         <th>PQR_TIPO</th>
+                                                        <th>FUNCION</th>
                                                     </tr>
                                                 </thead>
                                             </table>
@@ -85,7 +87,12 @@
     </div>
     <!--Container modal-->
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="./assets/js/main.js"></script>
-</body>
-</html>
+    
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<!--Script RFC4122-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/node-uuid/1.4.7/uuid.min.js"></script>
+<!--Script my script-->
+<script src="./assets/js/FirebaseGame.js"></script>
+<!--Script my script-->
+<script src="./assets/js/main.js"></script>
+

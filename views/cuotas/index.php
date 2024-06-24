@@ -7,6 +7,7 @@
     <title>Listado de PQR</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
     <!-- Estilos generales -->
     <link rel="stylesheet" href="assets/css/index.css">
     <link type="image/x-icon" href="assets/img/logos/logo.png" rel="icon">
@@ -46,6 +47,7 @@
                                                     <th>ESTADO</th>
                                                     <th>FECHA_LIMITE</th>
                                                     <th>PRECIO</th>
+                                                    <th>FUNCION</th>
                                                 </tr>
                                             </thead>
 
@@ -64,7 +66,7 @@
                                                         <td>
                                                             <a href="?c=cuota&m=show&userId=<?php echo $rows['ID']; ?>" class="submit boton1">Ver</a>
                                                             <a href="?c=cuota&m=edit&userId=<?php echo $rows['ID']; ?>" class="submit boton2">Editar</a>
-                                                            <a href="?c=cuota&m=delete&userId=<?php echo $cuota['ID']; ?>">Eliminar</a>
+                                                            <a href="?c=cuota&m=delete&userId=<?php echo $cuota['ID']; ?>" class="submit boton3">Eliminar</a>
 
 
                                                         </td>
@@ -82,6 +84,7 @@
                                                     <th>ESTADO</th>
                                                     <th>FECHA_LIMITE</th>
                                                     <th>PRECIO</th>
+                                                    <th>FUNCION</th>
                                                     </tr>
                                                 </thead>
                                         </table>

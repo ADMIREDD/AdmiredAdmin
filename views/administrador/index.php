@@ -53,6 +53,7 @@
                                                     <th>CARGO_ID</th>
                                                     <th>TORRE</th>
                                                     <th>APTO</th>
+                                                    <th>FUNCION</th>
                                                 </tr>
                                             </thead>
 
@@ -101,6 +102,7 @@
                                                         <th>CARGO_ID</th>
                                                         <th>TORRE</th>
                                                         <th>APTO</th>
+                                                        <th>FUNCION</th>
                                                     </tr>
                                                 </thead>
                                         </table>
