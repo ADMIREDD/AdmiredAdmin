@@ -7,13 +7,17 @@
                 <li>
                     <a href="?c=pqr&m=pqr">
                         <i class="mdi mdi-view-dashboard"></i>
-                        <span> Panel </span>
+                        <span> Pqr </span>
                     </a>
                 </li>
                 <li>
                     <a href="?c=administrador&m=index">
                         <i class="fa-solid fa-user"></i>
                         <span> Listado </span>
+                    </a>
+                    <a href="?c=cuota&m=index">
+                        <i class="fa-solid fa-user"></i>
+                        <span> Cuota Admin </span>
                     </a>
                 </li>
             </ul>

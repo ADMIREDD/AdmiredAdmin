@@ -1,217 +1,91 @@
-<link rel="stylesheet" href="./assets/css/dashboard.css">
-<div class="content-page">
-    <div class="content">
+<!DOCTYPE html>
+<html lang="es">
 
-        <!-- Start Content-->
-        <div class="container-fluid">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de PQR</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Estilos generales -->
+    <link rel="stylesheet" href="assets/css/index.css">
+    <link type="image/x-icon" href="assets/img/logos/logo.png" rel="icon">
+</head>
 
-            <!-- start page title -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="page-title-box">
-                        <h4 class="page-title">Panel</h4>
-                        <div class="row">
-                            <div class="col-xl-7">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="card-box">
-                                            <h4 class="header-title mb-3">Pqr</h4>
 
-                                            <div class="inbox-widget slimscroll" style="max-height: 324px;">
-                                                <a href="#">
-                                                    <div class="inbox-item">
-                                                        <div class="inbox-item-img"><img
-                                                                src="./assets/imagenes/miguel.jpeg"
-                                                                class="rounded-circle" alt=""></div>
-                                                        <p class="inbox-item-author">Miguel</p>
-                                                        <p class="inbox-item-text">Hey! there I'm available...</p>
-                                                        <p class="inbox-item-date">13:40 PM</p>
-                                                    </div>
-                                                </a>
-                                                <a href="#">
-                                                    <div class="inbox-item">
-                                                        <div class="inbox-item-img"><img
-                                                                src="./assets/imagenes/lorena.png"
-                                                                class="rounded-circle" alt=""></div>
-                                                        <p class="inbox-item-author">Lorena</p>
-                                                        <p class="inbox-item-text text-truncate">I've finished it! See
-                                                            you so...</p>
-                                                        <p class="inbox-item-date">13:34 PM</p>
-                                                    </div>
-                                                </a>
-                                                <a href="#">
-                                                    <div class="inbox-item">
-                                                        <div class="inbox-item-img"><img
-                                                                src="./assets/imagenes/antonio.jpg"
-                                                                class="rounded-circle" alt=""></div>
-                                                        <p class="inbox-item-author">Antonio</p>
-                                                        <p class="inbox-item-text">This theme is awesome!</p>
-                                                        <p class="inbox-item-date">13:17 PM</p>
-                                                    </div>
-                                                </a>
-                                                <a href="#">
-                                                    <div class="inbox-item">
-                                                        <div class="inbox-item-img"><img
-                                                                src="./assets/imagenes/andrea.jpeg"
-                                                                class="rounded-circle" alt=""></div>
-                                                        <p class="inbox-item-author">Andrea</p>
-                                                        <p class="inbox-item-text">Nice to meet you</p>
-                                                        <p class="inbox-item-date">12:20 PM</p>
-                                                    </div>
-                                                </a>
-                                                <a href="#">
-                                                    <div class="inbox-item">
-                                                        <div class="inbox-item-img"><img
-                                                                src="./assets/imagenes/andres.jpeg"
-                                                                class="rounded-circle" alt=""></div>
-                                                        <p class="inbox-item-author">Andres</p>
-                                                        <p class="inbox-item-text">Hey! there I'm available...</p>
-                                                        <p class="inbox-item-date">10:15 AM</p>
-                                                    </div>
-                                                </a>
-                                                <a href="#">
-                                                    <div class="inbox-item">
-                                                        <div class="inbox-item-img"><img
-                                                                src="./assets/imagenes/camila.png"
-                                                                class="rounded-circle" alt=""></div>
-                                                        <p class="inbox-item-author">Camila</p>
-                                                        <p class="inbox-item-text">This theme is awesome!</p>
-                                                        <p class="inbox-item-date">9:56 AM</p>
-                                                    </div>
-                                                </a>
-                                                <a href="#">
-                                                    <div class="inbox-item">
-                                                        <div class="inbox-item-img"><img
-                                                                src="./assets/imagenes/andres.jpeg"
-                                                                class="rounded-circle" alt=""></div>
-                                                        <p class="inbox-item-author">Andres</p>
-                                                        <p class="inbox-item-text">Hey! there I'm available...</p>
-                                                        <p class="inbox-item-date">10:15 AM</p>
-                                                    </div>
-                                                </a>
-                                                <a href="#">
-                                                    <div class="inbox-item">
-                                                        <div class="inbox-item-img"><img
-                                                                src="./assets/imagenes/marcela.png"
-                                                                class="rounded-circle" alt=""></div>
-                                                        <p class="inbox-item-author">Joshaustin</p>
-                                                        <p class="inbox-item-text">I've finished it! See you so...</p>
-                                                        <p class="inbox-item-date">9:56 AM</p>
-                                                    </div>
-                                                </a>
-                                            </div>
 
+<body>
+    <div class="content-page">
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <h4 class="page-title">PQR</h4>
+                            <div class="col-15">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="table-responsive mt-2">
+                                            <hr>
+                                            <table class="table table-dark table-striped table-hover">
+                                                <thead>
+                                                    <tr class="text-center">
+                                                        <th>ID</th>
+                                                        <th>DETALLE</th>
+                                                        <th>ESTADO_ID</th>
+                                                        <th>USUARIO_ID</th>
+                                                        <th>PQR_TIPO</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php
+                                                    // Verificar si $resultado no es nulo
+                                                    if ($resultado) {
+                                                        // LOOP TILL END OF DATA
+                                                        while ($rows = $resultado->fetch_assoc()) {
+                                                    ?>
+                                                            <tr>
+                                                                <!-- FETCHING DATA FROM EACH ROW OF EVERY COLUMN -->
+                                                                <td><?php echo $rows['ID']; ?></td>
+                                                                <td><?php echo $rows['DETALLE']; ?></td>
+                                                                <td><?php echo $rows['ESTADO_ID']; ?></td>
+                                                                <td><?php echo $rows['USUARIO_ID']; ?></td>
+                                                                <td><?php echo $rows['PQR_TIPO']; ?></td>
+                                                                <td>
+                                                                    <a href="?c=pqr&m=show&userId=<?php echo $rows['ID']; ?>" class="btn btn-primary">Ver</a>
+                                                                    <a href="?c=pqr&m=delete&userId=<?php echo $rows['ID']; ?>" class="btn btn-danger">Eliminar</a>
+                                                                </td>
+                                                            </tr>
+                                                    <?php
+                                                        }
+                                                    } else {
+                                                        echo "<tr><td colspan='4' class='text-center'>No se encontraron registros.</td></tr>";
+                                                    }
+                                                    ?>
+                                                </tbody>
+                                                <thead>
+                                                    <tr class="text-center">
+                                                        <th>ID</th>
+                                                        <th>DETALLE</th>
+                                                        <th>ESTADO_ID</th>
+                                                        <th>USUARIO_ID</th>
+                                                        <th>PQR_TIPO</th>
+                                                    </tr>
+                                                </thead>
+                                            </table>
                                         </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="card-box">
-                                            <h4 class="header-title mb-3">Estadisticas de pqr mensuales</h4>
-
-                                            <p class="font-weight-semibold mb-3">Pqr <span
-                                                    class="text-danger float-right"><b>78%</b></span></p>
-                                            <div class="progress" style="height: 10px;">
-                                                <div class="progress-bar progress-bar-striped bg-danger"
-                                                    role="progressbar" style="width: 78%" aria-valuenow="78"
-                                                    aria-valuemin="0" aria-valuemax="78"></div>
-                                            </div>
-                                        </div>
-
-                                        <div class="card-box">
-                                            <h4 class="header-title mb-3">Estadisticas de pqr quincenales</h4>
-
-                                            <p class="font-weight-semibold mb-2">Pqr <span
-                                                    class="text-success float-right"><b>25%</b></span></p>
-                                            <div class="progress" style="height: 10px;">
-                                                <div class="progress-bar progress-bar-striped bg-success"
-                                                    role="progressbar" style="width: 25%" aria-valuenow="25"
-                                                    aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-
-                                        <div class="card-box">
-                                            <h4 class="header-title mb-3">Estadisticas de pqr anuales</h4>
-
-                                            <p class="font-weight-semibold mb-2">Pqr <span
-                                                    class="text-warning float-right"><b>75%</b></span></p>
-                                            <div class="progress" style="height: 10px;">
-                                                <div class="progress-bar progress-bar-striped bg-warning"
-                                                    role="progressbar" style="width: 75%" aria-valuenow="75"
-                                                    aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                            </div><!-- end col-->
-
-                            <div class="col-xl-5">
-                                <div class="card-box">
-
-                                    <h4 class="header-title mb-3">Cuotas de administación</h4>
-
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-nowrap mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th>usuarios</th>
-                                                    <th>fecha de inicio</th>
-                                                    <th>fecha final</th>
-                                                    <th>estado</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <th class="text-muted">Miguel</th>
-                                                    <td>20/02/2014</td>
-                                                    <td>19/02/2020</td>
-                                                    <td><span class="badge badge-success">Pagado</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <th class="text-muted">Lorena</th>
-                                                    <td>20/02/2014</td>
-                                                    <td>19/02/2020</td>
-                                                    <td><span class="badge badge-danger">No pagado</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <th class="text-muted">Antonio</th>
-                                                    <td>20/02/2014</td>
-                                                    <td>19/02/2020</td>
-                                                    <td><span class="badge badge-success">Pagado</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <th class="text-muted">Andrea</th>
-                                                    <td>20/02/2014</td>
-                                                    <td>19/02/2020</td>
-                                                    <td><span class="badge badge-success">Pagado</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <th class="text-muted">Andres</th>
-                                                    <td>20/02/2014</td>
-                                                    <td>19/02/2020</td>
-                                                    <td><span class="badge badge-danger">No pagado</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <th class="text-muted">camila</th>
-                                                    <td>20/02/2014</td>
-                                                    <td>19/02/2020</td>
-                                                    <td><span class="badge badge-success">pagado</span></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
                                     </div>
                                 </div>
-                            </div><!-- end col-->
-
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                </div><!-- end row -->
+            </div> <!-- end container-fluid -->
+        </div>
+    </div>
+    <!--Container modal-->
 
-
-            <!-- end row -->
-
-        </div> <!-- end container-fluid -->
-
-    </div> <!-- end content -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="./assets/js/main.js"></script>
+</body>
+</html>

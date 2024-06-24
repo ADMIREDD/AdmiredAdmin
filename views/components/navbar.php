@@ -29,7 +29,7 @@
 
     <!-- LOGO -->
     <div class="logo-box">
-        <a href="index.html" class="logo text-center logo-dark">
+        <a href="/SENA/AdmiredAdmin/?c=pqr&m=pqr" class="logo text-center logo-dark">
             <span class="logo-lg">
                 <img src="./assets/imagenes/admired.png" alt="" height="50">
             </span>

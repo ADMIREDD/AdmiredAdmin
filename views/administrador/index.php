@@ -4,14 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tu Título</title>
-
+    <title>Listado de PQR</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-    <!-- Tus estilos específicos para los botones -->
-
-
     <!-- Estilos generales -->
     <link rel="stylesheet" href="assets/css/index.css">
     <link type="image/x-icon" href="assets/img/logos/logo.png" rel="icon">
@@ -73,7 +68,7 @@
                                                         <td><?php echo $rows['APELLIDO']; ?></td>
                                                         <td><?php echo $rows['TIPO_DOCUMENTO_ID']; ?></td>
                                                         <td><?php echo $rows['NO_DOCUMENTO']; ?></td>
-                                                        <td><?php echo $rows['FECHA_NACIEMIENTO']; ?></td>
+                                                        <td><?php echo isset($rows['FECHA_NACIEMIENTO']) ? $rows['FECHA_NACIEMIENTO'] : ''; ?></td>
                                                         <td><?php echo $rows['EMAIL']; ?></td>
                                                         <td><?php echo $rows['CONTRASENA']; ?></td>
                                                         <td><?php echo $rows['TELEFONO']; ?></td>
