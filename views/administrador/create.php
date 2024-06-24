@@ -19,7 +19,7 @@
                                             <div class="card-body">
                                                 <a href="?c=administrador&m=index" class="btn btn-success">Voler</a>
                                                 <section class="form-register">
-                                                    <form action="?c=administrador&m=create" method="post">
+                                                    <form action="?c=administrador&m=index" method="post">
                                                         <div class="table-responsive mt-2">
                                                             <table class="table table-border table-hover striped">
 
