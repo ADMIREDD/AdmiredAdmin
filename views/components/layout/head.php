@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>ADMIRED</title>
+    <title>AdmiredAdmin</title>
     <!-- Plugin css -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="./assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet" />

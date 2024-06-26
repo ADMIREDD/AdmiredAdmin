@@ -10,6 +10,7 @@
     <!-- Estilos generales -->
     <link rel="stylesheet" href="assets/css/index.css">
     <link type="image/x-icon" href="assets/img/logos/logo.png" rel="icon">
+    <link type="image/x-icon" href="assets/img/logos/favicon.png" rel="icon">
 </head>
 
 
