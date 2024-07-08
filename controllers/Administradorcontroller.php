@@ -118,6 +118,7 @@ class AdministradorController
     }
 
 
+
     public function destroy()
     {
         $servidor = "localhost";

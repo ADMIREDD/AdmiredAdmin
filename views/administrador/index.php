@@ -56,7 +56,7 @@
                                                     <th>FUNCION</th>
                                                 </tr>
                                             </thead>
-
+                                           
                                             <tbody>
                                                 <?php
                                                 // LOOP TILL END OF DATA
@@ -105,6 +105,7 @@
                                                         <th>FUNCION</th>
                                                     </tr>
                                                 </thead>
+                                                
                                         </table>
 
                                     </div>

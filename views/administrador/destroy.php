@@ -27,7 +27,6 @@
                                                            
                                                                 <input class="controls" type="text" name="nombre" id="nombre" placeholder="Ingrese su Nombre" value="<?php echo $user['NOMBRE'] ?>" readonly>
                                                                 <input class="controls" type="text" name="apellido" id="apellido" placeholder="Ingrese su Apellido" value="<?php echo $user['APELLIDO'] ?>" readonly>
-                                                                <input class="controls" type="text" name="usuario" id="usuario" placeholder="Ingrese su Apellido" value="<?php echo $user['USUARIO'] ?>" readonly>
                                                                 <select name="tipo_documento" disabled>
                                                                     <option <?php echo $user['TIPO_DOCUMENTO_ID'] == 1 ? 'selected' : '' ?> value="1">C.C.</option>
                                                                     <option <?php echo $user['TIPO_DOCUMENTO_ID'] == 2 ? 'selected' : '' ?> value="2">C.E.</option>
@@ -47,7 +46,18 @@
                                                                 <input class="controls" type="text" name="torre" id="torre" placeholder="Ingrese su Torre" value="<?php echo $user['TORRE'] ?>" readonly>
                                                                 <input class="controls" type="text" name="apto" id="apto" placeholder="Ingrese su apto" value="<?php echo $user['APTO'] ?>" readonly>
 
-                                                                <input class="botons" type="submit" value="Eliminar">
+                                                                <input class="botons" type="submit" value="Eliminar" onclick="confirmarEliminacion()">
+                                                                <script>
+                                                                    function confirmarEliminacion() {
+                                                                        if (confirm('¿Estás seguro que quieres eliminar este usuario?')) {
+                                                                            // Si el usuario confirma la eliminación, el formulario se enviará
+                                                                            document.querySelector('form').submit();
+                                                                        } else {
+                                                                            // Si el usuario cancela, no se hace nada
+                                                                            return false;
+                                                                        }
+                                                                    }
+                                                                </script>
                                                             </table>
                                                         </div>
                                                     </form>

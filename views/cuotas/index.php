@@ -5,15 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listado de PQR</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-    <!-- Estilos generales -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/index.css">
     <link type="image/x-icon" href="assets/img/logos/favicon.png" rel="icon">
 </head>
+<body>
 
-<!--Container preload-->
 <div class="preload" id="preload">
     <div class="spinner-grow text-primary position-absolute top-50 start-50" role="status">
         <span class="visually-hidden">Cargando...</span>
@@ -23,81 +20,54 @@
 
 <div class="content-page">
     <div class="content">
-        <div class="container-fluid">
+    <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box">
                         <h4 class="page-title">Liquidar Cuota</h4>
-                        <div class="col-15">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="table-responsive mt-2">
-                                        <!--btn add-->
-                                        <div class="d-flex">
-                                            <button type="button" onclick="window.location.href = '?c=cuota&m=crear';" class="btn btn-success">
-                                                <i class="fas fa-plus"></i> Crear Cuota Admin
-                                            </button>
-                                        </div>
-                                        <hr>
-                                        <table class="table table-dark table-striped table-hover">
-                                            <thead>
-                                                <tr class="text-center">
-                                                    <th>ID</th>
-                                                    <th>FECHA</th>
-                                                    <th>ESTADO</th>
-                                                    <th>FECHA_LIMITE</th>
-                                                    <th>PRECIO</th>
-                                                    <th>FUNCION</th>
-                                                </tr>
-                                            </thead>
-
-                                            <tbody>
-                                                <?php
-                                                // LOOP TILL END OF DATA
-                                                while ($rows = $resultado->fetch_assoc()) {
-                                                ?>
-                                                    <tr>
-                                                        <!-- FETCHING DATA FROM EACH ROW OF EVERY COLUMN -->
-                                                        <td><?php echo $rows['ID']; ?></td>
-                                                        <td><?php echo $rows['FECHA']; ?></td>
-                                                        <td><?php echo $rows['ESTADO']; ?></td>
-                                                        <td><?php echo $rows['FECHA_LIMITE']; ?></td>
-                                                        <td><?php echo $rows['PRECIO']; ?></td>
-                                                        <td>
-                                                            <a href="?c=cuota&m=show&userId=<?php echo $rows['ID']; ?>" class="submit boton1">Ver</a>
-                                                            <a href="?c=cuota&m=edit&userId=<?php echo $rows['ID']; ?>" class="submit boton2">Editar</a>
-                                                            <a href="?c=cuota&m=delete&userId=<?php echo $cuota['ID']; ?>" class="submit boton3">Eliminar</a>
-
-
-                                                        </td>
-                                                    </tr>
-                                                <?php
-                                                }
-                                                ?>
-
-                                            <tbody id="tbody">
-
-                                                <thead>
-                                                    <tr class="text-center">
-                                                    <th>ID</th>
-                                                    <th>FECHA</th>
-                                                    <th>ESTADO</th>
-                                                    <th>FECHA_LIMITE</th>
-                                                    <th>PRECIO</th>
-                                                    <th>FUNCION</th>
-                                                    </tr>
-                                                </thead>
-                                        </table>
-
-                                    </div>
-                                </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-end mb-3">
+                                <button type="button" onclick="window.location.href = '?c=cuota&m=crear';" class="btn btn-success">
+                                    <i class="fas fa-plus"></i> Crear Cuota Admin
+                                </button>
+                            </div>
+                            <hr>
+                            <div class="table-responsive">
+                                <table class="table table-dark table-striped table-hover">
+                                    <thead>
+                                        <tr class="text-center">
+                                            <th>ID</th>
+                                            <th>FECHA</th>
+                                            <th>ESTADO</th>
+                                            <th>FECHA_LIMITE</th>
+                                            <th>PRECIO</th>
+                                            <th>FUNCION</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php while ($rows = $resultado->fetch_assoc()) { ?>
+                                            <tr>
+                                                <td><?php echo $rows['ID']; ?></td>
+                                                <td><?php echo $rows['FECHA']; ?></td>
+                                                <td><?php echo $rows['ESTADO']; ?></td>
+                                                <td><?php echo $rows['FECHA_LIMITE']; ?></td>
+                                                <td><?php echo $rows['PRECIO']; ?></td>
+                                                <td>
+                                                    <a href="?c=cuota&m=show&userId=<?php echo $rows['ID']; ?>" class="btn btn-primary btn-sm">Ver</a>
+                                                    <a href="?c=cuota&m=edit&userId=<?php echo $rows['ID']; ?>" class="btn btn-primary btn-sm">Editar</a>
+                                                    <a href="?c=cuota&m=delete&userId=<?php echo $rows['ID']; ?>" class="btn btn-danger btn-sm">Eliminar</a>
+                                                </td>
+                                            </tr>
+                                        <?php } ?>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div><!-- end row -->
-
-        </div> <!-- end container-fluid -->
+            </div>
 
 
         <!-- Modal -->
