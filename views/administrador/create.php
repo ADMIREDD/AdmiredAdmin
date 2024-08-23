@@ -2,11 +2,7 @@
 
 <div class="content-page">
     <div class="content">
-
-        <!-- Start Content-->
         <div class="container-fluid">
-
-            <!-- start page title -->
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box">
@@ -17,12 +13,11 @@
                                     <div class="col-12">
                                         <div class="card">
                                             <div class="card-body">
-                                                <a href="?c=administrador&m=index" class="btn btn-success">Voler</a>
+                                                <a href="?c=administrador&m=index" class="btn btn-success">Volver</a>
                                                 <section class="form-register">
-                                                    <form action="?c=administrador&m=index" method="post">
+                                                    <form action="?c=administrador&m=create" method="post">
                                                         <div class="table-responsive mt-2">
                                                             <table class="table table-border table-hover striped">
-
                                                                 <input class="controls" type="text" name="nombre" id="nombre" placeholder="Ingrese su Nombre" required>
                                                                 <input class="controls" type="text" name="apellido" id="apellido" placeholder="Ingrese su Apellido" required>
                                                                 <select name="tipo_documento" required>

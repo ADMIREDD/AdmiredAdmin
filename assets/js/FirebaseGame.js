@@ -1,198 +1,139 @@
 /**
- * Author:JOSE ROSELLON
- * Date:29/03/2024
- * Description:These are the class for managing data from FIREBASE.
+ * Author: JOSE ROSELLON
+ * Date: 29/03/2024
+ * Description: These are the classes for managing data from FIREBASE.
  *
  */
 class FirebaseGameUser {
-  /**this the method constructor*/
+  /** Constructor method */
   constructor(idTbody) {
     this.objTbody = document.getElementById(idTbody);
     this.URL = "https://login-firebase-225e1-default-rtdb.firebaseio.com/Api/User";
   }
 
-  /**this the method for get data users*/
+  /** Method to get user data */
   async getDataUsers() {
-    return fetch(this.URL + ".json")
-      .then((res) => {
-        if (!res.ok) {
-          console.log("Result: Problem");
-          return;
-        }
-        return res.json();
-      })
-      .then((data) => {
-        this.setTableUser(data);
-      })
-      .catch((error) => {
-        console.error(error);
-      })
-      .finally();
+    try {
+      const response = await fetch(this.URL + ".json");
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+      const data = await response.json();
+      this.setTableUser(data);
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
   }
 
-  /**This is the method async to get user data by id
-   * @param id user
+  /** Method to get user data by id
+   * @param {string} id - User ID
    */
   async getDataUser(id) {
-    return fetch(this.URL + "/" + id + ".json")
-      .then((res) => {
-        if (!res.ok) {
-          console.log("Result: Problem");
-          return;
-        }
-        return res.json();
-      })
-      .then((data) => {
-        return data;
-      })
-      .catch((error) => {
-        console.error(error);
-      })
-      .finally();
+    try {
+      const response = await fetch(`${this.URL}/${id}.json`);
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+      return await response.json();
+    } catch (error) {
+      console.error("Error fetching user data by ID:", error);
+    }
   }
-  /**This is the method to create the table rows using a users Json format
-   * @param json user
+
+  /** Method to create table rows using user JSON data
+   * @param {Object} data - User data
    */
   setTableUser(data) {
     let contRow = 1;
     let rowTable = "";
     let btnActions = "";
+
     for (const user in data) {
-      let getId = "'" + user + "'";
-      btnActions =
-        '<div class="btn-group " role="group" aria-label="Basic mixed styles example">' +
-        '<button type="button" onclick="showUser(' +
-        getId +
-        ')" class="btn btn-info"><img class="img img-fluid" src="./assets/img/icons/eye-fill.svg"></button>' +
-        '<button type="button" onclick="editUser(' +
-        getId +
-        ')" class="btn btn-warning"><img class="img img-fluid" src="./assets/img/icons/pencil-square.svg"></button>' +
-        '<button type="button" onclick="deleteUser(' +
-        getId +
-        ')" class="btn btn-danger"><img class="img img-fluid" src="./assets/img/icons/trash3-fill.svg"></button>' +
-        "</div>";
-      rowTable +=
-        "<tr>" +
-        "<td>" +
-        contRow +
-        "</td>" +
-        "<td>" +
-        data[user].nombre +
-        "</td>" +
-        "<td>" +
-        data[user].apellido +
-        "</td>" +
-        "<td>" +
-        data[user].usuario +
-        "</td>" +
-        "<td class='text-center'>" +
-        data[user].tipo_documento_id +
-        "</td>" +
-        "<td class='text-center'>" +
-        data[user].no_documento +
-        "</td>" +
-        "<td class='text-center'>" +
-        data[user].fecha_nacimiento +
-        "</td>" +
-        "<td class='text-center'>" +
-        data[user].email +
-        "</td>" + 
-        "<td class='text-center'>" +
-        data[user].telefono +
-        "</td>" +
-        "<td class='text-center'>" +
-        data[user].cargo_id +
-        "</td>" +
-        "<td class='text-center'>" +
-        data[user].torre +
-        "</td>" +
-        "<td class='text-center'>" +
-        data[user].apto +
-        "</td>" +
-        "<td class='text-center'>" +
-        btnActions +
-        "</td>" +
-        "<tr>";
+      const getId = `'${user}'`;
+      btnActions = `
+        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+          <button type="button" onclick="showUser(${getId})" class="btn btn-info">
+            <img class="img img-fluid" src="./assets/img/icons/eye-fill.svg">
+          </button>
+          <button type="button" onclick="editUser(${getId})" class="btn btn-warning">
+            <img class="img img-fluid" src="./assets/img/icons/pencil-square.svg">
+          </button>
+          <button type="button" onclick="deleteUser(${getId})" class="btn btn-danger">
+            <img class="img img-fluid" src="./assets/img/icons/trash3-fill.svg">
+          </button>
+        </div>
+      `;
+      rowTable += `
+        <tr>
+          <td>${contRow}</td>
+          <td>${data[user].nombre || ''}</td>
+          <td>${data[user].apellido || ''}</td>
+          <td>${data[user].usuario || ''}</td>
+          <td class='text-center'>${data[user].tipo_documento_id || ''}</td>
+          <td class='text-center'>${data[user].no_documento || ''}</td>
+          <td class='text-center'>${data[user].fecha_nacimiento || ''}</td>
+          <td class='text-center'>${data[user].email || ''}</td>
+          <td class='text-center'>${data[user].telefono || ''}</td>
+          <td class='text-center'>${data[user].cargo_id || ''}</td>
+          <td class='text-center'>${data[user].torre || ''}</td>
+          <td class='text-center'>${data[user].apto || ''}</td>
+          <td class='text-center'>${btnActions}</td>
+        </tr>
+      `;
       contRow++;
     }
     this.objTbody.innerHTML = rowTable;
   }
 
-  /**This is the method to create the new data item in user Json format
-   * @param json user
+  /** Method to create a new user
+   * @param {Object} data - User data
    */
   async setCreateUser(data) {
-    
-    return fetch(this.URL + ".json", {
-      method: "POST",
-      headers: {
-        
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((res) => {
-        if (!res.ok) {
-          console.log("Result: Problem");
-          return;
-        }
-        return res.json();
-      })
-      .then((data) => {
-        this.getDataUsers();
-      })
-      .catch((error) => {
-        console.error(error);
-      })
-      .finally();
+    try {
+      const response = await fetch(this.URL + ".json", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+      await response.json();
+      this.getDataUsers();
+    } catch (error) {
+      console.error("Error creating user:", error);
+    }
   }
-  /**This is the method to update the element by sending a set of data in Json format from the user
-    * @param json user
-    @param id user
-    */
+
+  /** Method to update user data
+   * @param {string} id - User ID
+   * @param {Object} data - User data
+   */
   async setUpdateUser(id, data) {
-    return fetch(this.URL + "/" + id + ".json", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((res) => {
-        if (!res.ok) {
-          console.log("Result: Problem");
-          return;
-        }
-        return res.json();
-      })
-      .then((data) => {
-        this.getDataUsers();
-      })
-      .catch((error) => {
-        console.error(error);
-      })
-      .finally();
+    try {
+      const response = await fetch(`${this.URL}/${id}.json`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+      await response.json();
+      this.getDataUsers();
+    } catch (error) {
+      console.error("Error updating user:", error);
+    }
   }
-  /**This is the method to delete the element
-    @param id user
-    */
+
+  /** Method to delete a user
+   * @param {string} id - User ID
+   */
   async setDeleteUser(id) {
-    return fetch(this.URL + "/" + id + ".json", {
-      method: "DELETE",
-    })
-      .then((res) => {
-        if (!res.ok) {
-          console.log("Result: Problem");
-          return;
-        }
-        return res.json();
-      })
-      .then((data) => {
-        return data;
-      })
-      .catch((error) => {
-        console.error(error);
-      })
-      .finally();
+    try {
+      const response = await fetch(`${this.URL}/${id}.json`, {
+        method: "DELETE",
+      });
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+      return await response.json();
+    } catch (error) {
+      console.error("Error deleting user:", error);
+    }
   }
 }

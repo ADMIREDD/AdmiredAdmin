@@ -79,19 +79,26 @@ formUser.addEventListener('submit', (e) => {
   e.preventDefault();
   let inputId = document.getElementById('id');
   if (inputId.value.length === 0) {
-    inputId.value = uuid.v1();
+      inputId.value = uuid.v1();
   }
   let elements = formUser.querySelectorAll('input');
   var jsonArray = {};
   for (const elem of elements) {
-    jsonArray[elem.id] = elem.value;
+      jsonArray[elem.id] = elem.value;
   }
   if (validate) {
-    firebaseGame.setCreateUser(jsonArray).then(hideModal());
+      firebaseGame.setCreateUser(jsonArray).then(() => {
+          hideModal();
+          getDataUser(); // Refresh the data
+      });
   } else {
-    firebaseGame.setUpdateUser(getIdUser, jsonArray).then(hideModal());
+      firebaseGame.setUpdateUser(getIdUser, jsonArray).then(() => {
+          hideModal();
+          getDataUser(); // Refresh the data
+      });
   }
 });
+
 
 /**Function show modal*/
 function showModal() {
