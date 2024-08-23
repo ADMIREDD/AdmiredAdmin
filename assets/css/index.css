@@ -9,6 +9,7 @@ body {
 /* Ajustes para la cabecera de la tabla para mejorar su visibilidad */
 .table-dark {
   background-color: #343a40;
+  width: 100%;
 }
 
 .table-dark th {
@@ -19,17 +20,31 @@ body {
   border-bottom: 2px solid #dee2e6;
 }
 
+.text-center {
+  text-align: center;
+  white-space: nowrap;
+  /* Evita que el texto se salga del contenedor */
+
+
+
+}
+
 /* Estilos para botones para una mejor cohesión visual */
-.btn-info, .btn-warning, .btn-danger, .btn-success {
+.btn-info,
+.btn-warning,
+.btn-danger,
+.btn-success {
   margin: 0 5px;
 }
 
 .img-fluid {
-  max-width: 20px; /* Ajusta el tamaño de los íconos dentro de los botones */
+  max-width: 20px;
+  /* Ajusta el tamaño de los íconos dentro de los botones */
 }
 
 /* Mejora la legibilidad de los inputs y los selectores */
-.form-control, .form-select {
+.form-control,
+.form-select {
   margin-bottom: 15px;
 }
 
@@ -44,7 +59,7 @@ body {
   background-clip: padding-box;
   border: 1px solid #ced4da;
   border-radius: 0.25rem;
-  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 
 /* Ajustes visuales para el preload */
@@ -77,35 +92,38 @@ body {
 
 /* Estilos personalizados para los botones .boton1 y .boton2 */
 .boton1 {
-    background-color: #007bff; /* Azul, similar a .btn-primary */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 5px;
+  background-color: #007bff;
+  /* Azul, similar a .btn-primary */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
 .boton2 {
-    background-color: #249000; /* Rojo, similar a .btn-danger */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 5px;
+  background-color: #249000;
+  /* Rojo, similar a .btn-danger */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
 .boton3 {
-  background-color: #dc3545; /* Rojo, similar a .btn-danger */
+  background-color: #dc3545;
+  /* Rojo, similar a .btn-danger */
   color: white;
   border: none;
   padding: 10px 20px;
@@ -119,12 +137,16 @@ body {
 }
 
 /* Agregar hover y focus para mejorar la accesibilidad */
-.boton1:hover, .boton1:focus {
-    background-color: #0056b3; /* Azul más oscuro */
-    outline: none;
+.boton1:hover,
+.boton1:focus {
+  background-color: #0056b3;
+  /* Azul más oscuro */
+  outline: none;
 }
 
-.boton2:hover, .boton2:focus {
-    background-color: #c82333; /* Rojo más oscuro */
-    outline: none;
+.boton2:hover,
+.boton2:focus {
+  background-color: #c82333;
+  /* Rojo más oscuro */
+  outline: none;
 }

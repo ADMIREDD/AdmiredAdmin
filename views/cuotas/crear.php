@@ -22,10 +22,17 @@
                                                     <form action="?c=cuota&m=crear" method="post">
                                                         <div class="table-responsive mt-2">
                                                             <table class="table table-border table-hover striped">
-                                                                <input class="controls" type="date" name="fecha" id="fecha" placeholder="Ingrese la fecha" required>
-                                                                <input class="controls" type="text" name="estado" id="estado" placeholder="Ingrese el estado" required>
-                                                                <input class="controls" type="date" name="fecha_limite" id="fecha_limite" placeholder="Ingrese la fecha limite" required>
-                                                                <input class="controls" type="text" name="precio" id="precio" placeholder="Ingrese el precio" required>
+                                                                <input class="controls" type="date" name="fecha"
+                                                                    id="fecha" placeholder="Ingrese la fecha" required>
+                                                                <input class="controls" type="text" name="estado"
+                                                                    id="estado" placeholder="Ingrese el estado"
+                                                                    required>
+                                                                <input class="controls" type="date" name="fecha_limite"
+                                                                    id="fecha_limite"
+                                                                    placeholder="Ingrese la fecha limite" required>
+                                                                <input class="controls" type="text" name="precio"
+                                                                    id="precio" placeholder="Ingrese el precio"
+                                                                    required>
                                                                 <input class="botons" type="submit" value="Crear">
                                                             </table>
                                                         </div>
