@@ -1,74 +1,113 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/css/destroy.css">
-    <title>Actualizar Usuario</title>
-</head>
-
-<body>
-    <div class="content-page">
-        <div class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="page-title-box">
-                            <h4 class="page-title">Actualiza tus datos</h4>
-                            <a href="?c=administrador&m=index" class="btn btn-success">Volver</a>
-                            <section class="form-register">
-                                <form action="views/dashboard/editUser.php?userId=<?php echo $_GET['userId']; ?>"
-                                    method="post" class="formulario__register">
-
-                                    <input class="controls" type="text" name="nombre" id="nombre"
-                                        placeholder="Ingrese su Nombre"
-                                        value="<?php echo htmlspecialchars($user['NOMBRE']) ?>">
-                                    <input class="controls" type="text" name="apellido" id="apellido"
-                                        placeholder="Ingrese su Apellido"
-                                        value="<?php echo htmlspecialchars($user['APELLIDO']) ?>">
-                                    <select class="controls" id="tipo_documento" name="tipo_documento" disabled>
-                                        <option <?php echo $user['TIPO_DOCUMENTO_ID'] == 1 ? 'selected' : '' ?>
-                                            value="1">C.C.</option>
-                                        <option <?php echo $user['TIPO_DOCUMENTO_ID'] == 2 ? 'selected' : '' ?>
-                                            value="2">C.E.</option>
-                                        <option <?php echo $user['TIPO_DOCUMENTO_ID'] == 3 ? 'selected' : '' ?>
-                                            value="3">NIT.</option>
-                                    </select>
-                                    <input class="controls" type="text" name="no_documento" id="no_documento"
-                                        placeholder="Ingrese su Número de Documento"
-                                        value="<?php echo htmlspecialchars($user['NO_DOCUMENTO']) ?>" readonly>
-                                    <input class="controls" type="date" name="fecha_nacimiento" id="fecha_nacimiento"
-                                        placeholder="Ingrese su Fecha de Nacimiento"
-                                        value="<?php echo htmlspecialchars($user['FECHA_NACIMIENTO']) ?>" readonly>
-                                    <input class="controls" type="text" name="email" id="email"
-                                        placeholder="Ingrese su Correo Electrónico"
-                                        value="<?php echo htmlspecialchars($user['EMAIL']) ?>">
-                                    <input class="controls" type="password" name="contrasena" id="contrasena"
-                                        placeholder="Ingrese su Contraseña"
-                                        value="<?php echo htmlspecialchars($user['CONTRASENA']) ?>">
-                                    <input class="controls" type="text" name="telefono" id="telefono"
-                                        placeholder="Ingrese su Número de Teléfono"
-                                        value="<?php echo htmlspecialchars($user['TELEFONO']) ?>">
-                                    <select class="controls" name="Rol">
-                                        <option <?php echo $user['ROL_ID'] == 1 ? 'selected' : '' ?> value="1">
-                                            Propietario</option>
-                                        <option <?php echo $user['ROL_ID'] == 2 ? 'selected' : '' ?> value="2">
-                                            Residente</option>
-                                    </select>
-                                    <input class="controls" type="text" name="torre" id="torre"
-                                        placeholder="Ingrese su Torre"
-                                        value="<?php echo htmlspecialchars($user['TORRE']) ?>">
-                                    <input class="controls" type="text" name="apto" id="apto"
-                                        placeholder="Ingrese su Apartamento"
-                                        value="<?php echo htmlspecialchars($user['APTO']) ?>">
-                                    <input class="botons" type="submit" value="Actualizar">
-                                </form>
-                            </section>
+<link rel="stylesheet" href="assets/css/destroy.css">
+<div class="content-page">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <h2 class="page-title">Modificar Usuario</h2>
+                        <div class="content">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <a href="?c=administrador&m=index" class="btn btn-success">Volver</a>
+                                                <section class="form-register">
+                                                    <form action="?c=administrador&m=update" method="post">
+                                                        <div class="table-responsive mt-2">
+                                                            <table class="table table-border table-hover striped">
+                                                                <input type="hidden" name="userId"
+                                                                    value="<?php echo htmlspecialchars($user['ID']); ?>">
+                                                                <tr>
+                                                                    <td><input class="controls" type="text"
+                                                                            name="nombre"
+                                                                            value="<?php echo htmlspecialchars($user['NOMBRE']); ?>"
+                                                                            placeholder="Ingrese su Nombre" required>
+                                                                    </td>
+                                                                    <td><input class="controls" type="text"
+                                                                            name="apellido"
+                                                                            value="<?php echo htmlspecialchars($user['APELLIDO']); ?>"
+                                                                            placeholder="Ingrese su Apellido" required>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <select name="tipo_documento" required>
+                                                                            <option value="1"
+                                                                                <?php if ($user['TIPO_DOCUMENTO_ID'] == 1) echo 'selected'; ?>>
+                                                                                C.C.</option>
+                                                                            <option value="2"
+                                                                                <?php if ($user['TIPO_DOCUMENTO_ID'] == 2) echo 'selected'; ?>>
+                                                                                C.E.</option>
+                                                                            <option value="3"
+                                                                                <?php if ($user['TIPO_DOCUMENTO_ID'] == 3) echo 'selected'; ?>>
+                                                                                NIT.</option>
+                                                                        </select>
+                                                                    </td>
+                                                                    <td><input class="controls" type="text"
+                                                                            name="no_documento"
+                                                                            value="<?php echo htmlspecialchars($user['NO_DOCUMENTO']); ?>"
+                                                                            placeholder="Ingrese su Número de Documento"
+                                                                            required></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><input class="controls" type="date"
+                                                                            name="fecha_nacimiento"
+                                                                            value="<?php echo htmlspecialchars($user['FECHA_NACIMIENTO']); ?>"
+                                                                            required></td>
+                                                                    <td><input class="controls" type="email"
+                                                                            name="email"
+                                                                            value="<?php echo htmlspecialchars($user['EMAIL']); ?>"
+                                                                            placeholder="Ingrese su Correo Electrónico"
+                                                                            required></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><input type="password" name="contrasena"
+                                                                            value="<?php echo htmlspecialchars($user['CONTRASENA']); ?>"
+                                                                            placeholder="Contraseña"></td>
+                                                                    <td><input class="controls" type="text"
+                                                                            name="telefono"
+                                                                            value="<?php echo htmlspecialchars($user['TELEFONO']); ?>"
+                                                                            placeholder="Ingrese su Número de Teléfono"
+                                                                            required></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <select name="rol_id" required>
+                                                                            <option value="1"
+                                                                                <?php if ($user['ROL_ID'] == 3) echo 'selected'; ?>>
+                                                                                Propietario</option>
+                                                                            <option value="2"
+                                                                                <?php if ($user['ROL_ID'] == 4) echo 'selected'; ?>>
+                                                                                Residente</option>
+                                                                        </select>
+                                                                    </td>
+                                                                    <td><input class="controls" type="text" name="torre"
+                                                                            value="<?php echo htmlspecialchars($user['TORRE']); ?>"
+                                                                            placeholder="Ingrese su Torre" required>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><input class="controls" type="text" name="apto"
+                                                                            value="<?php echo htmlspecialchars($user['APTO']); ?>"
+                                                                            placeholder="Ingrese su apto" required></td>
+                                                                    <td><input class="botons" type="submit"
+                                                                            value="Actualizar"></td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </form>
+                                                </section>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</body>
+</div>

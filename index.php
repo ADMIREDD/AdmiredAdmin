@@ -27,4 +27,3 @@ if (file_exists($controllerFile)) {
 } else {
     echo 'Error: Controller file not found at ' . $controllerFile;
 }
-?>

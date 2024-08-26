@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!-- Estilos generales -->
-    <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="stylesheet" href="./assets/css/index.css">
     <link type="image/x-icon" href="assets/img/logos/favicon.png" rel="icon">
 </head>
 
@@ -139,17 +139,17 @@
                     <div class="modal-body">
                         <!-- Formulario para crear usuario -->
                         <form action="?c=administrador&m=create" method="POST" id="formUser">
-                            <div class="mb-3">
+                            <div class="controls">
                                 <label for="nombre" class="form-label">Nombre</label>
                                 <input type="text" class="form-control" id="nombre" name="nombre"
                                     placeholder="Ingrese su Nombre" required>
                             </div>
-                            <div class="mb-3">
+                            <div class="controls">
                                 <label for="apellido" class="form-label">Apellido</label>
                                 <input type="text" class="form-control" id="apellido" name="apellido"
                                     placeholder="Ingrese su Apellido" required>
                             </div>
-                            <div class="mb-3">
+                            <div class="controls">
                                 <label for="tipo_documento" class="form-label">Tipo de Documento</label>
                                 <select class="form-control" id="tipo_documento" name="tipo_documento" required>
                                     <option value="1">C.C.</option>
@@ -157,32 +157,32 @@
                                     <option value="3">NIT</option>
                                 </select>
                             </div>
-                            <div class="mb-3">
+                            <div class="controls">
                                 <label for="no_documento" class="form-label">Número de Documento</label>
                                 <input type="text" class="form-control" id="no_documento" name="no_documento"
                                     placeholder="Ingrese su Número de Documento" required>
                             </div>
-                            <div class="mb-3">
+                            <div class="controls">
                                 <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento</label>
                                 <input type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento"
                                     required>
                             </div>
-                            <div class="mb-3">
+                            <div class="controls">
                                 <label for="email" class="form-label">Correo Electrónico</label>
                                 <input type="email" class="form-control" id="email" name="email"
                                     placeholder="Ingrese su Correo Electrónico" required>
                             </div>
-                            <div class="mb-3">
+                            <div class="controls">
                                 <label for="contrasena" class="form-label">Contraseña</label>
                                 <input type="password" class="form-control" id="contrasena" name="contrasena"
                                     placeholder="Ingrese su Contraseña" required>
                             </div>
-                            <div class="mb-3">
+                            <div class="controls">
                                 <label for="telefono" class="form-label">Teléfono</label>
                                 <input type="text" class="form-control" id="telefono" name="telefono"
                                     placeholder="Ingrese su Número de Teléfono" required>
                             </div>
-                            <div class="mb-3">
+                            <div class="controls">
                                 <label for="cargo" class="form-label">Cargo</label>
                                 <select class="form-control" id="cargo" name="cargo" required>
                                     <option value="1">Empleado</option>
@@ -190,12 +190,12 @@
                                     <option value="4">Residente</option>
                                 </select>
                             </div>
-                            <div class="mb-3">
+                            <div class="controls">
                                 <label for="torre" class="form-label">Torre</label>
                                 <input type="text" class="form-control" id="torre" name="torre"
                                     placeholder="Ingrese su Torre" required>
                             </div>
-                            <div class="mb-3">
+                            <div class="controls">
                                 <label for="apto" class="form-label">Apartamento</label>
                                 <input type="text" class="form-control" id="apto" name="apto"
                                     placeholder="Ingrese su Apartamento" required>

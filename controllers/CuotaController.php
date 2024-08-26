@@ -78,14 +78,14 @@ class CuotaController
         $result = mysqli_query($conexion, $query) or die("error: " . mysqli_error($conexion));
 
         $user = $result->fetch_assoc();
-        require_once ('views/components/layout/head.php');
-        require_once ('views/cuotas/edit.php');
-        require_once ('views/components/layout/footer.php');
+        require_once('views/components/layout/head.php');
+        require_once('views/cuotas/edit.php');
+        require_once('views/components/layout/footer.php');
     }
 
 
 
-    
+
 
     public function crear()
     {
@@ -117,47 +117,44 @@ class CuotaController
     }
 
     public function delete()
-{
-    session_start();
+    {
+        session_start();
 
-    // Verificar si el usuario está autenticado y tiene el rol de administrador
-    if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || $_SESSION['role'] !== 'admin') {
-        echo "Acceso no autorizado para eliminar la cuota.";
-        return;
-    }
-
-    // Verificar si la solicitud es POST
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        // Verificar y sanitizar el ID de la cuota
-        if (!isset($_POST['cuota_id']) || !is_numeric($_POST['cuota_id'])) {
-            echo "Error: ID de cuota inválido.";
+        // Verificar si el usuario está autenticado y tiene el rol de administrador
+        if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || $_SESSION['role'] !== 'admin') {
+            echo "Acceso no autorizado para eliminar la cuota.";
             return;
         }
 
-        // Conectar a la base de datos
-        $conexion = $this->conectarBD();
-        $cuotaId = mysqli_real_escape_string($conexion, $_POST['cuota_id']);
+        // Verificar si la solicitud es POST
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Verificar y sanitizar el ID de la cuota
+            if (!isset($_POST['cuota_id']) || !is_numeric($_POST['cuota_id'])) {
+                echo "Error: ID de cuota inválido.";
+                return;
+            }
 
-        // Crear la consulta SQL
-        $query = "DELETE FROM cuotas_administracion WHERE ID = $cuotaId";
+            // Conectar a la base de datos
+            $conexion = $this->conectarBD();
+            $cuotaId = mysqli_real_escape_string($conexion, $_POST['cuota_id']);
 
-        // Ejecutar la consulta y verificar el resultado
-        if (mysqli_query($conexion, $query)) {
-            // Redireccionar o mostrar un mensaje de éxito
-            $_SESSION['message'] = "Cuota eliminada exitosamente.";
-            header('Location: ?c=cuota&m=index');
-            exit();
+            // Crear la consulta SQL
+            $query = "DELETE FROM cuotas_administracion WHERE ID = $cuotaId";
+
+            // Ejecutar la consulta y verificar el resultado
+            if (mysqli_query($conexion, $query)) {
+                // Redireccionar o mostrar un mensaje de éxito
+                $_SESSION['message'] = "Cuota eliminada exitosamente.";
+                header('Location: ?c=cuota&m=index');
+                exit();
+            } else {
+                echo "Error al eliminar la cuota: " . mysqli_error($conexion);
+            }
+
+            // Cerrar la conexión a la base de datos
+            mysqli_close($conexion);
         } else {
-            echo "Error al eliminar la cuota: " . mysqli_error($conexion);
+            echo "Acceso no autorizado para eliminar la cuota. Método de solicitud incorrecto.";
         }
-
-        // Cerrar la conexión a la base de datos
-        mysqli_close($conexion);
-    } else {
-        echo "Acceso no autorizado para eliminar la cuota. Método de solicitud incorrecto.";
     }
 }
-
-
-}
-?>
