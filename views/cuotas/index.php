@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listado de PQR</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="stylesheet" href="./assets/css/index.css">
     <link type="image/x-icon" href="assets/img/logos/favicon.png" rel="icon">
 </head>
 
@@ -37,7 +37,7 @@
                                 </div>
                                 <hr>
                                 <div class="table-responsive">
-                                    <table class="table table-dark table-striped table-hover">
+                                    <table class="table table-beige table-striped table-hover">
                                         <thead>
                                             <tr class="text-center">
                                                 <th>ID</th>
@@ -50,23 +50,23 @@
                                         </thead>
                                         <tbody>
                                             <?php while ($rows = $resultado->fetch_assoc()) { ?>
-                                            <tr>
-                                                <td><?php echo $rows['ID']; ?></td>
-                                                <td><?php echo $rows['FECHA']; ?></td>
-                                                <td><?php echo $rows['ESTADO']; ?></td>
-                                                <td><?php echo $rows['FECHA_LIMITE']; ?></td>
-                                                <td><?php echo $rows['PRECIO']; ?></td>
-                                                <td>
-                                                    <div class="d-flex gap-1">
-                                                        <a href="?c=cuota&m=show&userId=<?php echo $rows['ID']; ?>"
-                                                            class="btn btn-primary btn-sm">Ver</a>
-                                                        <a href="?c=cuota&m=edit&userId=<?php echo $rows['ID']; ?>"
-                                                            class="btn btn-primary btn-sm">Editar</a>
-                                                        <a href="?c=cuota&m=delete&userId=<?php echo $rows['ID']; ?>"
-                                                            class="btn btn-danger btn-sm">Eliminar</a>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                                <tr>
+                                                    <td><?php echo $rows['ID']; ?></td>
+                                                    <td><?php echo $rows['FECHA']; ?></td>
+                                                    <td><?php echo $rows['ESTADO']; ?></td>
+                                                    <td><?php echo $rows['FECHA_LIMITE']; ?></td>
+                                                    <td><?php echo $rows['PRECIO']; ?></td>
+                                                    <td>
+                                                        <div class="d-flex gap-1">
+                                                            <a href="?c=cuota&m=show&userId=<?php echo $rows['ID']; ?>"
+                                                                class="submit boton1">Ver</a>
+                                                            <a href="?c=cuota&m=edit&userId=<?php echo $rows['ID']; ?>"
+                                                                class="submit boton2">Editar</a>
+                                                            <a href="?c=cuota&m=delete&userId=<?php echo $rows['ID']; ?>"
+                                                                class="submit boton3">Eliminar</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
                                             <?php } ?>
                                         </tbody>
                                         <thead>

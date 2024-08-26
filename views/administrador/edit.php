@@ -33,7 +33,8 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td>
-                                                                        <select name="tipo_documento" required>
+                                                                        <select class="controls" name="tipo_documento"
+                                                                            required>
                                                                             <option value="1"
                                                                                 <?php if ($user['TIPO_DOCUMENTO_ID'] == 1) echo 'selected'; ?>>
                                                                                 C.C.</option>
@@ -63,7 +64,8 @@
                                                                             required></td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td><input type="password" name="contrasena"
+                                                                    <td><input class="controls" type="password"
+                                                                            name="contrasena"
                                                                             value="<?php echo htmlspecialchars($user['CONTRASENA']); ?>"
                                                                             placeholder="Contraseña"></td>
                                                                     <td><input class="controls" type="text"
@@ -74,7 +76,7 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td>
-                                                                        <select name="rol_id" required>
+                                                                        <select class="controls" name="rol_id" required>
                                                                             <option value="1"
                                                                                 <?php if ($user['ROL_ID'] == 3) echo 'selected'; ?>>
                                                                                 Propietario</option>

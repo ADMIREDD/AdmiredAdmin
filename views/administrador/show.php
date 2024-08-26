@@ -4,70 +4,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/css/destroy.css">
-    <title>Detalles de Usuario</title>
+    <title>Detalle de PQR</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Estilos generales -->
+    <link rel="stylesheet" href="./assets/css/index.css">
 </head>
 
 <body>
-    <div class="content-page">
-        <div class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="page-title-box">
-                            <h4 class="page-title">Detalles de Usuario</h4>
-                            <a href="?c=administrador&m=index" class="btn btn-success">Volver</a>
-                            <section class="form-register">
-                                <form action="views/dashboard/editUser.php?userId=<?php echo $_GET['userId']; ?>"
-                                    method="post" class="formulario__register">
-                                    <input class="controls" type="text" name="nombre" id="nombre"
-                                        placeholder="Ingrese su Nombre"
-                                        value="<?php echo htmlspecialchars($user['NOMBRE']) ?>" disabled>
-                                    <input class="controls" type="text" name="apellido" id="apellido"
-                                        placeholder="Ingrese su Apellido"
-                                        value="<?php echo htmlspecialchars($user['APELLIDO']) ?>" disabled>
-                                    <select class="controls" name="tipo_documento" disabled>
-                                        <option <?php echo $user['TIPO_DOCUMENTO_ID'] == 1 ? 'selected' : '' ?>
-                                            value="1">C.C.</option>
-                                        <option <?php echo $user['TIPO_DOCUMENTO_ID'] == 2 ? 'selected' : '' ?>
-                                            value="2">C.E.</option>
-                                        <option <?php echo $user['TIPO_DOCUMENTO_ID'] == 3 ? 'selected' : '' ?>
-                                            value="3">NIT.</option>
-                                    </select>
-                                    <input class="controls" type="text" name="no_documento" id="no_documento"
-                                        placeholder="Ingrese su Número de Documento"
-                                        value="<?php echo htmlspecialchars($user['NO_DOCUMENTO']) ?>" disabled>
-                                    <input class="controls" type="date" name="fecha_nacimiento" id="fecha_nacimiento"
-                                        placeholder="Ingrese su Fecha de Nacimiento"
-                                        value="<?php echo htmlspecialchars($user['FECHA_NACIMIENTO']) ?>" disabled>
-                                    <input class="controls" type="text" name="email" id="email"
-                                        placeholder="Ingrese su Correo Electrónico"
-                                        value="<?php echo htmlspecialchars($user['EMAIL']) ?>" disabled>
-                                    <input class="controls" type="password" name="contrasena" id="contrasena"
-                                        placeholder="Ingrese su Contraseña"
-                                        value="<?php echo htmlspecialchars($user['CONTRASENA']) ?>" disabled>
-                                    <input class="controls" type="text" name="telefono" id="telefono"
-                                        placeholder="Ingrese su Número de Teléfono"
-                                        value="<?php echo htmlspecialchars($user['TELEFONO']) ?>" disabled>
-                                    <select class="controls" name="rol_id" disabled>
-                                        <option <?php echo $user['ROL_ID'] == 1 ? 'selected' : '' ?> value="1">
-                                            Propietario</option>
-                                        <option <?php echo $user['ROL_ID'] == 2 ? 'selected' : '' ?> value="2">Residente
-                                        </option>
-                                    </select>
-                                    <input class="controls" type="text" name="torre" id="torre"
-                                        placeholder="Ingrese su Torre"
-                                        value="<?php echo htmlspecialchars($user['TORRE']) ?>" disabled>
-                                    <input class="controls" type="text" name="apto" id="apto"
-                                        placeholder="Ingrese su Apartamento"
-                                        value="<?php echo htmlspecialchars($user['APTO']) ?>" disabled>
-                                    <a href="?c=administrador&m=index" class="btn btn-success">Volver</a>
-                                </form>
-                            </section>
-                        </div>
+    <div class="container mt-4">
+        <h2>Detalle de la PQR</h2>
+        <div class="card mt-3">
+            <div class="card-body">
+                <h4>Información de la PQR</h4>
+                <p><strong>ID:</strong> <?php echo htmlspecialchars($user['ID']); ?></p>
+                <p><strong>Detalle:</strong> <?php echo htmlspecialchars($user['Detalle']); ?></p>
+                <p><strong>Estado:</strong> <?php echo htmlspecialchars($user['Estado']); ?></p>
+                <p><strong>Usuario:</strong> <?php echo htmlspecialchars($user['Usuario']); ?></p>
+                <p><strong>Tipo de PQR:</strong> <?php echo htmlspecialchars($user['Tipo de PQR']); ?></p>
+                <p><strong>Fecha de Solicitud:</strong> <?php echo htmlspecialchars($user['Fecha de Solicitud']); ?></p>
+                <p><strong>Fecha de Respuesta:</strong> <?php echo htmlspecialchars($user['Fecha de Respuesta']); ?></p>
+                <p><strong>Respuesta:</strong> <?php echo htmlspecialchars($user['Respuesta']); ?></p>
+            </div>
+        </div>
+
+        <div class="card mt-4">
+            <div class="card-body">
+                <h4>Responder a la PQR</h4>
+                <form action="?c=pqr&m=respond" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="userId" value="<?php echo htmlspecialchars($user['ID']); ?>">
+
+                    <!-- Botones de respuesta rápida -->
+                    <div class="mb-3">
+                        <button type="submit" name="respuesta" value="Solicitud aceptada" class="btn btn-success">
+                            Solicitud aceptada
+                        </button>
+                        <button type="submit" name="respuesta" value="Estamos revisando tu solicitud"
+                            class="btn btn-warning">
+                            Estamos revisando tu solicitud
+                        </button>
                     </div>
-                </div>
+
+                    <!-- Respuesta personalizada -->
+                    <div class="mb-3">
+                        <label for="respuestaPersonalizada" class="form-label">Respuesta personalizada:</label>
+                        <textarea id="respuestaPersonalizada" name="respuestaPersonalizada" class="form-control"
+                            rows="3"></textarea>
+                    </div>
+
+                    <!-- Adjuntar archivos -->
+                    <div class="mb-3">
+                        <label for="adjuntos" class="form-label">Adjuntar archivos:</label>
+                        <input type="file" id="adjuntos" name="adjuntos[]" class="form-control" multiple>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Enviar respuesta</button>
+                </form>
             </div>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
 </body>
+
+</html>

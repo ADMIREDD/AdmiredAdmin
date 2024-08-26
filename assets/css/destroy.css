@@ -1,6 +1,6 @@
 /* Estilos para el contenedor principal */
 .main {
-    padding-top: 20px;
+    padding-top: 10px;
 }
 
 /* Estilos para el título de la página */
@@ -15,27 +15,37 @@ h1.page-title {
 .btn-success {
     background-color: #28a745;
     color: #fff;
-    padding: 10px 20px;
+    padding: 10px 30px;
+    margin-left: 30px;
     text-decoration: none;
     border: none;
-    border-radius: 5px;
+    border-radius: 2px;
+    box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.8);
 }
 
 .btn-success:hover {
-    background-color: #218838;
+    background-color: #007519;
 }
 
 /* Estilos para la sección de formulario */
 .form-register {
-    margin-top: 20px;
+    margin-top: 10px;
+}
+
+
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 /* Estilos para el formulario */
 form {
     background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    padding: none;
+    border-radius: none;
+    box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.8);
 }
 
 /* Estilos para los controles de formulario */
@@ -43,8 +53,10 @@ form {
     width: 100%;
     margin-bottom: 10px;
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    border: none;
+    border-radius: none;
+    box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.5);
+    background-color: #fff;
 }
 
 /* Estilos para el botón de submit */
@@ -55,14 +67,27 @@ form {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    line-height: 1.5;
+    width: 100%;
+    /* Añadido para que ocupe el 100% del ancho del contenedor */
+    box-sizing: border-box;
+    /* Asegura que el padding no afecte al ancho total */
+    box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.8);
 }
 
+
 .botons:hover {
-    background-color: #0056b3;
-    background-color: #f0ad4e; /* Color de fondo naranja */
-    color: #fff; /* Color del texto blanco */
-    padding: 10px 20px; /* Espaciado interno */
-    border: none; /* Sin borde */
-    border-radius: 5px; /* Bordes redondeados */
+    background-color: #007bff;
+    background-color: #011098;
+    /* Color de fondo naranja */
+    color: #fff;
+    /* Color del texto blanco */
+    padding: 10px 20px;
+    /* Espaciado interno */
+    border: none;
+    /* Sin borde */
+    border-radius: 2px;
+    /* Bordes redondeados */
     text-decoration: none;
+    cursor: pointer;
 }

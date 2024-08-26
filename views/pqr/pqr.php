@@ -1,3 +1,8 @@
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -9,12 +14,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!-- Estilos generales -->
-    <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="stylesheet" href="./assets/css/index.css">
     <link type="image/x-icon" href="assets/img/logos/logo.png" rel="icon">
     <link type="image/x-icon" href="assets/img/logos/favicon.png" rel="icon">
 </head>
-
-
 
 <body>
     <div class="content-page">
@@ -29,15 +32,18 @@
                                     <div class="card-body">
                                         <div class="table-responsive mt-2">
                                             <hr>
-                                            <table class="table table-dark table-striped table-hover">
+                                            <table class="table table-beige table-striped table-hover">
                                                 <thead>
                                                     <tr class="text-center">
                                                         <th>ID</th>
                                                         <th>DETALLE</th>
-                                                        <th>ESTADO_ID</th>
-                                                        <th>USUARIO_ID</th>
-                                                        <th>PQR_TIPO</th>
-                                                        <th>FUNCION</th>
+                                                        <th>ESTADO</th>
+                                                        <th>USUARIO</th>
+                                                        <th>TIPO PQR</th>
+                                                        <th>FECHA SOLICITUD</th>
+                                                        <th>FECHA RESPUESTA</th>
+                                                        <th>RESPUESTA</th>
+                                                        <th>FUNCIONES</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -47,26 +53,29 @@
                                                         // LOOP TILL END OF DATA
                                                         while ($rows = $resultado->fetch_assoc()) {
                                                     ?>
-                                                    <tr>
-                                                        <!-- FETCHING DATA FROM EACH ROW OF EVERY COLUMN -->
-                                                        <td><?php echo $rows['ID']; ?></td>
-                                                        <td><?php echo $rows['DETALLE']; ?></td>
-                                                        <td><?php echo $rows['ESTADO_ID']; ?></td>
-                                                        <td><?php echo $rows['USUARIO_ID']; ?></td>
-                                                        <td><?php echo $rows['PQR_TIPO']; ?></td>
-                                                        <td>
-                                                            <div class="d-flex gap-1">
-                                                                <a href="?c=pqr&m=show&userId=<?php echo $rows['ID']; ?>"
-                                                                    class="btn btn-primary">Ver</a>
-                                                                <a href="?c=pqr&m=delete&userId=<?php echo $rows['ID']; ?>"
-                                                                    class="btn btn-danger">Eliminar</a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
+                                                            <tr>
+                                                                <!-- FETCHING DATA FROM EACH ROW OF EVERY COLUMN -->
+                                                                <td><?php echo $rows['ID']; ?></td>
+                                                                <td><?php echo $rows['Detalle']; ?></td>
+                                                                <td><?php echo $rows['Estado']; ?></td>
+                                                                <td><?php echo $rows['Usuario']; ?></td>
+                                                                <td><?php echo $rows['Tipo de PQR']; ?></td>
+                                                                <td><?php echo $rows['Fecha de Solicitud']; ?></td>
+                                                                <td><?php echo $rows['Fecha de Respuesta']; ?></td>
+                                                                <td><?php echo $rows['Respuesta']; ?></td>
+                                                                <td>
+                                                                    <div class="d-flex gap-1">
+                                                                        <a href="?c=pqr&m=show&userId=<?php echo $rows['ID']; ?>"
+                                                                            class="submit boton1">Ver</a>
+                                                                        <a href="?c=pqr&m=delete&userId=<?php echo $rows['ID']; ?>"
+                                                                            class="submit boton3">Eliminar</a>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
                                                     <?php
                                                         }
                                                     } else {
-                                                        echo "<tr><td colspan='4' class='text-center'>No se encontraron registros.</td></tr>";
+                                                        echo "<tr><td colspan='6' class='text-center'>No se encontraron registros.</td></tr>";
                                                     }
                                                     ?>
                                                 </tbody>
@@ -74,10 +83,13 @@
                                                     <tr class="text-center">
                                                         <th>ID</th>
                                                         <th>DETALLE</th>
-                                                        <th>ESTADO_ID</th>
-                                                        <th>USUARIO_ID</th>
-                                                        <th>PQR_TIPO</th>
-                                                        <th>FUNCION</th>
+                                                        <th>ESTADO</th>
+                                                        <th>USUARIO</th>
+                                                        <th>TIPO PQR</th>
+                                                        <th>FECHA SOLICITUD</th>
+                                                        <th>FECHA RESPUESTA</th>
+                                                        <th>RESPUESTA</th>
+                                                        <th>FUNCIONES</th>
                                                     </tr>
                                                 </thead>
                                             </table>
@@ -93,7 +105,6 @@
     </div>
     <!--Container modal-->
 
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
@@ -103,3 +114,6 @@
     <script src="./assets/js/FirebaseGame.js"></script>
     <!--Script my script-->
     <script src="./assets/js/main.js"></script>
+</body>
+
+</html>

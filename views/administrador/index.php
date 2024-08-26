@@ -8,6 +8,8 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <!-- Estilos generales -->
     <link rel="stylesheet" href="./assets/css/index.css">
     <link type="image/x-icon" href="assets/img/logos/favicon.png" rel="icon">
@@ -39,11 +41,19 @@
                                                 class="btn btn-success">
                                                 <i class="fas fa-plus"></i> Crear usuario
                                             </button>
+                                            <form method="GET" action="" class="search-form d-flex">
+                                                <input type="text" class="form-control search-input" id="search"
+                                                    name="search" placeholder="Buscar..."
+                                                    value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
+                                                <button type="submit" class="btn btn-search">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </form>
                                         </div>
                                         <hr>
-                                        <table class="table table-dark table-striped table-hover">
+                                        <table class="table table-beige table-striped table-hover">
                                             <thead>
-                                                <tr class="text-center">
+                                                <tr class="text-center" font-weight="bold">
                                                     <th>ID</th>
                                                     <th>NOMBRE</th>
                                                     <th>APELLIDO</th>
@@ -65,32 +75,32 @@
                                                 // LOOP TILL END OF DATA
                                                 while ($rows = $resultado->fetch_assoc()) {
                                                 ?>
-                                                <tr class="text-center">
-                                                    <!-- FETCHING DATA FROM EACH ROW OF EVERY COLUMN -->
-                                                    <td><?php echo $rows['ID']; ?></td>
-                                                    <td><?php echo $rows['NOMBRE']; ?></td>
-                                                    <td><?php echo $rows['APELLIDO']; ?></td>
-                                                    <td><?php echo $rows['TIPO_DOCUMENTO_ID']; ?></td>
-                                                    <td><?php echo $rows['NO_DOCUMENTO']; ?></td>
-                                                    <td><?php echo isset($rows['FECHA_NACIEMIENTO']) ? $rows['FECHA_NACIEMIENTO'] : ''; ?>
-                                                    </td>
-                                                    <td><?php echo $rows['EMAIL']; ?></td>
-                                                    <td><?php echo $rows['CONTRASENA']; ?></td>
-                                                    <td><?php echo $rows['TELEFONO']; ?></td>
-                                                    <td><?php echo $rows['ROL_ID']; ?></td>
-                                                    <td><?php echo $rows['TORRE']; ?></td>
-                                                    <td><?php echo $rows['APTO']; ?></td>
-                                                    <td>
-                                                        <div class="d-flex gap-1">
-                                                            <a href="?c=administrador&m=show&userId=<?php echo $rows['ID']; ?>"
-                                                                class="submit boton1">Ver</a>
-                                                            <a href="?c=administrador&m=edit&userId=<?php echo $rows['ID']; ?>"
-                                                                class="submit boton2">Editar</a>
-                                                            <a href="?c=administrador&m=destroy&userId=<?php echo $rows['ID']; ?>"
-                                                                class="submit boton3">Eliminar</a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
+                                                    <tr class="text-center">
+                                                        <!-- FETCHING DATA FROM EACH ROW OF EVERY COLUMN -->
+                                                        <td><?php echo $rows['ID']; ?></td>
+                                                        <td><?php echo $rows['NOMBRE']; ?></td>
+                                                        <td><?php echo $rows['APELLIDO']; ?></td>
+                                                        <td><?php echo $rows['TIPO_DOCUMENTO_ID']; ?></td>
+                                                        <td><?php echo $rows['NO_DOCUMENTO']; ?></td>
+                                                        <td><?php echo isset($rows['FECHA_NACIEMIENTO']) ? $rows['FECHA_NACIEMIENTO'] : ''; ?>
+                                                        </td>
+                                                        <td><?php echo $rows['EMAIL']; ?></td>
+                                                        <td><?php echo $rows['CONTRASENA']; ?></td>
+                                                        <td><?php echo $rows['TELEFONO']; ?></td>
+                                                        <td><?php echo $rows['ROL_ID']; ?></td>
+                                                        <td><?php echo $rows['TORRE']; ?></td>
+                                                        <td><?php echo $rows['APTO']; ?></td>
+                                                        <td>
+                                                            <div class="d-flex gap-1">
+                                                                <a href="?c=administrador&m=show&userId=<?php echo $rows['ID']; ?>"
+                                                                    class="submit boton1">Ver</a>
+                                                                <a href="?c=administrador&m=edit&userId=<?php echo $rows['ID']; ?>"
+                                                                    class="submit boton2">Editar</a>
+                                                                <a href="?c=administrador&m=destroy&userId=<?php echo $rows['ID']; ?>"
+                                                                    class="submit boton3">Eliminar</a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
                                                 <?php
                                                 }
                                                 ?>
@@ -139,17 +149,17 @@
                     <div class="modal-body">
                         <!-- Formulario para crear usuario -->
                         <form action="?c=administrador&m=create" method="POST" id="formUser">
-                            <div class="controls">
+                            <div class="table-responsive mb-2">
                                 <label for="nombre" class="form-label">Nombre</label>
                                 <input type="text" class="form-control" id="nombre" name="nombre"
                                     placeholder="Ingrese su Nombre" required>
                             </div>
-                            <div class="controls">
+                            <div class="table-responsive mb-2">
                                 <label for="apellido" class="form-label">Apellido</label>
                                 <input type="text" class="form-control" id="apellido" name="apellido"
                                     placeholder="Ingrese su Apellido" required>
                             </div>
-                            <div class="controls">
+                            <div class="table-responsive mb-2">
                                 <label for="tipo_documento" class="form-label">Tipo de Documento</label>
                                 <select class="form-control" id="tipo_documento" name="tipo_documento" required>
                                     <option value="1">C.C.</option>
@@ -157,45 +167,44 @@
                                     <option value="3">NIT</option>
                                 </select>
                             </div>
-                            <div class="controls">
+                            <div class="table-responsive mb-2">
                                 <label for="no_documento" class="form-label">Número de Documento</label>
                                 <input type="text" class="form-control" id="no_documento" name="no_documento"
                                     placeholder="Ingrese su Número de Documento" required>
                             </div>
-                            <div class="controls">
+                            <div class="table-responsive mb-2">
                                 <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento</label>
                                 <input type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento"
                                     required>
                             </div>
-                            <div class="controls">
+                            <div class="table-responsive mb-2">
                                 <label for="email" class="form-label">Correo Electrónico</label>
                                 <input type="email" class="form-control" id="email" name="email"
                                     placeholder="Ingrese su Correo Electrónico" required>
                             </div>
-                            <div class="controls">
+                            <div class="table-responsive mb-2">
                                 <label for="contrasena" class="form-label">Contraseña</label>
                                 <input type="password" class="form-control" id="contrasena" name="contrasena"
                                     placeholder="Ingrese su Contraseña" required>
                             </div>
-                            <div class="controls">
+                            <div class="table-responsive mb-2">
                                 <label for="telefono" class="form-label">Teléfono</label>
                                 <input type="text" class="form-control" id="telefono" name="telefono"
                                     placeholder="Ingrese su Número de Teléfono" required>
                             </div>
-                            <div class="controls">
+                            <div class="table-responsive mb-2">
                                 <label for="cargo" class="form-label">Cargo</label>
-                                <select class="form-control" id="cargo" name="cargo" required>
-                                    <option value="1">Empleado</option>
-                                    <option value="3">Propietario</option>
-                                    <option value="4">Residente</option>
+                                <select class="table-responsive mb-2" id="cargo" name="cargo" required>
+                                    <option value="1">Propietario</option>
+                                    <option value="2">Residente</option>
                                 </select>
                             </div>
-                            <div class="controls">
+                            <div class="table-responsive mb-2">
                                 <label for="torre" class="form-label">Torre</label>
                                 <input type="text" class="form-control" id="torre" name="torre"
                                     placeholder="Ingrese su Torre" required>
                             </div>
-                            <div class="controls">
+                            <div class="table-responsive mb-2">
                                 <label for="apto" class="form-label">Apartamento</label>
                                 <input type="text" class="form-control" id="apto" name="apto"
                                     placeholder="Ingrese su Apartamento" required>

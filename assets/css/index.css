@@ -1,32 +1,17 @@
 /* Estilo general del cuerpo de la página para un fondo más coherente */
 body {
   background-color: #f4f7f6;
-  color: #333;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #0d0d0d;
+  font-family: 'montserrat', sans-serif;
+  padding-top: 10px;
+}
+
+.card-body {
+  background-color: #f4f7f6;
+  color: #0d0d0d;
+  font-family: 'montserrat', sans-serif;
   padding-top: 20px;
-}
-
-/* Ajustes para la cabecera de la tabla para mejorar su visibilidad */
-.table-dark {
-  background-color: #343a40;
-  width: 100%;
-}
-
-.table-dark th {
-  color: #fff;
-}
-
-.table-dark thead th {
-  border-bottom: 2px solid #dee2e6;
-}
-
-.text-center {
-  text-align: center;
-  white-space: nowrap;
-  /* Evita que el texto se salga del contenedor */
-
-
-
+  box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.8);
 }
 
 /* Estilos para botones para una mejor cohesión visual */
@@ -35,10 +20,16 @@ body {
 .btn-danger,
 .btn-success {
   margin: 0 5px;
+  padding: 5px 10px;
+  border-radius: 2px;
+  font-size: 14px;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.8);
 }
 
 .img-fluid {
-  max-width: 20px;
+  max-width: 10px;
   /* Ajusta el tamaño de los íconos dentro de los botones */
 }
 
@@ -57,9 +48,32 @@ body {
   color: #495057;
   background-color: #fff;
   background-clip: padding-box;
-  border: 1px solid #ced4da;
+  border: 10px solid #ced4da;
   border-radius: 0.25rem;
   transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.table-beige {
+  background-color: #f4f7f6;
+  color: #3c3c3c;
+  font-family: 'montserrat', sans-serif;
+  padding-top: 10px;
+
+}
+
+table {
+  border-collapse: 2px;
+  border-spacing: 0;
+  width: 100%;
+  border: 5px solid #000000;
+
+}
+
+.table-responsive {
+  overflow-x: auto;
+  white-space: nowrap;
+  text-align: center;
+  font-family: 'montserrat', sans-serif;
 }
 
 /* Ajustes visuales para el preload */
@@ -96,7 +110,7 @@ body {
   /* Azul, similar a .btn-primary */
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 2px 20px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -104,6 +118,7 @@ body {
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 5px;
+  box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.8);
 }
 
 .boton2 {
@@ -111,7 +126,7 @@ body {
   /* Rojo, similar a .btn-danger */
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 2px 20px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -119,6 +134,7 @@ body {
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 5px;
+  box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.8);
 }
 
 .boton3 {
@@ -126,7 +142,7 @@ body {
   /* Rojo, similar a .btn-danger */
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 2px 20px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -134,19 +150,59 @@ body {
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 5px;
+  box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.8);
 }
 
-/* Agregar hover y focus para mejorar la accesibilidad */
-.boton1:hover,
-.boton1:focus {
-  background-color: #0056b3;
-  /* Azul más oscuro */
-  outline: none;
+.search-form {
+  display: flex;
+  align-items: center;
+  margin-bottom: -15px;
+  /* Ajusta el margen aquí sea necesario */
+  margin-left: 18px;
+
 }
 
-.boton2:hover,
-.boton2:focus {
-  background-color: #c82333;
-  /* Rojo más oscuro */
-  outline: none;
+.search-input {
+  flex: 0 0 200px;
+  /* Ancho fijo de 200px */
+  margin-right: 5px;
+  /* Ajusta el margen según sea necesario */
+  padding: 5px;
+  border: 0px solid #ccc;
+  border-radius: 2px;
+  /* Ajusta el radio de borde más o menos */
+  font-size: 16px;
+  /* Ajusta el tamaño de fuente más o menos */
+  height: 35px;
+  box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.8);
+}
+
+.btn-search {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.btn-search .fa-search {
+  color: #040405;
+  /* Color del ícono */
+  font-size: 20px;
+  /* Tamaño del ícono */
+  transition: color 0.3s;
+  /* Transición para el efecto de hover */
+  margin-left: 10px;
+
+}
+
+.btn-search:hover .fa-search {
+  color: #979797;
+  /* El color no cambia en hover */
+}
+
+.d-flex {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  /* Ajusta el orden de los elementos */
 }
