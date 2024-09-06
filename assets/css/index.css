@@ -11,7 +11,7 @@ body {
   color: #0d0d0d;
   font-family: 'montserrat', sans-serif;
   padding-top: 20px;
-  box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.8);
+  box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.4);
 }
 
 /* Estilos para botones para una mejor cohesión visual */
@@ -25,7 +25,7 @@ body {
   font-size: 14px;
   text-transform: uppercase;
   cursor: pointer;
-  box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.8);
+  box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.4);
 }
 
 .img-fluid {
@@ -118,7 +118,7 @@ table {
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 5px;
-  box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.8);
+  box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.4);
 }
 
 .boton2 {
@@ -134,7 +134,7 @@ table {
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 5px;
-  box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.8);
+  box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.4);
 }
 
 .boton3 {
@@ -150,7 +150,7 @@ table {
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 5px;
-  box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.8);
+  box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.4);
 }
 
 .search-form {
@@ -174,7 +174,7 @@ table {
   font-size: 16px;
   /* Ajusta el tamaño de fuente más o menos */
   height: 35px;
-  box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.8);
+  box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.4);
 }
 
 .btn-search {

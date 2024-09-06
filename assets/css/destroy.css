@@ -20,7 +20,7 @@ h1.page-title {
     text-decoration: none;
     border: none;
     border-radius: 2px;
-    box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.8);
+    box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.4);
 }
 
 .btn-success:hover {
@@ -41,12 +41,14 @@ h1.page-title {
 }
 
 /* Estilos para el formulario */
-form {
+.card-body {
     background-color: #fff;
     padding: none;
     border-radius: none;
-    box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.8);
+    box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.4);
 }
+
+
 
 /* Estilos para los controles de formulario */
 .controls {
@@ -55,7 +57,7 @@ form {
     padding: 10px;
     border: none;
     border-radius: none;
-    box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.5);
+    box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.2);
     background-color: #fff;
 }
 
@@ -72,7 +74,7 @@ form {
     /* Añadido para que ocupe el 100% del ancho del contenedor */
     box-sizing: border-box;
     /* Asegura que el padding no afecte al ancho total */
-    box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.8);
+    box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.4);
 }
 
 

@@ -4,60 +4,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalles de PQR</title>
+    <title>Detalle de PQR</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!-- Estilos generales -->
     <link rel="stylesheet" href="./assets/css/index.css">
-    <link type="image/x-icon" href="assets/img/logos/logo.png" rel="icon">
-    <link type="image/x-icon" href="assets/img/logos/favicon.png" rel="icon">
 </head>
 
 <body>
-    <div class="container mt-5">
-        <h2>Detalles de la PQR</h2>
-        <div class="card">
-            <div class="card-body">
-                <p>ID: <?php echo htmlspecialchars($user['ID'] ?? ''); ?></p>
+    <div class="container-fluid">
+        <a href="?c=pqr&m=index" class="btn btn-success">Volver</a>
+        <h2>Detalle de la PQR</h2>
+        <div class="page-title-box"></div>
+        <div class="table-responsive mt-2">
 
-                <p>Estado: <?php echo htmlspecialchars($user['Estado'] ?? ''); ?></p>
-                <p>Usuario: <?php echo htmlspecialchars($user['Usuario'] ?? ''); ?></p>
-                <p>Tipo de PQR: <?php echo htmlspecialchars($user['Tipo de PQR'] ?? ''); ?></p>
-                <p>Fecha de Solicitud: <?php echo htmlspecialchars($user['Fecha de Solicitud'] ?? ''); ?></p>
-                <p>Fecha de Respuesta: <?php echo htmlspecialchars($user['Fecha de Respuesta'] ?? ''); ?></p>
-                <p>Respuesta: <?php echo htmlspecialchars($user['Respuesta'] ?? ''); ?></p>
-                <p>Detalle: <?php echo htmlspecialchars($user['Detalle'] ?? ''); ?></p>
-            </div>
+
+            <table class="table table-border table-hover striped">
+                <div class="card-body">
+                    <h4>Información de la PQR </h4>
+                    <p><strong>ID:</strong> <?php echo htmlspecialchars($user['ID']); ?></p>
+                    <p><strong>Detalle:</strong> <?php echo htmlspecialchars($user['Detalle']); ?></p>
+                    <p><strong>Estado:</strong> <?php echo htmlspecialchars($user['Estado']); ?></p>
+                    <p><strong>Usuario:</strong> <?php echo htmlspecialchars($user['Usuario']); ?></p>
+                    <p><strong>Tipo de PQR:</strong> <?php echo htmlspecialchars($user['Tipo de PQR']); ?></p>
+                    <p><strong>Fecha de Solicitud:</strong> <?php echo htmlspecialchars($user['Fecha de Solicitud']); ?>
+                    </p>
+                    <p><strong>Fecha de Respuesta:</strong> <?php echo htmlspecialchars($user['Fecha de Respuesta']); ?>
+                    </p>
+                    <p><strong>Respuesta:</strong> <?php echo htmlspecialchars($user['Respuesta']); ?></p>
+                </div>
         </div>
 
-        <h3 class="mt-4">Responder PQR</h3>
-        <form action="?c=pqr&m=respond" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="id" value="<?php echo htmlspecialchars($user['ID'] ?? ''); ?>">
-            <div class="mb-3">
-                <button type="submit" name="response" value="Solicitud aceptada" class="btn btn-success">Solicitud
-                    aceptada</button>
-                <button type="submit" name="response" value="Estamos revisando tu solicitud"
-                    class="btn btn-warning">Estamos revisando tu solicitud</button>
-            </div>
-            <div class="mb-3">
-                <label for="customResponse" class="form-label">Respuesta personalizada:</label>
-                <textarea id="customResponse" name="customResponse" class="form-control" rows="3"></textarea>
-            </div>
-            <div class="mb-3">
-                <label for="attachments" class="form-label">Adjuntar archivos:</label>
-                <input type="file" id="attachments" name="attachments[]" class="form-control" multiple>
-            </div>
-            <button type="submit" class="btn btn-primary">Enviar Respuesta</button>
-        </form>
+        <div class="card mt-4">
+            <div class="card-body">
+                <h4>Responder a la PQR</h4>
+                <form action="?c=pqr&m=respond" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="userId" value="<?php echo htmlspecialchars($user['ID']); ?>">
 
-        <a href="?c=pqr&m=pqr" class="btn btn-primary mt-3">Volver al listado</a>
+                    <!-- Botones de respuesta rápida -->
+                    <div class="mb-3">
+                        <button type="submit" name="respuesta" value="Solicitud aceptada" class="btn btn-success">
+                            Solicitud aceptada
+                        </button>
+                        <button type="submit" name="respuesta" value="Estamos revisando tu solicitud"
+                            class="btn btn-warning">
+                            Estamos revisando tu solicitud
+                        </button>
+                    </div>
+
+                    <!-- Respuesta personalizada -->
+                    <div class="mb-3">
+                        <label for="respuestaPersonalizada" class="form-label">Respuesta personalizada:</label>
+                        <textarea id="respuestaPersonalizada" name="respuestaPersonalizada" class="form-control"
+                            rows="3"></textarea>
+                    </div>
+
+                    <!-- Adjuntar archivos -->
+                    <div class="mb-3">
+                        <label for="adjuntos" class="form-label">Adjuntar archivos:</label>
+                        <input type="file" id="adjuntos" name="adjuntos[]" class="form-control" multiple>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Enviar respuesta</button>
+                </form>
+            </div>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
-    <script src="./assets/js/main.js"></script>
 </body>
 
 </html>

@@ -2,8 +2,12 @@
 body {
     background-color: #f4f7f6;
     color: #333;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    padding-top: 20px;
+    font-family: 'montserrat', sans-serif;
+    padding-top: 1px;
+    width: 60%;
+    margin-left: 19%;
+    box-shadow: 0px 18px 18px rgb(0 29 253 / 40%);
+    margin-top: 37px;
 }
 
 /* Ajustes para la cabecera de la tabla para mejorar su visibilidad */
@@ -19,17 +23,29 @@ body {
     border-bottom: 2px solid #dee2e6;
 }
 
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -45%;
+    margin-left: -45%;
+}
+
 /* Estilos para botones para una mejor cohesión visual */
-.btn-info, .btn-warning, .btn-danger, .btn-success {
+.btn-info,
+.btn-warning,
+.btn-danger,
+.btn-success {
     margin: 0 5px;
 }
 
 .img-fluid {
-    max-width: 20px; /* Ajusta el tamaño de los íconos dentro de los botones */
+    max-width: 20px;
+    /* Ajusta el tamaño de los íconos dentro de los botones */
 }
 
 /* Mejora la legibilidad de los inputs y los selectores */
-.form-control, .form-select {
+.form-control,
+.form-select {
     margin-bottom: 15px;
 }
 
@@ -44,7 +60,7 @@ body {
     background-clip: padding-box;
     border: 1px solid #ced4da;
     border-radius: 0.25rem;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 
 /* Ajustes visuales para el preload */
@@ -78,7 +94,8 @@ body {
 
 /* Estilos para el título del modal */
 #modalApp .modal-title {
-    color: #007bff; /* Ajusta este color según tu esquema de diseño */
+    color: #040404;
+    /* Ajusta este color según tu esquema de diseño */
     font-weight: bold;
 }
 
@@ -88,28 +105,28 @@ body {
     border: 1px solid #ced4da;
 }
 
-#modalApp .form-floating > label {
-    color: #6c757d; /* Color para las etiquetas para mejorar la legibilidad */
-    font-size: 0.875em;
-}
+
 
 #modalApp .form-floating {
-    margin-bottom: 15px; /* Espaciado entre campos para evitar que se vean apretados */
+    margin-bottom: 15px;
+    /* Espaciado entre campos para evitar que se vean apretados */
 }
 
 /* Mejoras en los botones dentro del modal */
-#modalApp .btn-primary {
-    background-color: #007bff; /* Ajusta estos valores según tu paleta de colores */
-    border-color: #007bff;
+.btn-primary {
+    background-color: #227bff;
+    /* Ajusta estos valores según tu paleta de colores */
+    border-color: #0058b6;
 }
 
-#modalApp .btn-secondary {
-    background-color: #6c757d;
-    border-color: #6c757d;
+.btn-secondary {
+    background-color: #227bff;
+    /* Ajusta estos valores según tu paleta de colores */
+    border-color: #0058b6;
 }
 
 /* Estilos para selectores dentro del modal */
-#modalApp .form-select {
+.form-select {
     display: block;
     width: 100%;
     padding: 0.375rem 1.75rem 0.375rem 0.75rem;
@@ -117,7 +134,7 @@ body {
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
-    color: #495057;
+
     background-color: #fff;
     background-repeat: no-repeat;
     border: 1px solid #ced4da;
@@ -141,3 +158,8 @@ body {
     padding: 0.375rem 0.75rem;
 }
 
+#modalApp .link-success {
+    color: #020e09, !important;
+    text-decoration: none;
+    cursor: pointer;
+}

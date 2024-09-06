@@ -4,63 +4,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalle de PQR</title>
+    <title>Detalles del Usuario</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!-- Estilos generales -->
-    <link rel="stylesheet" href="./assets/css/index.css">
+    <link rel="stylesheet" href="assets/css/destroy.css">
+    <link type="image/x-icon" href="assets/img/logos/logo.png" rel="icon">
+    <link type="image/x-icon" href="assets/img/logos/favicon.png" rel="icon">
 </head>
 
 <body>
-    <div class="container mt-4">
-        <h2>Detalle de la PQR</h2>
-        <div class="card mt-3">
-            <div class="card-body">
-                <h4>Información de la PQR</h4>
-                <p><strong>ID:</strong> <?php echo htmlspecialchars($user['ID']); ?></p>
-                <p><strong>Detalle:</strong> <?php echo htmlspecialchars($user['Detalle']); ?></p>
-                <p><strong>Estado:</strong> <?php echo htmlspecialchars($user['Estado']); ?></p>
-                <p><strong>Usuario:</strong> <?php echo htmlspecialchars($user['Usuario']); ?></p>
-                <p><strong>Tipo de PQR:</strong> <?php echo htmlspecialchars($user['Tipo de PQR']); ?></p>
-                <p><strong>Fecha de Solicitud:</strong> <?php echo htmlspecialchars($user['Fecha de Solicitud']); ?></p>
-                <p><strong>Fecha de Respuesta:</strong> <?php echo htmlspecialchars($user['Fecha de Respuesta']); ?></p>
-                <p><strong>Respuesta:</strong> <?php echo htmlspecialchars($user['Respuesta']); ?></p>
-            </div>
-        </div>
-
-        <div class="card mt-4">
-            <div class="card-body">
-                <h4>Responder a la PQR</h4>
-                <form action="?c=pqr&m=respond" method="POST" enctype="multipart/form-data">
-                    <input type="hidden" name="userId" value="<?php echo htmlspecialchars($user['ID']); ?>">
-
-                    <!-- Botones de respuesta rápida -->
-                    <div class="mb-3">
-                        <button type="submit" name="respuesta" value="Solicitud aceptada" class="btn btn-success">
-                            Solicitud aceptada
-                        </button>
-                        <button type="submit" name="respuesta" value="Estamos revisando tu solicitud"
-                            class="btn btn-warning">
-                            Estamos revisando tu solicitud
-                        </button>
+    <div class="content-page">
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <h2 class="page-title">Detalles del Usuario</h2>
+                            <div class="content">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <a href="?c=administrador&m=index"
+                                                        class="btn btn-success">Volver</a>
+                                                    <section class="form-register">
+                                                        <div class="table-responsive mt-2">
+                                                            <table class="table table-border table-hover striped">
+                                                                <tr>
+                                                                    <td><input class="controls" type="text"
+                                                                            value="<?php echo htmlspecialchars($user['NOMBRE']); ?>"
+                                                                            readonly></td>
+                                                                    <td><input class="controls" type="text"
+                                                                            value="<?php echo htmlspecialchars($user['APELLIDO']); ?>"
+                                                                            readonly></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <select class="controls" disabled>
+                                                                            <option value="1"
+                                                                                <?php if ($user['TIPO_DOCUMENTO_ID'] == 1) echo 'selected'; ?>>
+                                                                                C.C.</option>
+                                                                            <option value="2"
+                                                                                <?php if ($user['TIPO_DOCUMENTO_ID'] == 2) echo 'selected'; ?>>
+                                                                                C.E.</option>
+                                                                            <option value="3"
+                                                                                <?php if ($user['TIPO_DOCUMENTO_ID'] == 3) echo 'selected'; ?>>
+                                                                                NIT.</option>
+                                                                        </select>
+                                                                    </td>
+                                                                    <td><input class="controls" type="text"
+                                                                            value="<?php echo htmlspecialchars($user['NO_DOCUMENTO']); ?>"
+                                                                            readonly></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><input class="controls" type="date"
+                                                                            value="<?php echo htmlspecialchars($user['FECHA_NACIMIENTO']); ?>"
+                                                                            readonly></td>
+                                                                    <td><input class="controls" type="email"
+                                                                            value="<?php echo htmlspecialchars($user['EMAIL']); ?>"
+                                                                            readonly></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><input class="controls" type="password"
+                                                                            value="<?php echo htmlspecialchars($user['CONTRASENA']); ?>"
+                                                                            readonly></td>
+                                                                    <td><input class="controls" type="text"
+                                                                            value="<?php echo htmlspecialchars($user['TELEFONO']); ?>"
+                                                                            readonly></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <select class="controls" disabled>
+                                                                            <option value="1"
+                                                                                <?php if ($user['ROL_ID'] == 3) echo 'selected'; ?>>
+                                                                                Propietario</option>
+                                                                            <option value="2"
+                                                                                <?php if ($user['ROL_ID'] == 4) echo 'selected'; ?>>
+                                                                                Residente</option>
+                                                                        </select>
+                                                                    </td>
+                                                                    <td><input class="controls" type="text"
+                                                                            value="<?php echo htmlspecialchars($user['TORRE']); ?>"
+                                                                            readonly></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><input class="controls" type="text"
+                                                                            value="<?php echo htmlspecialchars($user['APTO']); ?>"
+                                                                            readonly></td>
+                                                                    <td></td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-
-                    <!-- Respuesta personalizada -->
-                    <div class="mb-3">
-                        <label for="respuestaPersonalizada" class="form-label">Respuesta personalizada:</label>
-                        <textarea id="respuestaPersonalizada" name="respuestaPersonalizada" class="form-control"
-                            rows="3"></textarea>
-                    </div>
-
-                    <!-- Adjuntar archivos -->
-                    <div class="mb-3">
-                        <label for="adjuntos" class="form-label">Adjuntar archivos:</label>
-                        <input type="file" id="adjuntos" name="adjuntos[]" class="form-control" multiple>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">Enviar respuesta</button>
-                </form>
+                </div>
             </div>
         </div>
     </div>
@@ -68,6 +115,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
+    <script src="assets/js/main.js"></script>
 </body>
 
 </html>
