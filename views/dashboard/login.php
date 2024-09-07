@@ -30,19 +30,23 @@
                         <label for="user">Email</label>
                     </div>
 
-                    <div class="form-floating mb-3">
-                        <input type="password" minlength="6" maxlength="12" title="Validate the data entered"
-                            class="form-control" id="password" placeholder="Enter Password" required>
-                        <label for="password">Contraseña</label>
-                        <button class="btn btn-outline-secondary" type="button" id="btn-password">
-                            <img src="assets/img/icons/eye-slash-fill.svg" alt>
-                        </button>
+                    <!-- Campo de Contraseña con el botón del "ojito" -->
+                    <div class="mb-3">
+                        <div class="form-floating mb-3">
+                            <input type="password" minlength="6" maxlength="12" title="Validate the data entered"
+                                class="form-control" id="password" placeholder="Enter Password" required>
+                            <button class="btn btn-outline-secondary" type="button" id="btn-password">
+                                <img class="eye" src="assets/img/icons/eye-slash-fill.svg" />
+                            </button>
+                            <label for="password" class="form-label">Contraseña</label>
+                        </div>
+
                     </div>
 
                     <div>
-                        <button type="submit" class="btn btn-primary w-100 mb-3">Iniciar Sesión</button>
+                        <button type="submit" class="btn btn-primary w-100 mb-1">Iniciar Sesión</button>
                         <a href="/SENA/AdmiredAdmin/views/dashboard/create.php"
-                            class="btn btn-secondary w-100">Registrarse</a>
+                            class="btn btn-primary w-100 mb-0">Registrarse</a>
                         <a href="/SENA/AdmiredAdmin/views/dashboard/recoverPassword.php" class="link-success">Recuperar
                             Contraseña</a>
                     </div>
