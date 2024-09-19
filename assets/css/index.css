@@ -1,9 +1,17 @@
 /* Estilo general del cuerpo de la página para un fondo más coherente */
+.container-fluid {
+  background-color: #f4f7f6;
+  color: #0d0d0d;
+  font-family: 'montserrat', sans-serif;
+  padding-top: 100px;
+}
+
 body {
   background-color: #f4f7f6;
   color: #0d0d0d;
   font-family: 'montserrat', sans-serif;
-  padding-top: 10px;
+  padding-top: 0px;
+
 }
 
 .card-body {
@@ -12,6 +20,8 @@ body {
   font-family: 'montserrat', sans-serif;
   padding-top: 20px;
   box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.4);
+  margin-top: 0px;
+
 }
 
 /* Estilos para botones para una mejor cohesión visual */
@@ -19,6 +29,7 @@ body {
 .btn-warning,
 .btn-danger,
 .btn-success {
+
   margin: 0 5px;
   padding: 5px 10px;
   border-radius: 2px;
@@ -26,6 +37,7 @@ body {
   text-transform: uppercase;
   cursor: pointer;
   box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.4);
+  margin-top: 0px;
 }
 
 .img-fluid {

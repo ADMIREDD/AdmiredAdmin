@@ -10,10 +10,8 @@ error_reporting(E_ALL);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listado de PQR</title>
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <!-- Estilos generales -->
     <link rel="stylesheet" href="./assets/css/index.css">
     <link type="image/x-icon" href="assets/img/logos/logo.png" rel="icon">
     <link type="image/x-icon" href="assets/img/logos/favicon.png" rel="icon">
@@ -48,50 +46,35 @@ error_reporting(E_ALL);
                                                 </thead>
                                                 <tbody>
                                                     <?php
-                                                    // Verificar si $resultado no es nulo
                                                     if ($resultado) {
-                                                        // LOOP TILL END OF DATA
                                                         while ($rows = $resultado->fetch_assoc()) {
                                                     ?>
-                                                            <tr>
-                                                                <!-- FETCHING DATA FROM EACH ROW OF EVERY COLUMN -->
-                                                                <td><?php echo $rows['ID']; ?></td>
-                                                                <td><?php echo $rows['Detalle']; ?></td>
-                                                                <td><?php echo $rows['Estado']; ?></td>
-                                                                <td><?php echo $rows['Usuario']; ?></td>
-                                                                <td><?php echo $rows['Tipo de PQR']; ?></td>
-                                                                <td><?php echo $rows['Fecha de Solicitud']; ?></td>
-                                                                <td><?php echo $rows['Fecha de Respuesta']; ?></td>
-                                                                <td><?php echo $rows['Respuesta']; ?></td>
-                                                                <td>
-                                                                    <div class="d-flex gap-1">
-                                                                        <a href="?c=pqr&m=show&userId=<?php echo $rows['ID']; ?>"
-                                                                            class="submit boton1">Ver</a>
-                                                                        <a href="?c=pqr&m=delete&userId=<?php echo $rows['ID']; ?>"
-                                                                            class="submit boton3">Eliminar</a>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
+                                                    <tr>
+                                                        <td><?php echo $rows['ID']; ?></td>
+                                                        <td><?php echo substr($rows['Detalle'], 0, 20) . '...'; ?></td>
+                                                        <td><?php echo $rows['Estado']; ?></td>
+                                                        <td><?php echo $rows['Usuario']; ?></td>
+                                                        <td><?php echo $rows['Tipo de PQR']; ?></td>
+                                                        <td><?php echo $rows['Fecha de Solicitud']; ?></td>
+                                                        <td><?php echo $rows['Fecha de Respuesta']; ?></td>
+                                                        <td><?php echo $rows['Respuesta']; ?></td>
+                                                        <td>
+                                                            <a href="?c=pqr&m=show&ID=<?php echo $rows['ID']; ?>"
+                                                                class="btn btn-primary btn-sm">Ver</a>
+
+                                                            class="btn btn-primary btn-sm">Ver</a>
+
+                                                            <a href="?c=pqr&m=delete&ID=<?php echo $rows['ID']; ?>"
+                                                                class="btn btn-danger btn-sm"
+                                                                onclick="return confirm('¿Está seguro de eliminar esta PQR?');">Eliminar</a>
+
+                                                        </td>
+                                                    </tr>
                                                     <?php
                                                         }
-                                                    } else {
-                                                        echo "<tr><td colspan='6' class='text-center'>No se encontraron registros.</td></tr>";
                                                     }
                                                     ?>
                                                 </tbody>
-                                                <thead>
-                                                    <tr class="text-center">
-                                                        <th>ID</th>
-                                                        <th>DETALLE</th>
-                                                        <th>ESTADO</th>
-                                                        <th>USUARIO</th>
-                                                        <th>TIPO PQR</th>
-                                                        <th>FECHA SOLICITUD</th>
-                                                        <th>FECHA RESPUESTA</th>
-                                                        <th>RESPUESTA</th>
-                                                        <th>FUNCIONES</th>
-                                                    </tr>
-                                                </thead>
                                             </table>
                                         </div>
                                     </div>
@@ -99,21 +82,13 @@ error_reporting(E_ALL);
                             </div>
                         </div>
                     </div>
-                </div><!-- end row -->
-            </div> <!-- end container-fluid -->
+                </div>
+            </div>
         </div>
     </div>
-    <!--Container modal-->
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+        integrity="sha384-pb32HFr4npALxGLYPDnM/LoCz8MzOkXMy9QaFzHKIzZwVM28Osl7CTh5cFgq+LhS" crossorigin="anonymous">
     </script>
-    <!--Script RFC4122-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/node-uuid/1.4.7/uuid.min.js"></script>
-    <!--Script my script-->
-    <script src="./assets/js/FirebaseGame.js"></script>
-    <!--Script my script-->
-    <script src="./assets/js/main.js"></script>
 </body>
 
 </html>

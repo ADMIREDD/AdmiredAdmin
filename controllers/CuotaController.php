@@ -97,7 +97,7 @@ class CuotaController
             $fecha_limite = mysqli_real_escape_string($conexion, $_POST['fecha_limite']);
             $precio = mysqli_real_escape_string($conexion, $_POST['precio']);
 
-            $query = "INSERT INTO cuotas_administracion (FECHA, ESTADO, FECHA_LIMITE, PRECIO) 
+            $query = "INSERT INTO cuotas_administracion (FECHA_MES, ESTADO, FECHA_PAGO, UNIDAD_RESIDENCIAL_ID) 
                       VALUES ('$fecha', '$estado', '$fecha_limite', '$precio')";
 
             if (mysqli_query($conexion, $query)) {

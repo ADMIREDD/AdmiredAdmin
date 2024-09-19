@@ -41,42 +41,46 @@
                                         <thead>
                                             <tr class="text-center">
                                                 <th>ID</th>
-                                                <th>FECHA</th>
+                                                <th>FECHA_MES</th>
                                                 <th>ESTADO</th>
-                                                <th>FECHA_LIMITE</th>
-                                                <th>PRECIO</th>
-                                                <th>FUNCION</th>
+                                                <th>VALOR</th>
+                                                <th>NO_APTO</th>
+                                                <th>FECHA_PAGO</th>
+                                                <th>UNIDAD_RESIDENCIAL_ID</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php while ($rows = $resultado->fetch_assoc()) { ?>
-                                                <tr>
-                                                    <td><?php echo $rows['ID']; ?></td>
-                                                    <td><?php echo $rows['FECHA']; ?></td>
-                                                    <td><?php echo $rows['ESTADO']; ?></td>
-                                                    <td><?php echo $rows['FECHA_LIMITE']; ?></td>
-                                                    <td><?php echo $rows['PRECIO']; ?></td>
-                                                    <td>
-                                                        <div class="d-flex gap-1">
-                                                            <a href="?c=cuota&m=show&userId=<?php echo $rows['ID']; ?>"
-                                                                class="submit boton1">Ver</a>
-                                                            <a href="?c=cuota&m=edit&userId=<?php echo $rows['ID']; ?>"
-                                                                class="submit boton2">Editar</a>
-                                                            <a href="?c=cuota&m=delete&userId=<?php echo $rows['ID']; ?>"
-                                                                class="submit boton3">Eliminar</a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
+                                            <tr>
+                                                <td><?php echo $rows['ID']; ?></td>
+                                                <td><?php echo $rows['FECHA_MES']; ?></td>
+                                                <td><?php echo $rows['ESTADO']; ?></td>
+                                                <td><?php echo $rows['VALOR']; ?></td>
+                                                <td><?php echo $rows['NO_APTO']; ?></td>
+                                                <td><?php echo $rows['FECHA_PAGO']; ?></td>
+                                                <td><?php echo $rows['UNIDAD_RESIDENCIAL_ID']; ?></td>
+                                                <td>
+                                                    <div class="d-flex gap-1">
+                                                        <a href="?c=cuota&m=show&userId=<?php echo $rows['ID']; ?>"
+                                                            class="submit boton1">Ver</a>
+                                                        <a href="?c=cuota&m=edit&userId=<?php echo $rows['ID']; ?>"
+                                                            class="submit boton2">Editar</a>
+                                                        <a href="?c=cuota&m=delete&userId=<?php echo $rows['ID']; ?>"
+                                                            class="submit boton3">Eliminar</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
                                             <?php } ?>
                                         </tbody>
                                         <thead>
                                             <tr class="text-center">
                                                 <th>ID</th>
-                                                <th>FECHA</th>
+                                                <th>FECHA_MES</th>
                                                 <th>ESTADO</th>
-                                                <th>FECHA_LIMITE</th>
-                                                <th>PRECIO</th>
-                                                <th>FUNCION</th>
+                                                <th>VALOR</th>
+                                                <th>NO_APTO</th>
+                                                <th>FECHA_PAGO</th>
+                                                <th>UNIDAD_RESIDENCIAL_ID</th>
                                             </tr>
                                         </thead>
                                     </table>
@@ -100,8 +104,9 @@
                                 <!-- Formulario para crear usuario -->
                                 <form action="?c=cuota&m=crear" method="POST" id="formUser">
                                     <div class="mb-3">
-                                        <label for="fecha" class="form-label">fecha</label>
-                                        <input type="date" class="form-control" id="fecha" name="fecha" required>
+                                        <label for="fecha_mes" class="form-label">fecha mes</label>
+                                        <input type="date" class="form-control" id="fecha_mes" name="fecha_mes"
+                                            required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="estado" class="form-label">estado</label>
