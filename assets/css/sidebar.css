@@ -1,3 +1,31 @@
-.left-side-menu{
-    background-color: #f8fafc;
+.left-side-menu {
+    background-color: #d3d3d3;
+    margin-top: -19px;
+    height: 100vh;
+    max-width: 190px;
+}
+
+.slimscroll-menu {
+    background-color: #d3d3d3;
+}
+
+.slimscroll-menu {
+    height: 838px;
+}
+
+.text {
+    font-size: 18px;
+}
+
+.text-muted {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #acadaf;
+
+}
+
+.text-muted {
+    color: #6c757d !important;
+    font-size: 25px;
+    padding-left: 20px;
 }

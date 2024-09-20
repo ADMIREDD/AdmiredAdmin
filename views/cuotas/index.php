@@ -47,6 +47,7 @@
                                                 <th>NO_APTO</th>
                                                 <th>FECHA_PAGO</th>
                                                 <th>UNIDAD_RESIDENCIAL_ID</th>
+                                                <th>FUNCIONES</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -81,6 +82,7 @@
                                                 <th>NO_APTO</th>
                                                 <th>FECHA_PAGO</th>
                                                 <th>UNIDAD_RESIDENCIAL_ID</th>
+                                                <th>FUNCIONES</th>
                                             </tr>
                                         </thead>
                                     </table>

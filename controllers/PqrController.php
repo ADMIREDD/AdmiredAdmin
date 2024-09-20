@@ -93,28 +93,44 @@ class PqrController
 
             $userId = $_POST['userId'];
 
-            // Obtener el correo del usuario
-            $query = "SELECT EMAIL FROM usuarios WHERE ID = $userId";
-            $result = $this->conexion->query($query);
+            // Obtener el correo de la tabla usuarios
+            $queryUsuarios = "SELECT EMAIL FROM usuarios WHERE ID = $userId";
+            $resultUsuarios = $this->conexion->query($queryUsuarios);
+            $emailUsuario = null;
 
-            if (!$result) {
-                die("Error en la consulta SQL: " . $this->conexion->error);
+            if ($resultUsuarios) {
+                $usuario = $resultUsuarios->fetch_assoc();
+                $emailUsuario = $usuario['EMAIL'] ?? null;
             }
 
-            $usuario = $result->fetch_assoc();
+            // Obtener el correo de la tabla users
+            $queryUsers = "SELECT email FROM users WHERE id = $userId";
+            $resultUsers = $this->conexion->query($queryUsers);
+            $emailUser = null;
 
-            if ($usuario && isset($usuario['EMAIL'])) {
-                $emailUsuario = $usuario['EMAIL'];
+            if ($resultUsers) {
+                $user = $resultUsers->fetch_assoc();
+                $emailUser = $user['email'] ?? null;
+            }
 
-                $to = $emailUsuario;
+            // Validar si hay correos disponibles
+            if ($emailUsuario || $emailUser) {
+                $to = [];
+                if ($emailUsuario) $to[] = $emailUsuario;
+                if ($emailUser) $to[] = $emailUser;
+
+                $to = implode(',', $to); // Separa los correos por coma si hay más de uno
+
                 $subject = "Respuesta a tu PQR";
                 $message = "Hola, esta es la respuesta a tu PQR:\n\n" . $respuesta;
-                $headers = "From: tuemail@ejemplo.com";
+                $headers = "From: tuemail@ejemplo.com\r\n";
+                $headers .= "Reply-To: tuemail@ejemplo.com\r\n";
+                $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
 
                 if (mail($to, $subject, $message, $headers)) {
                     // Actualizar la PQR con la respuesta
-                    $query = "UPDATE pqr SET RESPUESTA = ?, FECHA_RESPUESTA = ? WHERE ID = ?";
-                    $stmt = $this->conexion->prepare($query);
+                    $queryUpdate = "UPDATE pqr SET RESPUESTA = ?, FECHA_RESPUESTA = ? WHERE ID = ?";
+                    $stmt = $this->conexion->prepare($queryUpdate);
                     $fechaRespuesta = date('Y-m-d');
                     $stmt->bind_param('ssi', $respuesta, $fechaRespuesta, $pqrId);
                     $stmt->execute();
@@ -126,7 +142,7 @@ class PqrController
                     echo "Error al enviar el correo.";
                 }
             } else {
-                echo "Usuario no encontrado o correo electrónico no disponible.";
+                echo "No se encontró un correo electrónico registrado en ninguna tabla.";
             }
         } else {
             echo "Error: datos no válidos.";

@@ -3,22 +3,27 @@
     <div class="slimscroll-menu">
         <div id="sidebar-menu">
             <ul class="metismenu" id="side-menu">
-                <li class="menu-title">Opciones</li>
+                <li class="text-muted">Opciones</li>
                 <li>
                     <a href="?c=pqr&m=pqr">
-                        <i class="mdi mdi-view-dashboard"></i>
-                        <span> Pqr </span>
+                        <i class="fa-solid fa-user"></i>
+                        <span class="text"> Pqr </span>
                     </a>
                 </li>
                 <li>
                     <a href="?c=administrador&m=index">
                         <i class="fa-solid fa-user"></i>
-                        <span> Listado </span>
+                        <span class="text"> Listado </span>
                     </a>
                     <a href="?c=cuota&m=index">
                         <i class="fa-solid fa-user"></i>
-                        <span> Cuota Admin </span>
+                        <span class="text"> Cuota Admin </span>
                     </a>
+                    <a href="?c=reserva&m=index">
+                        <i class="fa-solid fa-user"></i>
+                        <span class="text"> Reservas </span>
+                    </a>
+
                 </li>
             </ul>
         </div>

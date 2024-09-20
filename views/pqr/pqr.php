@@ -61,13 +61,9 @@ error_reporting(E_ALL);
                                                         <td>
                                                             <a href="?c=pqr&m=show&ID=<?php echo $rows['ID']; ?>"
                                                                 class="btn btn-primary btn-sm">Ver</a>
-
-                                                            class="btn btn-primary btn-sm">Ver</a>
-
                                                             <a href="?c=pqr&m=delete&ID=<?php echo $rows['ID']; ?>"
                                                                 class="btn btn-danger btn-sm"
                                                                 onclick="return confirm('¿Está seguro de eliminar esta PQR?');">Eliminar</a>
-
                                                         </td>
                                                     </tr>
                                                     <?php

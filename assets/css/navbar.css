@@ -6,3 +6,13 @@
     background-color: #90919b;
     box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.4);
 }
+
+.cerrar-sesion {
+    font-size: 20px;
+    color: rgb(254, 6, 6);
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    margin-left: 18px;
+
+}

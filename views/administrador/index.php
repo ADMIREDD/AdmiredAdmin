@@ -66,7 +66,7 @@
                                                     <th>ROL</th>
                                                     <th>TORRE</th>
                                                     <th>APTO</th>
-                                                    <th>FUNCION</th>
+                                                    <th>FUNCIONES</th>
                                                 </tr>
                                             </thead>
 
@@ -75,32 +75,32 @@
                                                 // LOOP TILL END OF DATA
                                                 while ($rows = $resultado->fetch_assoc()) {
                                                 ?>
-                                                    <tr class="text-center">
-                                                        <!-- FETCHING DATA FROM EACH ROW OF EVERY COLUMN -->
-                                                        <td><?php echo $rows['ID']; ?></td>
-                                                        <td><?php echo $rows['NOMBRE']; ?></td>
-                                                        <td><?php echo $rows['APELLIDO']; ?></td>
-                                                        <td><?php echo $rows['TIPO_DOCUMENTO_ID']; ?></td>
-                                                        <td><?php echo $rows['NO_DOCUMENTO']; ?></td>
-                                                        <td><?php echo isset($rows['FECHA_NACIEMIENTO']) ? $rows['FECHA_NACIEMIENTO'] : ''; ?>
-                                                        </td>
-                                                        <td><?php echo $rows['EMAIL']; ?></td>
-                                                        <td><?php echo $rows['CONTRASENA']; ?></td>
-                                                        <td><?php echo $rows['TELEFONO']; ?></td>
-                                                        <td><?php echo $rows['ROL_ID']; ?></td>
-                                                        <td><?php echo $rows['TORRE']; ?></td>
-                                                        <td><?php echo $rows['APTO']; ?></td>
-                                                        <td>
-                                                            <div class="d-flex gap-1">
-                                                                <a href="?c=administrador&m=show&userId=<?php echo $rows['ID']; ?>"
-                                                                    class="submit boton1">Ver</a>
-                                                                <a href="?c=administrador&m=edit&userId=<?php echo $rows['ID']; ?>"
-                                                                    class="submit boton2">Editar</a>
-                                                                <a href="?c=administrador&m=destroy&userId=<?php echo $rows['ID']; ?>"
-                                                                    class="submit boton3">Eliminar</a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
+                                                <tr class="text-center">
+                                                    <!-- FETCHING DATA FROM EACH ROW OF EVERY COLUMN -->
+                                                    <td><?php echo $rows['ID']; ?></td>
+                                                    <td><?php echo $rows['NOMBRE']; ?></td>
+                                                    <td><?php echo $rows['APELLIDO']; ?></td>
+                                                    <td><?php echo $rows['TIPO_DOCUMENTO_ID']; ?></td>
+                                                    <td><?php echo $rows['NO_DOCUMENTO']; ?></td>
+                                                    <td><?php echo isset($rows['FECHA_NACIEMIENTO']) ? $rows['FECHA_NACIEMIENTO'] : ''; ?>
+                                                    </td>
+                                                    <td><?php echo $rows['EMAIL']; ?></td>
+                                                    <td><?php echo $rows['CONTRASENA']; ?></td>
+                                                    <td><?php echo $rows['TELEFONO']; ?></td>
+                                                    <td><?php echo $rows['ROL_ID']; ?></td>
+                                                    <td><?php echo $rows['TORRE']; ?></td>
+                                                    <td><?php echo $rows['APTO']; ?></td>
+                                                    <td>
+                                                        <div class="d-flex gap-1">
+                                                            <a href="?c=administrador&m=show&userId=<?php echo $rows['ID']; ?>"
+                                                                class="submit boton1">Ver</a>
+                                                            <a href="?c=administrador&m=edit&userId=<?php echo $rows['ID']; ?>"
+                                                                class="submit boton2">Editar</a>
+                                                            <a href="?c=administrador&m=destroy&userId=<?php echo $rows['ID']; ?>"
+                                                                class="submit boton3">Eliminar</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
                                                 <?php
                                                 }
                                                 ?>
@@ -121,7 +121,7 @@
                                                         <th>ROL</th>
                                                         <th>TORRE</th>
                                                         <th>APTO</th>
-                                                        <th>FUNCION</th>
+                                                        <th>FUNCIONES</th>
                                                     </tr>
                                                 </thead>
 

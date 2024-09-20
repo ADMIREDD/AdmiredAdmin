@@ -2,8 +2,9 @@
 <div class="navbar-custom">
     <ul class="list-unstyled topnav-menu float-right mb-0">
         <li class="dropdown notification-list">
-            <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="http://localhost/AdmiredAdmin/" role="button" aria-haspopup="false" aria-expanded="false">
-                <img src="./assets/imagenes/andres.jpeg" alt="user-image" class="rounded-circle">
+            <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown"
+                href="http://localhost/AdmiredAdmin/" role="button" aria-haspopup="false" aria-expanded="false">
+
                 <span class="d-none d-sm-inline-block ml-1 font-weight-medium"></span>
                 <i class="mdi mdi-chevron-down d-none d-sm-inline-block"></i>
             </a>
@@ -15,12 +16,11 @@
 
                 <!-- item-->
 
-                <div class="dropdown-divider"></div>
+
 
                 <!-- item-->
                 <a href="javascript:void(0);">
-                    <i class="mdi mdi-logout-variant"></i>
-                    <span><a href="http://localhost/SENA/AdmiredAdmin/?">Cerrar Sesion</a></span>
+                    <span><a class="cerrar-sesion" href="http://localhost/SENA/AdmiredAdmin/?">Cerrar Sesion</a></span>
                 </a>
 
             </div>
