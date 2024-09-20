@@ -23,10 +23,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex justify-content-end mb-3">
-                                    <button type="button" onclick="window.location.href = '?c=reserva&m=crear';"
-                                        class="btn btn-success">
-                                        <i class="fas fa-plus"></i> Crear Reserva
-                                    </button>
+
                                 </div>
                                 <hr>
                                 <div class="table-responsive">
@@ -63,11 +60,11 @@
                                                 <td>
                                                     <div class="d-flex gap-1">
                                                         <a href="?c=reserva&m=show&userId=<?php echo $row['ID']; ?>"
-                                                            class="btn btn-primary btn-sm">Ver</a>
+                                                            class="submit boton1">Ver</a>
                                                         <a href="?c=reserva&m=edit&userId=<?php echo $row['ID']; ?>"
-                                                            class="btn btn-warning btn-sm">Editar</a>
+                                                            class="submit boton2">Editar</a>
                                                         <a href="?c=reserva&m=delete&userId=<?php echo $row['ID']; ?>"
-                                                            class="btn btn-danger btn-sm">Eliminar</a>
+                                                            class="submit boton3">Eliminar</a>
                                                     </div>
                                                 </td>
                                             </tr>
