@@ -221,7 +221,7 @@ table {
 }
 
 .search-input {
-  flex: 0 0 200px;
+  flex: 0 0 250px;
   /* Ancho fijo de 200px */
   margin-right: 5px;
   /* Ajusta el margen según sea necesario */
@@ -231,8 +231,10 @@ table {
   /* Ajusta el radio de borde más o menos */
   font-size: 16px;
   /* Ajusta el tamaño de fuente más o menos */
-  height: 35px;
-  box-shadow: 2px 2px 19px rgba(0, 0, 0, 0.8);
+  height: 33px;
+  box-shadow: -5px 3px 26px rgba(0, 0, 0, 1.8);
+  background-color: #e0dcdc;
+  cursor: pointer;
 }
 
 .btn-search {
