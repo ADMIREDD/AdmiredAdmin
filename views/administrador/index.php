@@ -83,10 +83,11 @@
                                                             <td><?php echo $rows['APELLIDO']; ?></td>
                                                             <td><?php echo $rows['TIPO_DOCUMENTO_ID']; ?></td>
                                                             <td><?php echo $rows['NO_DOCUMENTO']; ?></td>
-                                                            <td><?php echo isset($rows['FECHA_NACIEMIENTO']) ? $rows['FECHA_NACIEMIENTO'] : ''; ?>
+                                                            <td><?php echo isset($rows['FECHA_NACIMIENTO']) ? $rows['FECHA_NACIMIENTO'] : ''; ?>
                                                             </td>
                                                             <td><?php echo $rows['EMAIL']; ?></td>
-                                                            <td><?php echo $rows['CONTRASENA']; ?></td>
+                                                            <td><?php echo substr($rows['CONTRASENA'], 0, 20) . '...'; ?>
+                                                            </td>
                                                             <td><?php echo $rows['TELEFONO']; ?></td>
                                                             <td><?php echo $rows['ROL_ID']; ?></td>
                                                             <td><?php echo $rows['TORRE']; ?></td>

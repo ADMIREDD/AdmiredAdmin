@@ -237,12 +237,7 @@ table {
   cursor: pointer;
 }
 
-.btn-search {
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-}
+
 
 .btn-search .fa-search {
   color: #040405;

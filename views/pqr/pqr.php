@@ -49,23 +49,24 @@ error_reporting(E_ALL);
                                                     if ($resultado) {
                                                         while ($rows = $resultado->fetch_assoc()) {
                                                     ?>
-                                                    <tr>
-                                                        <td><?php echo $rows['ID']; ?></td>
-                                                        <td><?php echo substr($rows['Detalle'], 0, 20) . '...'; ?></td>
-                                                        <td><?php echo $rows['Estado']; ?></td>
-                                                        <td><?php echo $rows['Usuario']; ?></td>
-                                                        <td><?php echo $rows['Tipo de PQR']; ?></td>
-                                                        <td><?php echo $rows['Fecha de Solicitud']; ?></td>
-                                                        <td><?php echo $rows['Fecha de Respuesta']; ?></td>
-                                                        <td><?php echo $rows['Respuesta']; ?></td>
-                                                        <td>
-                                                            <a href="?c=pqr&m=show&ID=<?php echo $rows['ID']; ?>"
-                                                                class="btn btn-primary btn-sm">Ver</a>
-                                                            <a href="?c=pqr&m=delete&ID=<?php echo $rows['ID']; ?>"
-                                                                class="btn btn-danger btn-sm"
-                                                                onclick="return confirm('¿Está seguro de eliminar esta PQR?');">Eliminar</a>
-                                                        </td>
-                                                    </tr>
+                                                            <tr>
+                                                                <td><?php echo $rows['ID']; ?></td>
+                                                                <td><?php echo substr($rows['Detalle'], 0, 20) . '...'; ?></td>
+                                                                <td><?php echo $rows['Estado']; ?></td>
+                                                                <td><?php echo $rows['Usuario']; ?></td>
+                                                                <td><?php echo $rows['Tipo de PQR']; ?></td>
+                                                                <td><?php echo $rows['Fecha de Solicitud']; ?></td>
+                                                                <td><?php echo $rows['Fecha de Respuesta']; ?></td>
+                                                                <td><?php echo substr($rows['Respuesta'], 0, 20) . '...'; ?>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="?c=pqr&m=show&ID=<?php echo $rows['ID']; ?>"
+                                                                        class="btn btn-primary btn-sm">Ver</a>
+                                                                    <a href="?c=pqr&m=delete&ID=<?php echo $rows['ID']; ?>"
+                                                                        class="btn btn-danger btn-sm"
+                                                                        onclick="return confirm('¿Está seguro de eliminar esta PQR?');">Eliminar</a>
+                                                                </td>
+                                                            </tr>
                                                     <?php
                                                         }
                                                     }
