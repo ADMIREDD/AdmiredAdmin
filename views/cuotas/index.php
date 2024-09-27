@@ -41,50 +41,39 @@
                                         <thead>
                                             <tr class="text-center">
                                                 <th>ID</th>
-                                                <th>FECHA_MES</th>
+                                                <th>FECHA MES</th>
                                                 <th>ESTADO</th>
                                                 <th>VALOR</th>
-                                                <th>NO_APTO</th>
-                                                <th>FECHA_PAGO</th>
-                                                <th>UNIDAD_RESIDENCIAL_ID</th>
+                                                <th>NO APTO</th>
+                                                <th>FECHA DE PAGO</th>
+                                                <th>UNI RESIDENCIAL</th>
                                                 <th>FUNCIONES</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php while ($rows = $resultado->fetch_assoc()) { ?>
-                                            <tr>
-                                                <td><?php echo $rows['ID']; ?></td>
-                                                <td><?php echo $rows['FECHA_MES']; ?></td>
-                                                <td><?php echo $rows['ESTADO']; ?></td>
-                                                <td><?php echo $rows['VALOR']; ?></td>
-                                                <td><?php echo $rows['NO_APTO']; ?></td>
-                                                <td><?php echo $rows['FECHA_PAGO']; ?></td>
-                                                <td><?php echo $rows['UNIDAD_RESIDENCIAL_ID']; ?></td>
-                                                <td>
-                                                    <div class="d-flex gap-1">
-                                                        <a href="?c=cuota&m=show&userId=<?php echo $rows['ID']; ?>"
-                                                            class="submit boton1">Ver</a>
-                                                        <a href="?c=cuota&m=edit&userId=<?php echo $rows['ID']; ?>"
-                                                            class="submit boton2">Editar</a>
-                                                        <a href="?c=cuota&m=delete&userId=<?php echo $rows['ID']; ?>"
-                                                            class="submit boton3">Eliminar</a>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                                <tr>
+                                                    <td><?php echo $rows['ID']; ?></td>
+                                                    <td><?php echo $rows['FECHA_MES']; ?></td>
+                                                    <td><?php echo $rows['ESTADO']; ?></td>
+                                                    <td><?php echo $rows['VALOR']; ?></td>
+                                                    <td><?php echo $rows['NO_APTO']; ?></td>
+                                                    <td><?php echo $rows['FECHA_PAGO']; ?></td>
+                                                    <td><?php echo $rows['UNIDAD_RESIDENCIAL_ID']; ?></td>
+                                                    <td>
+                                                        <div class="d-flex gap-1">
+                                                            <a href="?c=cuota&m=show&userId=<?php echo $rows['ID']; ?>"
+                                                                class="submit boton1">Ver</a>
+                                                            <a href="?c=cuota&m=edit&userId=<?php echo $rows['ID']; ?>"
+                                                                class="submit boton2">Editar</a>
+                                                            <a href="?c=cuota&m=delete&userId=<?php echo $rows['ID']; ?>"
+                                                                class="submit boton3">Eliminar</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
                                             <?php } ?>
                                         </tbody>
-                                        <thead>
-                                            <tr class="text-center">
-                                                <th>ID</th>
-                                                <th>FECHA_MES</th>
-                                                <th>ESTADO</th>
-                                                <th>VALOR</th>
-                                                <th>NO_APTO</th>
-                                                <th>FECHA_PAGO</th>
-                                                <th>UNIDAD_RESIDENCIAL_ID</th>
-                                                <th>FUNCIONES</th>
-                                            </tr>
-                                        </thead>
+
                                     </table>
                                 </div>
                             </div>

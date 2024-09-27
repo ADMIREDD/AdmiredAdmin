@@ -59,7 +59,7 @@
                                                         <th>ID</th>
                                                         <th>NOMBRE</th>
                                                         <th>APELLIDO</th>
-                                                        <th>TIPO DOC</th>
+                                                        <th>TIPO DC</th>
                                                         <th>NO DOC</th>
                                                         <th>FECHA NAC</th>
                                                         <th>EMAIL</th>

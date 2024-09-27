@@ -31,43 +31,43 @@
                                         <thead>
                                             <tr class="text-center">
                                                 <th>ID</th>
-                                                <th>Fecha Reserva</th>
-                                                <th>Área Común</th>
-                                                <th>Estado Reserva</th>
-                                                <th>Usuario</th>
-                                                <th>Observación Entrega</th>
-                                                <th>Observación Recibe</th>
-                                                <th>Valor</th>
-                                                <th>Funciones</th>
+                                                <th>FECHA RESERVA</th>
+                                                <th>AREA COMUN</th>
+                                                <th>ESTADO RESERVA</th>
+                                                <th>USUARIO</th>
+                                                <th>OBSERVACION ENTREGA</th>
+                                                <th>OBSERVACION RECIBE</th>
+                                                <th>VALOR</th>
+                                                <th>FUNCIONES</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php if (empty($reservas)) { ?>
-                                            <tr>
-                                                <td colspan="8">No se encontraron reservas.</td>
-                                            </tr>
-                                            <?php } else {
+                                                <tr>
+                                                    <td colspan="8">No se encontraron reservas.</td>
+                                                </tr>
+                                                <?php } else {
                                                 foreach ($reservas as $row) { ?>
-                                            <tr>
-                                                <td><?php echo $row['ID']; ?></td>
-                                                <td><?php echo $row['Fecha Reserva']; ?></td>
-                                                <td><?php echo $row['Área Común']; ?></td>
-                                                <td><?php echo $row['Estado Reserva']; ?></td>
-                                                <td><?php echo $row['Usuario']; ?></td>
-                                                <td><?php echo $row['Observación Entrega']; ?></td>
-                                                <td><?php echo $row['Observación Recibe']; ?></td>
-                                                <td><?php echo $row['Valor']; ?></td>
-                                                <td>
-                                                    <div class="d-flex gap-1">
-                                                        <a href="?c=reserva&m=show&userId=<?php echo $row['ID']; ?>"
-                                                            class="submit boton1">Ver</a>
-                                                        <a href="?c=reserva&m=edit&userId=<?php echo $row['ID']; ?>"
-                                                            class="submit boton2">Editar</a>
-                                                        <a href="?c=reserva&m=delete&userId=<?php echo $row['ID']; ?>"
-                                                            class="submit boton3">Eliminar</a>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                                    <tr>
+                                                        <td><?php echo $row['ID']; ?></td>
+                                                        <td><?php echo $row['Fecha Reserva']; ?></td>
+                                                        <td><?php echo $row['Área Común']; ?></td>
+                                                        <td><?php echo $row['Estado Reserva']; ?></td>
+                                                        <td><?php echo $row['Usuario']; ?></td>
+                                                        <td><?php echo $row['Observación Entrega']; ?></td>
+                                                        <td><?php echo $row['Observación Recibe']; ?></td>
+                                                        <td><?php echo $row['Valor']; ?></td>
+                                                        <td>
+                                                            <div class="d-flex gap-1">
+                                                                <a href="?c=reserva&m=show&userId=<?php echo $row['ID']; ?>"
+                                                                    class="submit boton1">Ver</a>
+                                                                <a href="?c=reserva&m=edit&userId=<?php echo $row['ID']; ?>"
+                                                                    class="submit boton2">Editar</a>
+                                                                <a href="?c=reserva&m=delete&userId=<?php echo $row['ID']; ?>"
+                                                                    class="submit boton3">Eliminar</a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
                                             <?php }
                                             } ?>
                                         </tbody>
