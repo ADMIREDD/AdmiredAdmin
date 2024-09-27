@@ -137,7 +137,8 @@ class AdministradorController
 
             // Crear la consulta SQL
             $query = "INSERT INTO usuarios (NOMBRE, APELLIDO, TIPO_DOCUMENTO_ID, NO_DOCUMENTO, FECHA_NACIMIENTO, EMAIL, CONTRASENA, TELEFONO, ROL_ID, TORRE, APTO) 
-                  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
             $stmt = mysqli_prepare($this->conexion, $query);
 
             if (!$stmt) {

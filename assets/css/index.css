@@ -3,7 +3,7 @@
   background-color: #f4f7f6;
   color: #0d0d0d;
   font-family: 'montserrat', sans-serif;
-  padding-top: 20px;
+  padding-top: 82px;
 }
 
 body {
@@ -18,14 +18,20 @@ body {
   background-color: #f4f7f6;
   color: #0d0d0d;
   font-family: 'montserrat', sans-serif;
-  padding-top: 20px;
+  padding-top: 27px;
   box-shadow: 2px 2px 19px rgba(0, 0, 0, 0.6);
-  padding-left: 0px;
-  border-radius: 20px;
+  padding-left: 20px;
+  border-radius: 13px;
 }
 
 .card {
   border-radius: 20px;
+}
+
+.card-body_pqr {
+  max-width: 1000px !important;
+  margin-bottom: 43px;
+  margin-left: 28% !important;
 }
 
 .text-center {
@@ -47,6 +53,24 @@ body {
   cursor: pointer;
   box-shadow: 2px 2px 19px rgba(0, 0, 0, 0.8);
   margin-top: 0px;
+}
+
+.btn-primary {
+  margin: 0 5px;
+  padding: 5px 10px;
+  border-radius: 2px;
+  font-size: 14px;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 2px 2px 19px rgba(0, 0, 0, 0.8);
+  margin-top: 0px;
+  margin-left: -39%;
+  background-color: #1468e5;
+  color: white;
+}
+
+.mt-4 {
+  margin-top: 0.5rem !important
 }
 
 .img-fluid {
@@ -232,6 +256,11 @@ table {
 .btn-search:hover .fa-search {
   color: #979797;
   /* El color no cambia en hover */
+}
+
+.button {
+  cursor: pointer;
+  margin-left: 2% !important;
 }
 
 .d-flex {

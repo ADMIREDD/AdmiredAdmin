@@ -3,6 +3,12 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+// Cargar PHPMailer
+require 'vendor/autoload.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 class PqrController
 {
     private $conexion;
@@ -62,9 +68,12 @@ class PqrController
                     FECHA_RESPUESTA AS 'Fecha de Respuesta', 
                     RESPUESTA AS 'Respuesta'
                 FROM pqr 
-                WHERE ID = $userId";
+                WHERE ID = ?";
 
-        $result = $this->conexion->query($query);
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bind_param('i', $userId);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
         if (!$result) {
             die("Error en la consulta SQL: " . $this->conexion->error);
@@ -87,62 +96,75 @@ class PqrController
             $pqrId = $_POST['id'];
             $respuesta = $_POST['respuesta'];
 
+            // Si hay respuesta personalizada, se prioriza
             if (isset($_POST['respuestaPersonalizada']) && !empty($_POST['respuestaPersonalizada'])) {
                 $respuesta = $_POST['respuestaPersonalizada'];
             }
 
             $userId = $_POST['userId'];
 
-            // Obtener el correo de la tabla usuarios
-            $queryUsuarios = "SELECT EMAIL FROM usuarios WHERE ID = $userId";
-            $resultUsuarios = $this->conexion->query($queryUsuarios);
-            $emailUsuario = null;
+            // Obtener el correo del usuario
+            $queryUsuario = "SELECT EMAIL FROM usuarios WHERE ID = ?";
+            $stmt = $this->conexion->prepare($queryUsuario);
+            $stmt->bind_param('i', $userId);
+            $stmt->execute();
+            $resultUsuario = $stmt->get_result();
+            $emailUsuario = $resultUsuario->fetch_assoc()['EMAIL'] ?? null;
 
-            if ($resultUsuarios) {
-                $usuario = $resultUsuarios->fetch_assoc();
-                $emailUsuario = $usuario['EMAIL'] ?? null;
-            }
+            $stmt->close();
 
-            // Obtener el correo de la tabla users
-            $queryUsers = "SELECT email FROM users WHERE id = $userId";
-            $resultUsers = $this->conexion->query($queryUsers);
-            $emailUser = null;
+            if ($emailUsuario) {
+                // Envío de correo
+                $mail = new PHPMailer(true);
+                try {
+                    // Configuración del servidor SMTP
+                    $mail->isSMTP();
+                    $mail->Host = 'smtp.gmail.com'; // Cambia esto por tu servidor SMTP
+                    $mail->SMTPAuth = true;
+                    $mail->Username = 'joserosellonl@gmail.com'; // Tu dirección de correo
+                    $mail->Password = 'jeka plnp gluz hbiy'; // Tu contraseña
+                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // O PHPMailer::ENCRYPTION_SMTPS para SSL
+                    $mail->Port = 587; // Cambia esto si es necesario
 
-            if ($resultUsers) {
-                $user = $resultUsers->fetch_assoc();
-                $emailUser = $user['email'] ?? null;
-            }
+                    // Remitente y destinatario
+                    $mail->setFrom('joserosellonl@gmail.com', 'admired'); // Cambia esto a tu dirección de correo
+                    $mail->addAddress($emailUsuario); // El correo del destinatario
 
-            // Validar si hay correos disponibles
-            if ($emailUsuario || $emailUser) {
-                $to = [];
-                if ($emailUsuario) $to[] = $emailUsuario;
-                if ($emailUser) $to[] = $emailUser;
+                    // Contenido del correo
+                    $mail->isHTML(true);
+                    $mail->Subject = "Respuesta a tu PQR";
+                    $mail->Body = "Hola,<br><br>Esta es la respuesta a tu PQR:<br><br>" . nl2br(htmlspecialchars($respuesta));
 
-                $to = implode(',', $to); // Separa los correos por coma si hay más de uno
+                    // Enviar el correo
+                    $mail->send();
 
-                $subject = "Respuesta a tu PQR";
-                $message = "Hola, esta es la respuesta a tu PQR:\n\n" . $respuesta;
-                $headers = "From: tuemail@ejemplo.com\r\n";
-                $headers .= "Reply-To: tuemail@ejemplo.com\r\n";
-                $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
-
-                if (mail($to, $subject, $message, $headers)) {
-                    // Actualizar la PQR con la respuesta
+                    // Actualizar la PQR con la respuesta y la fecha de respuesta
                     $queryUpdate = "UPDATE pqr SET RESPUESTA = ?, FECHA_RESPUESTA = ? WHERE ID = ?";
                     $stmt = $this->conexion->prepare($queryUpdate);
-                    $fechaRespuesta = date('Y-m-d');
+                    $fechaRespuesta = date('Y-m-d H:i:s'); // Considera la fecha y hora
                     $stmt->bind_param('ssi', $respuesta, $fechaRespuesta, $pqrId);
                     $stmt->execute();
                     $stmt->close();
 
+                    // Manejar archivos adjuntos
+                    if (isset($_FILES['adjuntos']) && !empty($_FILES['adjuntos']['name'][0])) {
+                        foreach ($_FILES['adjuntos']['tmp_name'] as $key => $tmp_name) {
+                            $file_name = $_FILES['adjuntos']['name'][$key];
+                            $file_tmp = $_FILES['adjuntos']['tmp_name'][$key];
+
+                            // Aquí puedes establecer la ruta donde se guardarán los archivos
+                            $uploadDir = "ruta/a/tu/directorio/"; // Cambia esto a tu ruta
+                            move_uploaded_file($file_tmp, $uploadDir . $file_name);
+                        }
+                    }
+
                     header("Location: ?c=pqr&m=show&ID=$pqrId&success=1");
                     exit();
-                } else {
-                    echo "Error al enviar el correo.";
+                } catch (Exception $e) {
+                    echo "El correo no pudo ser enviado. Mailer Error: {$mail->ErrorInfo}";
                 }
             } else {
-                echo "No se encontró un correo electrónico registrado en ninguna tabla.";
+                echo "No se encontró un correo electrónico registrado para el usuario.";
             }
         } else {
             echo "Error: datos no válidos.";
@@ -157,9 +179,12 @@ class PqrController
 
         $userId = (int)$_GET['ID'];
 
-        $query = "DELETE FROM pqr WHERE ID = $userId";
+        $query = "DELETE FROM pqr WHERE ID = ?";
 
-        if ($this->conexion->query($query)) {
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bind_param('i', $userId);
+
+        if ($stmt->execute()) {
             header("Location: ?c=pqr&m=pqr");
             exit();
         } else {
