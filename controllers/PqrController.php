@@ -139,6 +139,27 @@ class PqrController
                     $mail->Subject = "Respuesta a tu PQR";
                     $mail->Body = "Hola,<br><br>Esta es la respuesta a tu PQR:<br><br>" . nl2br(htmlspecialchars($respuesta));
 
+                    // Manejar archivos adjuntos
+                    // Manejar archivos adjuntos
+                    if (isset($_FILES['adjuntos']) && !empty($_FILES['adjuntos']['name'][0])) {
+                        foreach ($_FILES['adjuntos']['tmp_name'] as $key => $tmp_name) {
+                            $file_name = $_FILES['adjuntos']['name'][$key];
+                            $file_tmp = $_FILES['adjuntos']['tmp_name'][$key];
+
+                            // Cambia esto a tu ruta absoluta o usa __DIR__ para una ruta relativa
+                            $uploadDir = __DIR__ . '/../uploads/'; // Ajusta esto según la estructura de tu proyecto
+
+                            // Mover el archivo y manejar errores
+                            if (!move_uploaded_file($file_tmp, $uploadDir . $file_name)) {
+                                echo "Error al mover el archivo: " . $_FILES['adjuntos']['error'][$key];
+                                return;
+                            }
+
+                            // Adjuntar el archivo al correo
+                            $mail->addAttachment($uploadDir . $file_name); // Adjuntar archivo
+                        }
+                    }
+
                     // Enviar el correo
                     $mail->send();
 
@@ -149,18 +170,6 @@ class PqrController
                     $stmt->bind_param('ssi', $respuesta, $fechaRespuesta, $pqrId);
                     $stmt->execute();
                     $stmt->close();
-
-                    // Manejar archivos adjuntos
-                    if (isset($_FILES['adjuntos']) && !empty($_FILES['adjuntos']['name'][0])) {
-                        foreach ($_FILES['adjuntos']['tmp_name'] as $key => $tmp_name) {
-                            $file_name = $_FILES['adjuntos']['name'][$key];
-                            $file_tmp = $_FILES['adjuntos']['tmp_name'][$key];
-
-                            // Aquí puedes establecer la ruta donde se guardarán los archivos
-                            $uploadDir = "ruta/a/tu/directorio/"; // Cambia esto a tu ruta
-                            move_uploaded_file($file_tmp, $uploadDir . $file_name);
-                        }
-                    }
 
                     header("Location: ?c=pqr&m=show&ID=$pqrId&success=1");
                     exit();
@@ -174,6 +183,7 @@ class PqrController
             echo "Error: datos no válidos.";
         }
     }
+
 
     public function delete()
     {
