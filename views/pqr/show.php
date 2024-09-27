@@ -33,6 +33,7 @@
                 <form action="?c=pqr&m=respond" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="id" value="<?php echo htmlspecialchars($user['ID']); ?>">
                     <input type="hidden" name="userId" value="<?php echo htmlspecialchars($user['Usuario']); ?>">
+                    <input type="hidden" name="respuesta" value="Respuesta personalizada"> <!-- valor predeterminado -->
 
                     <div class="mb-3">
                         <button type="submit" name="respuesta" value="Solicitud aceptada"
@@ -51,6 +52,7 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Enviar respuesta</button>
                 </form>
+
             </div>
         </div>
     </div>

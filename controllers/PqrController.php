@@ -92,16 +92,20 @@ class PqrController
 
     public function respond()
     {
-        if (isset($_POST['id'], $_POST['respuesta'], $_POST['userId'])) {
+        if (isset($_POST['id'], $_POST['userId'])) {
             $pqrId = $_POST['id'];
-            $respuesta = $_POST['respuesta'];
+            $userId = $_POST['userId'];
+            $respuesta = '';
 
-            // Si hay respuesta personalizada, se prioriza
+            // Priorizar respuesta personalizada si está definida
             if (isset($_POST['respuestaPersonalizada']) && !empty($_POST['respuestaPersonalizada'])) {
                 $respuesta = $_POST['respuestaPersonalizada'];
+            } elseif (isset($_POST['respuesta'])) {
+                $respuesta = $_POST['respuesta'];
+            } else {
+                echo "Error: datos no válidos.";
+                return;
             }
-
-            $userId = $_POST['userId'];
 
             // Obtener el correo del usuario
             $queryUsuario = "SELECT EMAIL FROM usuarios WHERE ID = ?";
