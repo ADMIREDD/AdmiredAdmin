@@ -15,7 +15,7 @@
         <a href="?c=pqr&m=pqr" class="btn btn-primary">Volver</a>
         <div class="card-body_pqr mx-auto mt-4" style="max-width: 600px;">
             <div class="card-body">
-                <h4>Información de la PQR </h4>
+                <h4>Información de la PQR</h4>
                 <p><strong>ID:</strong> <?php echo htmlspecialchars($user['ID']); ?></p>
                 <p><strong>Mensaje: <br> </strong> <?php echo nl2br(htmlspecialchars($user['Detalle'])); ?></p>
                 <p><strong>Estado:</strong> <?php echo htmlspecialchars($user['Estado']); ?></p>
@@ -30,7 +30,7 @@
         <div class="card-body_pqr mt-4 mx-auto" style="max-width: 600px;">
             <div class="card-body">
                 <h4>Responder a la PQR</h4>
-                <form action="?c=pqr&m=respond" method="POST" enctype="multipart/form-data">
+                <form id="responseForm" action="?c=pqr&m=respond" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="id" value="<?php echo htmlspecialchars($user['ID']); ?>">
                     <input type="hidden" name="userId" value="<?php echo htmlspecialchars($user['Usuario']); ?>">
                     <input type="hidden" name="respuesta" value="Respuesta personalizada"> <!-- valor predeterminado -->
@@ -50,12 +50,26 @@
                         <label for="adjuntos" class="form-label">Adjuntar archivos:</label>
                         <input type="file" id="adjuntos" name="adjuntos[]" multiple class="form-control">
                     </div>
-                    <button type="submit" class="btn btn-primary">Enviar respuesta</button>
+                    <button type="submit" id="btnEnviar" class="button btn-primary">Enviar respuesta</button>
                 </form>
 
             </div>
         </div>
     </div>
+
+    <script>
+        document.getElementById('responseForm').addEventListener('submit', function(event) {
+            // Verifica si el botón que se presiona es el botón de "Enviar respuesta"
+            var isEnviarRespuesta = event.submitter && event.submitter.id === 'btnEnviar';
+            var respuestaPersonalizada = document.getElementById('respuestaPersonalizada').value.trim();
+
+            // Si el botón es "Enviar respuesta" y el campo está vacío, muestra el mensaje de alerta
+            if (isEnviarRespuesta && !respuestaPersonalizada) {
+                alert('Por favor, escribe tu respuesta personalizada antes de enviar.');
+                event.preventDefault(); // Evita el envío del formulario
+            }
+        });
+    </script>
 </body>
 
 </html>

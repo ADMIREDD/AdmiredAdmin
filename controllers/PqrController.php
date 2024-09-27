@@ -103,7 +103,7 @@ class PqrController
             } elseif (isset($_POST['respuesta'])) {
                 $respuesta = $_POST['respuesta'];
             } else {
-                echo "Error: datos no válidos.";
+                echo "<script>alert('Por favor, escribe tu respuesta.');</script>";
                 return;
             }
 
@@ -139,7 +139,6 @@ class PqrController
                     $mail->Subject = "Respuesta a tu PQR";
                     $mail->Body = "Hola,<br><br>Esta es la respuesta a tu PQR:<br><br>" . nl2br(htmlspecialchars($respuesta));
 
-                    // Manejar archivos adjuntos
                     // Manejar archivos adjuntos
                     if (isset($_FILES['adjuntos']) && !empty($_FILES['adjuntos']['name'][0])) {
                         foreach ($_FILES['adjuntos']['tmp_name'] as $key => $tmp_name) {
@@ -183,6 +182,7 @@ class PqrController
             echo "Error: datos no válidos.";
         }
     }
+
 
 
     public function delete()
