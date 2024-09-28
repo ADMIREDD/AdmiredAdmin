@@ -1,7 +1,7 @@
 <!-- Footer Start -->
 <?php
-require_once ('./views/components/footer.php')
-    ?>
+require_once('./views/components/footer.php')
+?>
 <!-- end Footer -->
 
 </div>
@@ -15,17 +15,12 @@ require_once ('./views/components/footer.php')
 
 <!-- Right Sidebar -->
 <?php
-require_once ('./views/components/sidebar-right.php')
-    ?>
+require_once('./views/components/sidebar-right.php')
+?>
 <!-- /Right-bar -->
 
 <!-- Right bar overlay-->
 <div class="rightbar-overlay"></div>
-
-</ /a href="javascript:void(0);" class="right-bar-toggle demos-show-btn">
-</ /i class="mdi mdi-settings-outline mdi-spin">
-</ /i> &nbsp;Choose Demos
-</ /a>
 
 <!-- Vendor js -->
 <script src="./assets/js/vendor.min.js"></script>
