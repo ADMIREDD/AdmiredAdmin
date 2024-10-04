@@ -29,15 +29,23 @@ class PqrController
     public function pqr()
     {
         $sql = "SELECT 
-                    ID, 
-                    DETALLE AS 'Detalle', 
-                    ESTADO_ID AS 'Estado', 
-                    USUARIO_ID AS 'Usuario', 
-                    PQR_TIPO_ID AS 'Tipo de PQR', 
-                    FECHA_SOLICITUD AS 'Fecha de Solicitud', 
-                    FECHA_RESPUESTA AS 'Fecha de Respuesta', 
-                    RESPUESTA AS 'Respuesta'
-                FROM pqr";
+                pqr.ID, 
+                pqr.DETALLE AS 'Detalle', 
+                estados.TIPO AS 'Estado', 
+                usuarios.NOMBRE AS 'Usuario', 
+                pqr_tipo.NOMBRE AS 'Tipo de PQR', 
+                pqr.FECHA_SOLICITUD AS 'Fecha de Solicitud', 
+                pqr.FECHA_RESPUESTA AS 'Fecha de Respuesta', 
+                pqr.RESPUESTA AS 'Respuesta'
+            FROM 
+                pqr 
+            JOIN 
+                estados ON pqr.ESTADO_ID = estados.ID
+            JOIN 
+                usuarios ON pqr.USUARIO_ID = usuarios.ID
+            JOIN 
+                pqr_tipo ON pqr.PQR_TIPO_ID = pqr_tipo.ID";
+
         $resultado = $this->conexion->query($sql);
 
         if ($resultado === FALSE) {
@@ -50,6 +58,7 @@ class PqrController
         require_once('views/components/layout/footer.php');
     }
 
+
     public function show()
     {
         if (!isset($_GET['ID']) || empty($_GET['ID'])) {
@@ -59,16 +68,19 @@ class PqrController
         $userId = (int)$_GET['ID'];
 
         $query = "SELECT 
-                    ID, 
-                    DETALLE AS 'Detalle', 
-                    ESTADO_ID AS 'Estado', 
-                    USUARIO_ID AS 'Usuario', 
-                    PQR_TIPO_ID AS 'Tipo de PQR', 
-                    FECHA_SOLICITUD AS 'Fecha de Solicitud', 
-                    FECHA_RESPUESTA AS 'Fecha de Respuesta', 
-                    RESPUESTA AS 'Respuesta'
-                FROM pqr 
-                WHERE ID = ?";
+                pqr.ID, 
+                pqr.DETALLE AS 'Detalle', 
+                estados.TIPO AS 'Estado', 
+                pqr.USUARIO_ID AS 'Usuario', 
+                pqr_tipo.NOMBRE AS 'Tipo de PQR', 
+                pqr.FECHA_SOLICITUD AS 'Fecha de Solicitud', 
+                pqr.FECHA_RESPUESTA AS 'Fecha de Respuesta', 
+                pqr.RESPUESTA AS 'Respuesta'
+            FROM pqr 
+            JOIN estados ON pqr.ESTADO_ID = estados.ID
+            JOIN usuarios ON pqr.USUARIO_ID = usuarios.ID
+            JOIN pqr_tipo ON pqr.PQR_TIPO_ID = pqr_tipo.ID
+            WHERE pqr.ID = ?";
 
         $stmt = $this->conexion->prepare($query);
         $stmt->bind_param('i', $userId);
@@ -89,6 +101,9 @@ class PqrController
         require_once('views/pqr/show.php');
         require_once('views/components/layout/footer.php');
     }
+
+
+
 
     public function respond()
     {
@@ -113,12 +128,18 @@ class PqrController
             $stmt->bind_param('i', $userId);
             $stmt->execute();
             $resultUsuario = $stmt->get_result();
-            $emailUsuario = $resultUsuario->fetch_assoc()['EMAIL'] ?? null;
+
+            if ($resultUsuario->num_rows > 0) {
+                $emailUsuario = $resultUsuario->fetch_assoc()['EMAIL'];
+            } else {
+                $emailUsuario = null; // Manejo de casos donde no se encuentra el usuario
+            }
 
             $stmt->close();
 
             if ($emailUsuario) {
                 // Mensaje de depuración para verificar el correo electrónico del usuario
+                // Puedes comentar esta línea en producción
                 echo "Correo electrónico del usuario: " . htmlspecialchars($emailUsuario);
 
                 // Envío de correo
@@ -134,7 +155,7 @@ class PqrController
                     $mail->Port = 587; // Cambia esto si es necesario
 
                     // Remitente y destinatario
-                    $mail->setFrom('joserosellonl@gmail.com', 'admired'); // Cambia esto a tu dirección de correo
+                    $mail->setFrom('joserosellonl@gmail.com', 'Admired'); // Cambia esto a tu dirección de correo
                     $mail->addAddress($emailUsuario); // El correo del destinatario
 
                     // Contenido del correo
@@ -173,6 +194,7 @@ class PqrController
                     $stmt->execute();
                     $stmt->close();
 
+                    // Redirigir después de enviar la respuesta
                     header("Location: ?c=pqr&m=show&ID=$pqrId&success=1");
                     exit();
                 } catch (Exception $e) {
@@ -185,6 +207,7 @@ class PqrController
             echo "Error: datos no válidos.";
         }
     }
+
 
 
     public function delete()
