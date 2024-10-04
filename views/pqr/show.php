@@ -33,47 +33,58 @@
                 <form id="responseForm" action="?c=pqr&m=respond" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="id" value="<?php echo htmlspecialchars($user['ID']); ?>">
                     <input type="hidden" name="userId" value="<?php echo htmlspecialchars($user['Usuario']); ?>">
-                    <input type="hidden" name="respuesta" id="respuesta" value="PQR RESUELTA">
-                    <!-- Cambiado a "PQR RESUELTA" -->
 
                     <div class="mb-3">
-                        <button type="submit" name="respuesta" value="Solicitud aceptada" class="btn btn-success"
-                            id="btnSolicitudAceptada">Solicitud aceptada</button>
-                        <button type="submit" name="respuesta" value="Estamos revisando tu solicitud"
-                            class="btn btn-warning" id="btnRevisandoSolicitud">Estamos revisando tu solicitud</button>
+                        <button type="submit" name="estado" value="Solicitud aceptada" class="btn btn-success">
+                            Solicitud aceptada
+                        </button>
+                        <button type="submit" name="estado" value="Estamos revisando tu solicitud"
+                            class="btn btn-warning">
+                            Estamos revisando tu solicitud
+                        </button>
                     </div>
+
                     <div class="mb-3">
                         <label for="respuestaPersonalizada" class="form-label">Respuesta personalizada:</label>
                         <textarea id="respuestaPersonalizada" name="respuestaPersonalizada" class="form-control"
                             rows="3"></textarea>
                     </div>
+
                     <div class="mb-3">
                         <label for="adjuntos" class="form-label">Adjuntar archivos:</label>
                         <input type="file" id="adjuntos" name="adjuntos[]" multiple class="form-control">
                     </div>
-                    <button type="submit" id="btnEnviar" class="button btn-primary">Enviar respuesta</button>
+
+                    <button type="submit" id="btnEnviar" name="submitType" value="customResponse"
+                        class="btn btn-primary">
+                        Enviar respuesta
+                    </button>
                 </form>
+
             </div>
         </div>
     </div>
 
     <script>
-        document.getElementById('responseForm').addEventListener('submit', function(event) {
-            // Verifica si el botón que se presiona es el botón de "Enviar respuesta"
-            var isEnviarRespuesta = event.submitter && event.submitter.id === 'btnEnviar';
-            var respuestaPersonalizada = document.getElementById('respuestaPersonalizada').value.trim();
+    document.getElementById('responseForm').addEventListener('submit', function(event) {
+        var isEnviarRespuesta = event.submitter && event.submitter.value === 'customResponse';
+        var respuestaPersonalizada = document.getElementById('respuestaPersonalizada').value.trim();
 
-            // Si el botón es "Enviar respuesta" y el campo está vacío, muestra el mensaje de alerta
-            if (isEnviarRespuesta && !respuestaPersonalizada) {
+        // Validar solo si es el botón "Enviar respuesta" el que se presionó
+        if (isEnviarRespuesta) {
+            if (!respuestaPersonalizada) {
+                // Mostrar un mensaje de alerta y evitar el envío
                 alert('Por favor, escribe tu respuesta personalizada antes de enviar.');
                 event.preventDefault(); // Evita el envío del formulario
-            } else if (!isEnviarRespuesta) {
-                // Bloquea los botones de "Solicitud aceptada" y "Estamos revisando tu solicitud"
-                document.getElementById('btnSolicitudAceptada').disabled = true;
-                document.getElementById('btnRevisandoSolicitud').disabled = true;
+                return; // Salir de la función
+            } else {
+                // Asignar la respuesta personalizada para enviar
+                document.getElementById('respuestaPersonalizada').value = respuestaPersonalizada;
             }
-        });
+        }
+    });
     </script>
+
 </body>
 
 </html>

@@ -97,11 +97,11 @@ class PqrController
             $userId = $_POST['userId'];
             $respuesta = '';
 
-            // Priorizar respuesta personalizada si está definida
-            if (isset($_POST['respuestaPersonalizada']) && !empty($_POST['respuestaPersonalizada'])) {
+            // Recoger la respuesta del botón si está definido
+            if (isset($_POST['estado'])) {
+                $respuesta = $_POST['estado'];
+            } elseif (isset($_POST['respuestaPersonalizada']) && !empty($_POST['respuestaPersonalizada'])) {
                 $respuesta = $_POST['respuestaPersonalizada'];
-            } elseif (isset($_POST['respuesta'])) {
-                $respuesta = $_POST['respuesta'];
             } else {
                 echo "<script>alert('Por favor, escribe tu respuesta.');</script>";
                 return;
@@ -118,6 +118,9 @@ class PqrController
             $stmt->close();
 
             if ($emailUsuario) {
+                // Mensaje de depuración para verificar el correo electrónico del usuario
+                echo "Correo electrónico del usuario: " . htmlspecialchars($emailUsuario);
+
                 // Envío de correo
                 $mail = new PHPMailer(true);
                 try {
@@ -182,7 +185,6 @@ class PqrController
             echo "Error: datos no válidos.";
         }
     }
-
 
 
     public function delete()
