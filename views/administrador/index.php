@@ -73,40 +73,46 @@
                                                 </thead>
                                                 <tbody id="tbody">
                                                     <?php
-                                                    // LOOP TILL END OF DATA
-                                                    while ($rows = $resultado->fetch_assoc()) {
-                                                    ?>
-                                                        <tr class="text-center">
-                                                            <!-- FETCHING DATA FROM EACH ROW OF EVERY COLUMN -->
-                                                            <td><?php echo $rows['ID']; ?></td>
-                                                            <td><?php echo $rows['NOMBRE']; ?></td>
-                                                            <td><?php echo $rows['APELLIDO']; ?></td>
-                                                            <td><?php echo $rows['TIPO_DOCUMENTO_ID']; ?></td>
-                                                            <td><?php echo $rows['NO_DOCUMENTO']; ?></td>
-                                                            <td><?php echo isset($rows['FECHA_NACIMIENTO']) ? $rows['FECHA_NACIMIENTO'] : ''; ?>
-                                                            </td>
-                                                            <td><?php echo $rows['EMAIL']; ?></td>
-                                                            <td><?php echo substr($rows['CONTRASENA'], 0, 20) . '...'; ?>
-                                                            </td>
-                                                            <td><?php echo $rows['TELEFONO']; ?></td>
-                                                            <td><?php echo $rows['ROL_ID']; ?></td>
-                                                            <td><?php echo $rows['TORRE']; ?></td>
-                                                            <td><?php echo $rows['APTO']; ?></td>
-                                                            <td>
-                                                                <div class="d-flex gap-1">
-                                                                    <a href="?c=administrador&m=show&userId=<?php echo $rows['ID']; ?>"
-                                                                        class="submit boton1">Ver</a>
-                                                                    <a href="?c=administrador&m=edit&userId=<?php echo $rows['ID']; ?>"
-                                                                        class="submit boton2">Editar</a>
-                                                                    <a href="?c=administrador&m=destroy&userId=<?php echo $rows['ID']; ?>"
-                                                                        class="submit boton3">Eliminar</a>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
+    // LOOP TILL END OF DATA
+    while ($rows = $resultado->fetch_assoc()) {
+        // Usamos las funciones del controlador para convertir los IDs en sus valores de texto
+        $tipoDocumento = $this->getTipoDocumento($rows['TIPO_DOCUMENTO_ID']);
+        $rol = $this->getRol($rows['ROL_ID']);
+    ?>
+                                                    <tr class="text-center">
+                                                        <!-- FETCHING DATA FROM EACH ROW OF EVERY COLUMN -->
+                                                        <td><?php echo $rows['ID']; ?></td>
+                                                        <td><?php echo $rows['NOMBRE']; ?></td>
+                                                        <td><?php echo $rows['APELLIDO']; ?></td>
+                                                        <td><?php echo $tipoDocumento; ?></td>
+                                                        <!-- Aquí mostramos el tipo de documento en texto -->
+                                                        <td><?php echo $rows['NO_DOCUMENTO']; ?></td>
+                                                        <td><?php echo isset($rows['FECHA_NACIMIENTO']) ? $rows['FECHA_NACIMIENTO'] : ''; ?>
+                                                        </td>
+                                                        <td><?php echo $rows['EMAIL']; ?></td>
+                                                        <td><?php echo substr($rows['CONTRASENA'], 0, 20) . '...'; ?>
+                                                        </td>
+                                                        <td><?php echo $rows['TELEFONO']; ?></td>
+                                                        <td><?php echo $rol; ?></td>
+                                                        <!-- Aquí mostramos el rol en texto -->
+                                                        <td><?php echo $rows['TORRE']; ?></td>
+                                                        <td><?php echo $rows['APTO']; ?></td>
+                                                        <td>
+                                                            <div class="d-flex gap-1">
+                                                                <a href="?c=administrador&m=show&userId=<?php echo $rows['ID']; ?>"
+                                                                    class="submit boton1">Ver</a>
+                                                                <a href="?c=administrador&m=edit&userId=<?php echo $rows['ID']; ?>"
+                                                                    class="submit boton2">Editar</a>
+                                                                <a href="?c=administrador&m=destroy&userId=<?php echo $rows['ID']; ?>"
+                                                                    class="submit boton3">Eliminar</a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
                                                     <?php
-                                                    }
-                                                    ?>
+    }
+    ?>
                                                 </tbody>
+
                                             </table>
                                         </div>
                                     </div>
@@ -210,23 +216,23 @@
 
     <!-- Preloader -->
     <script>
-        window.onload = function() {
-            document.getElementById("preload").style.display = "none";
-        };
+    window.onload = function() {
+        document.getElementById("preload").style.display = "none";
+    };
     </script>
 
     <!-- Lógica de búsqueda -->
     <script>
-        function fetchResults() {
-            const searchQuery = document.getElementById("search").value.toLowerCase();
-            const rows = document.querySelectorAll("#tbody tr");
+    function fetchResults() {
+        const searchQuery = document.getElementById("search").value.toLowerCase();
+        const rows = document.querySelectorAll("#tbody tr");
 
-            rows.forEach(row => {
-                const cells = row.querySelectorAll("td");
-                const rowText = Array.from(cells).map(cell => cell.textContent.toLowerCase()).join(" ");
-                row.style.display = rowText.includes(searchQuery) ? "" : "none";
-            });
-        }
+        rows.forEach(row => {
+            const cells = row.querySelectorAll("td");
+            const rowText = Array.from(cells).map(cell => cell.textContent.toLowerCase()).join(" ");
+            row.style.display = rowText.includes(searchQuery) ? "" : "none";
+        });
+    }
     </script>
 </body>
 

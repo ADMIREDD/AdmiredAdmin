@@ -23,7 +23,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex justify-content-end mb-3">
-
+                                    <!-- Aquí puedes agregar botones para crear nuevas reservas, etc. -->
                                 </div>
                                 <hr>
                                 <div class="table-responsive">
@@ -32,44 +32,38 @@
                                             <tr class="text-center">
                                                 <th>ID</th>
                                                 <th>FECHA RESERVA</th>
-                                                <th>AREA COMUN</th>
-                                                <th>ESTADO RESERVA</th>
+                                                <th>FECHA FIN</th>
+                                                <th>ÁREA COMÚN</th>
                                                 <th>USUARIO</th>
-                                                <th>OBSERVACION ENTREGA</th>
-                                                <th>OBSERVACION RECIBE</th>
+                                                <th>ESTADO RESERVA</th>
+                                                <th>OBSERVACIÓN ENTREGA</th>
+                                                <th>OBSERVACIÓN RECIBE</th>
                                                 <th>VALOR</th>
-                                                <th>FUNCIONES</th>
+                                                <th>ACCIONES</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php if (empty($reservas)) { ?>
-                                                <tr>
-                                                    <td colspan="8">No se encontraron reservas.</td>
-                                                </tr>
-                                                <?php } else {
-                                                foreach ($reservas as $row) { ?>
-                                                    <tr>
-                                                        <td><?php echo $row['ID']; ?></td>
-                                                        <td><?php echo $row['Fecha Reserva']; ?></td>
-                                                        <td><?php echo $row['Área Común']; ?></td>
-                                                        <td><?php echo $row['Estado Reserva']; ?></td>
-                                                        <td><?php echo $row['Usuario']; ?></td>
-                                                        <td><?php echo $row['Observación Entrega']; ?></td>
-                                                        <td><?php echo $row['Observación Recibe']; ?></td>
-                                                        <td><?php echo $row['Valor']; ?></td>
-                                                        <td>
-                                                            <div class="d-flex gap-1">
-                                                                <a href="?c=reserva&m=show&userId=<?php echo $row['ID']; ?>"
-                                                                    class="submit boton1">Ver</a>
-                                                                <a href="?c=reserva&m=edit&userId=<?php echo $row['ID']; ?>"
-                                                                    class="submit boton2">Editar</a>
-                                                                <a href="?c=reserva&m=delete&userId=<?php echo $row['ID']; ?>"
-                                                                    class="submit boton3">Eliminar</a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                            <?php }
-                                            } ?>
+                                            <?php foreach ($reservas as $reserva): ?>
+                                            <tr class="text-center">
+                                                <td><?php echo $reserva['ID']; ?></td>
+                                                <td><?php echo $reserva['Fecha Reserva']; ?></td>
+                                                <td><?php echo $reserva['Fecha Fin']; ?></td>
+                                                <td><?php echo $reserva['Nombre Area']; ?></td>
+                                                <td><?php echo $reserva['Nombre Usuario']; ?></td>
+                                                <td><?php echo $reserva['Estado Texto']; ?></td>
+                                                <td><?php echo $reserva['Observación Entrega']; ?></td>
+                                                <td><?php echo $reserva['Observación Recibe']; ?></td>
+                                                <td><?php echo $reserva['Valor']; ?></td>
+                                                <td>
+                                                    <a href="?c=reserva&m=show&id=<?php echo $reserva['ID']; ?>"
+                                                        class="btn btn-info btn-sm">Ver</a>
+
+                                                    <a href="?c=reserva&m=edit&id=<?php echo $reserva['ID']; ?>"
+                                                        class="btn btn-warning btn-sm">Editar</a>
+
+                                                </td>
+                                            </tr>
+                                            <?php endforeach; ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -79,10 +73,9 @@
                 </div>
             </div>
         </div>
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="./assets/js/main.js"></script>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

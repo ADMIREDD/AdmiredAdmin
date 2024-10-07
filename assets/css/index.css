@@ -11,6 +11,7 @@
   color: #0d0d0d;
   font-family: 'montserrat', sans-serif;
   padding-top: 98px !important;
+  padding-left: 2% !important;
 }
 
 body {
@@ -21,6 +22,13 @@ body {
 
 }
 
+
+.container-show-1 {
+  margin-left: 20%;
+  margin-top: 6%;
+  width: 74%;
+}
+
 .card-body {
   background-color: #f4f7f6;
   color: #0d0d0d;
@@ -29,6 +37,7 @@ body {
   box-shadow: 2px 2px 19px rgba(0, 0, 0, 0.6);
   padding-left: 20px;
   border-radius: 13px;
+  margin-bottom: 6%;
 }
 
 .card {
@@ -71,7 +80,7 @@ body {
   cursor: pointer;
   box-shadow: 2px 2px 19px rgba(0, 0, 0, 0.8);
   margin-top: 0px;
-  margin-left: -38%;
+  margin-left: -8%;
   background-color: #1468e5;
   color: white;
 }
@@ -122,6 +131,13 @@ table {
 }
 
 .table-responsive {
+  overflow-x: auto;
+  white-space: nowrap;
+  text-align: center;
+  font-family: 'montserrat', sans-serif;
+}
+
+.table-responsive-1 {
   overflow-x: auto;
   white-space: nowrap;
   text-align: center;

@@ -17,7 +17,13 @@ if (file_exists($controllerFile)) {
 
         // Verifica si el método existe
         if (method_exists($object, $method)) {
-            $object->$method();
+            // Si el método es 'show' o 'edit', asegúrate de pasar el ID
+            if (($method === 'show' || $method === 'edit') && isset($_GET['id'])) {
+                $id = $_GET['id']; // Obtener el ID de la reserva
+                $object->$method($id); // Llama al método con el ID
+            } else {
+                $object->$method(); // Llama al método sin parámetros
+            }
         } else {
             echo 'Error: Method ' . $method . ' not found in controller ' . $controller . '.';
         }

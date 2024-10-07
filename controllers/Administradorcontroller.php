@@ -25,6 +25,34 @@ class AdministradorController
         return $conexion;
     }
 
+    // Convertir TIPO_DOCUMENTO_ID a texto
+    private function getTipoDocumento($tipoDocumentoId)
+    {
+        switch ($tipoDocumentoId) {
+            case 1:
+                return 'C.C.';
+            case 2:
+                return 'C.E.';
+            case 3:
+                return 'NIT';
+            default:
+                return 'Desconocido';
+        }
+    }
+
+    // Convertir ROL_ID a texto
+    private function getRol($rolId)
+    {
+        switch ($rolId) {
+            case 1:
+                return 'Propietario';
+            case 2:
+                return 'Residente';
+            default:
+                return 'Desconocido';
+        }
+    }
+
     public function index()
     {
         $query = "SELECT * FROM usuarios";
@@ -191,11 +219,10 @@ class AdministradorController
                 header("Location: ?c=administrador&m=index");
                 exit();
             } else {
-                die("Error en la ejecución de la consulta: " . mysqli_stmt_error($stmt));
+                die("Error al eliminar el usuario: " . mysqli_stmt_error($stmt));
             }
         } else {
-            header("Location: ?c=administrador&m=index");
-            exit();
+            die("Método no permitido");
         }
     }
 }
