@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 class CuotaController
 {
@@ -62,28 +64,34 @@ class CuotaController
 
     public function edit()
     {
-        $servidor = "localhost";
-        $usuario = "root";
-        $password = "";
-        $bd = "base_proyecto";
-        $conexion = mysqli_connect($servidor, $usuario, $password, $bd);
+        $conexion = $this->conectarBD();
 
-        // Check connection
-        if (mysqli_connect_errno()) {
-            echo "Failed to connect to MySQL: " . mysqli_connect_error();
-            exit();
+        if (!isset($_GET['cuotaId'])) {
+            echo "ID de cuota no proporcionado.";
+            return;
         }
-        $query = "select * from cuotas_administracion where ID = {$_GET['userId']}";
 
-        $result = mysqli_query($conexion, $query) or die("error: " . mysqli_error($conexion));
+        $cuotaId = mysqli_real_escape_string($conexion, $_GET['cuotaId']);
+        $query = "SELECT * FROM cuotas_administracion WHERE ID = $cuotaId";
 
-        $user = $result->fetch_assoc();
-        require_once('views/components/layout/head.php');
-        require_once('views/cuotas/edit.php');
-        require_once('views/components/layout/footer.php');
+        $result = mysqli_query($conexion, $query);
+
+        if (!$result) {
+            echo "Error en la consulta: " . mysqli_error($conexion);
+            mysqli_close($conexion);
+            return;
+        }
+
+        $cuota = $result->fetch_assoc();
+
+        if ($cuota) {
+            $this->loadView('views/cuotas/edit.php', ['cuota' => $cuota]);
+        } else {
+            echo "Cuota no encontrada.";
+        }
+
+        mysqli_close($conexion);
     }
-
-
 
 
 

@@ -15,14 +15,14 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box">
-                            <h4 class="page-title">Detalles Cuota Ad</h4>
+                            <h4 class="page-title">Detalles Cuota Admin</h4>
                         </div>
                         <section class="form-register">
                             <form method="post" class="formulario__register">
                                 <div class="mb-3">
-                                    <label for="fecha" class="form-label">Fecha</label>
+                                    <label for="fecha" class="form-label">Fecha Mes</label>
                                     <input type="text" class="form-control" id="fecha"
-                                        value="<?php echo htmlspecialchars($cuota['FECHA']); ?>" readonly>
+                                        value="<?php echo htmlspecialchars($cuota['FECHA_MES']); ?>" readonly>
                                 </div>
                                 <div class="mb-3">
                                     <label for="estado" class="form-label">Estado</label>
@@ -30,14 +30,16 @@
                                         value="<?php echo htmlspecialchars($cuota['ESTADO']); ?>" readonly>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="fecha_limite" class="form-label">Fecha Límite</label>
+                                    <label for="fecha_limite" class="form-label">Fecha de Pago</label>
                                     <input type="text" class="form-control" id="fecha_limite"
-                                        value="<?php echo htmlspecialchars($cuota['FECHA_LIMITE']); ?>" readonly>
+                                        value="<?php echo htmlspecialchars(date('d-m-Y', strtotime($cuota['FECHA_PAGO']))); ?>"
+                                        readonly>
                                 </div>
                                 <div class="mb-3">
                                     <label for="precio" class="form-label">Precio</label>
                                     <input type="text" class="form-control" id="precio"
-                                        value="<?php echo htmlspecialchars($cuota['PRECIO']); ?>" readonly>
+                                        value="<?php echo htmlspecialchars(number_format($cuota['VALOR'], 2, ',', '.')); ?> COP"
+                                        readonly>
                                 </div>
                                 <a href="?c=cuota&m=index" class="btn btn-success">Volver</a>
                             </form>

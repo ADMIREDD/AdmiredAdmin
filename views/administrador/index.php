@@ -207,12 +207,9 @@
     </div>
 
     <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-        integrity="sha384-IQsoLXlH6G4RC8dUmfElfa6BoNURm9/ctvs6GFQ6QyNs+boRf5T3/zrdLwqLg8eA" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
-        integrity="sha384-cVKIPhGWiSkKK6TA1yHjUgqa2PHFZb6O5c5Bb2mIwZjYg7SkD3ygslCkOwZ5T2l" crossorigin="anonymous">
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
 
     <!-- Preloader -->
     <script>

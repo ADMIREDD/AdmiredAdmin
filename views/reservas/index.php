@@ -44,25 +44,26 @@
                                         </thead>
                                         <tbody>
                                             <?php foreach ($reservas as $reserva): ?>
-                                            <tr class="text-center">
-                                                <td><?php echo $reserva['ID']; ?></td>
-                                                <td><?php echo $reserva['Fecha Reserva']; ?></td>
-                                                <td><?php echo $reserva['Fecha Fin']; ?></td>
-                                                <td><?php echo $reserva['Nombre Area']; ?></td>
-                                                <td><?php echo $reserva['Nombre Usuario']; ?></td>
-                                                <td><?php echo $reserva['Estado Texto']; ?></td>
-                                                <td><?php echo $reserva['Observación Entrega']; ?></td>
-                                                <td><?php echo $reserva['Observación Recibe']; ?></td>
-                                                <td><?php echo $reserva['Valor']; ?></td>
-                                                <td>
-                                                    <a href="?c=reserva&m=show&id=<?php echo $reserva['ID']; ?>"
-                                                        class="btn btn-info btn-sm">Ver</a>
+                                                <tr class="text-center">
+                                                    <td><?php echo $reserva['ID']; ?></td>
+                                                    <td><?php echo $reserva['Fecha Reserva']; ?></td>
+                                                    <td><?php echo $reserva['Fecha Fin']; ?></td>
+                                                    <td><?php echo $reserva['Nombre Area']; ?></td>
+                                                    <td><?php echo $reserva['Nombre Usuario']; ?></td>
+                                                    <td><?php echo $reserva['Estado Texto']; ?></td>
+                                                    <td><?php echo $reserva['Observación Entrega']; ?></td>
+                                                    <td><?php echo $reserva['Observación Recibe']; ?></td>
+                                                    <td><?php echo $reserva['Valor']; ?></td>
+                                                    <td>
+                                                        <a href="?c=reserva&m=show&id=<?php echo $reserva['ID']; ?>"
+                                                            class="submit boton1">Ver</a>
 
-                                                    <a href="?c=reserva&m=edit&id=<?php echo $reserva['ID']; ?>"
-                                                        class="btn btn-warning btn-sm">Editar</a>
 
-                                                </td>
-                                            </tr>
+                                                        <a href="?c=reserva&m=edit&id=<?php echo $reserva['ID']; ?>"
+                                                            class="submit boton2">Editar</a>
+
+                                                    </td>
+                                                </tr>
                                             <?php endforeach; ?>
                                         </tbody>
                                     </table>

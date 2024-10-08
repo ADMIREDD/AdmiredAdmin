@@ -61,26 +61,28 @@ class PqrController
 
     public function show()
     {
-        if (!isset($_GET['ID']) || empty($_GET['ID'])) {
+        if (!isset($_GET['id']) || empty($_GET['id'])) {
             die("El parámetro ID no está definido.");
         }
 
-        $userId = (int)$_GET['ID'];
+        $userId = (int)$_GET['id']; // Asegúrate de que sea un entero
+
+        // Aquí podrías agregar más validaciones si lo consideras necesario
 
         $query = "SELECT 
-                pqr.ID, 
-                pqr.DETALLE AS 'Detalle', 
-                estados.TIPO AS 'Estado', 
-                pqr.USUARIO_ID AS 'Usuario', 
-                pqr_tipo.NOMBRE AS 'Tipo de PQR', 
-                pqr.FECHA_SOLICITUD AS 'Fecha de Solicitud', 
-                pqr.FECHA_RESPUESTA AS 'Fecha de Respuesta', 
-                pqr.RESPUESTA AS 'Respuesta'
-            FROM pqr 
-            JOIN estados ON pqr.ESTADO_ID = estados.ID
-            JOIN usuarios ON pqr.USUARIO_ID = usuarios.ID
-            JOIN pqr_tipo ON pqr.PQR_TIPO_ID = pqr_tipo.ID
-            WHERE pqr.ID = ?";
+            pqr.ID, 
+            pqr.DETALLE AS 'Detalle', 
+            estados.TIPO AS 'Estado', 
+            pqr.USUARIO_ID AS 'Usuario', 
+            pqr_tipo.NOMBRE AS 'Tipo de PQR', 
+            pqr.FECHA_SOLICITUD AS 'Fecha de Solicitud', 
+            pqr.FECHA_RESPUESTA AS 'Fecha de Respuesta', 
+            pqr.RESPUESTA AS 'Respuesta'
+        FROM pqr 
+        JOIN estados ON pqr.ESTADO_ID = estados.ID
+        JOIN usuarios ON pqr.USUARIO_ID = usuarios.ID
+        JOIN pqr_tipo ON pqr.PQR_TIPO_ID = pqr_tipo.ID
+        WHERE pqr.ID = ?";
 
         $stmt = $this->conexion->prepare($query);
         $stmt->bind_param('i', $userId);
@@ -105,6 +107,7 @@ class PqrController
 
 
 
+
     public function respond()
     {
         if (isset($_POST['id'], $_POST['userId'])) {
@@ -112,7 +115,7 @@ class PqrController
             $userId = $_POST['userId'];
             $respuesta = '';
 
-            // Recoger la respuesta del botón si está definido
+            // Recoger la respuesta del botón o del campo personalizado
             if (isset($_POST['estado'])) {
                 $respuesta = $_POST['estado'];
             } elseif (isset($_POST['respuestaPersonalizada']) && !empty($_POST['respuestaPersonalizada'])) {
@@ -139,7 +142,6 @@ class PqrController
 
             if ($emailUsuario) {
                 // Mensaje de depuración para verificar el correo electrónico del usuario
-                // Puedes comentar esta línea en producción
                 echo "Correo electrónico del usuario: " . htmlspecialchars($emailUsuario);
 
                 // Envío de correo
@@ -147,16 +149,16 @@ class PqrController
                 try {
                     // Configuración del servidor SMTP
                     $mail->isSMTP();
-                    $mail->Host = 'smtp.gmail.com'; // Cambia esto por tu servidor SMTP
+                    $mail->Host = 'smtp.gmail.com';
                     $mail->SMTPAuth = true;
-                    $mail->Username = 'joserosellonl@gmail.com'; // Tu dirección de correo
-                    $mail->Password = 'jeka plnp gluz hbiy'; // Tu contraseña
-                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // O PHPMailer::ENCRYPTION_SMTPS para SSL
-                    $mail->Port = 587; // Cambia esto si es necesario
+                    $mail->Username = 'joserosellonl@gmail.com';
+                    $mail->Password = 'jeka plnp gluz hbiy'; // Recuerda manejar este valor de forma segura
+                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                    $mail->Port = 587;
 
                     // Remitente y destinatario
-                    $mail->setFrom('joserosellonl@gmail.com', 'Admired'); // Cambia esto a tu dirección de correo
-                    $mail->addAddress($emailUsuario); // El correo del destinatario
+                    $mail->setFrom('joserosellonl@gmail.com', 'Admired');
+                    $mail->addAddress($emailUsuario);
 
                     // Contenido del correo
                     $mail->isHTML(true);
@@ -169,17 +171,12 @@ class PqrController
                             $file_name = $_FILES['adjuntos']['name'][$key];
                             $file_tmp = $_FILES['adjuntos']['tmp_name'][$key];
 
-                            // Cambia esto a tu ruta absoluta o usa __DIR__ para una ruta relativa
-                            $uploadDir = __DIR__ . '/../uploads/'; // Ajusta esto según la estructura de tu proyecto
-
-                            // Mover el archivo y manejar errores
+                            $uploadDir = __DIR__ . '/../uploads/';
                             if (!move_uploaded_file($file_tmp, $uploadDir . $file_name)) {
                                 echo "Error al mover el archivo: " . $_FILES['adjuntos']['error'][$key];
                                 return;
                             }
-
-                            // Adjuntar el archivo al correo
-                            $mail->addAttachment($uploadDir . $file_name); // Adjuntar archivo
+                            $mail->addAttachment($uploadDir . $file_name);
                         }
                     }
 
@@ -189,14 +186,18 @@ class PqrController
                     // Actualizar la PQR con la respuesta y la fecha de respuesta
                     $queryUpdate = "UPDATE pqr SET RESPUESTA = ?, FECHA_RESPUESTA = ? WHERE ID = ?";
                     $stmt = $this->conexion->prepare($queryUpdate);
-                    $fechaRespuesta = date('Y-m-d H:i:s'); // Considera la fecha y hora
+                    $fechaRespuesta = date('Y-m-d H:i:s');
                     $stmt->bind_param('ssi', $respuesta, $fechaRespuesta, $pqrId);
                     $stmt->execute();
                     $stmt->close();
 
                     // Redirigir después de enviar la respuesta
-                    header("Location: ?c=pqr&m=show&ID=$pqrId&success=1");
-                    exit();
+                    if (headers_sent()) {
+                        echo "<script>window.location.href = '?c=pqr&m=show&id=$pqrId&success=1';</script>";
+                    } else {
+                        header("Location: ?c=pqr&m=show&id=$pqrId&success=1");
+                        exit();
+                    }
                 } catch (Exception $e) {
                     echo "El correo no pudo ser enviado. Mailer Error: {$mail->ErrorInfo}";
                 }
@@ -207,6 +208,7 @@ class PqrController
             echo "Error: datos no válidos.";
         }
     }
+
 
 
 

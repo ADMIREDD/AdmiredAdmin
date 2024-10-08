@@ -12,7 +12,7 @@
 
 <body>
     <div class="container-show text-center">
-        <a href="?c=pqr&m=pqr" class="btn btn-primary">Volver</a>
+
         <div class="card-body_pqr mx-auto mt-4" style="max-width: 600px;">
             <div class="card-body">
                 <h4>Detalles del PQR</h4>
@@ -33,6 +33,8 @@
                 <h4>Responder a la PQR</h4>
                 <form id="responseForm" action="?c=pqr&m=respond" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="id" value="<?php echo htmlspecialchars($user['ID']); ?>">
+
+
                     <input type="hidden" name="userId" value="<?php echo htmlspecialchars($user['Usuario']); ?>">
 
 
@@ -61,6 +63,7 @@
                         class="btn btn-primary">
                         Enviar respuesta
                     </button>
+                    <a href="?c=pqr&m=pqr" class="btn btn-primary">Volver</a>
                 </form>
 
             </div>
@@ -68,23 +71,23 @@
     </div>
 
     <script>
-        document.getElementById('responseForm').addEventListener('submit', function(event) {
-            var isEnviarRespuesta = event.submitter && event.submitter.value === 'customResponse';
-            var respuestaPersonalizada = document.getElementById('respuestaPersonalizada').value.trim();
+    document.getElementById('responseForm').addEventListener('submit', function(event) {
+        var isEnviarRespuesta = event.submitter && event.submitter.value === 'customResponse';
+        var respuestaPersonalizada = document.getElementById('respuestaPersonalizada').value.trim();
 
-            // Validar solo si es el botón "Enviar respuesta" el que se presionó
-            if (isEnviarRespuesta) {
-                if (!respuestaPersonalizada) {
-                    // Mostrar un mensaje de alerta y evitar el envío
-                    alert('Por favor, escribe tu respuesta personalizada antes de enviar.');
-                    event.preventDefault(); // Evita el envío del formulario
-                    return; // Salir de la función
-                } else {
-                    // Asignar la respuesta personalizada para enviar
-                    document.getElementById('respuestaPersonalizada').value = respuestaPersonalizada;
-                }
+        // Validar solo si es el botón "Enviar respuesta" el que se presionó
+        if (isEnviarRespuesta) {
+            if (!respuestaPersonalizada) {
+                // Mostrar un mensaje de alerta y evitar el envío
+                alert('Por favor, escribe tu respuesta personalizada antes de enviar.');
+                event.preventDefault(); // Evita el envío del formulario
+                return; // Salir de la función
+            } else {
+                // Asignar la respuesta personalizada para enviar
+                document.getElementById('respuestaPersonalizada').value = respuestaPersonalizada;
             }
-        });
+        }
+    });
     </script>
 
 </body>

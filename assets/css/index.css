@@ -12,6 +12,7 @@
   font-family: 'montserrat', sans-serif;
   padding-top: 98px !important;
   padding-left: 2% !important;
+  margin-bottom: 6%;
 }
 
 body {
@@ -80,7 +81,7 @@ body {
   cursor: pointer;
   box-shadow: 2px 2px 19px rgba(0, 0, 0, 0.8);
   margin-top: 0px;
-  margin-left: -8%;
+  margin-left: 1%;
   background-color: #1468e5;
   color: white;
 }

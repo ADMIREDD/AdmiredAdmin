@@ -15,32 +15,50 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box">
-                            <h4 class="page-title">Actualiza Cuota Admin</h4>
-                            
+                            <h4 class="page-title">Actualizar Cuota Admin</h4>
+
                             <section class="form-register">
-                                <form action="views/dashboard/editUser.php?userId=<?php echo $_GET['userId']; ?>" method="post" class="formulario__register">
+                                <form action="?c=cuota&m=update&userId=<?php echo $_GET['userId']; ?>" method="post"
+                                    class="formulario__register">
+
+                                    <!-- Campo Fecha (solo lectura) -->
                                     <div class="form-group">
                                         <label for="fecha">Fecha:</label>
-                                        <input class="controls" type="text" name="fecha" id="fecha" placeholder="Ingrese la fecha" value="<?php echo htmlspecialchars($user['FECHA']) ?>">
+                                        <input class="controls" type="text" name="fecha" id="fecha"
+                                            value="<?php echo htmlspecialchars($cuota['FECHA']); ?>" readonly>
                                     </div>
+
+                                    <!-- Campo Estado (editable) -->
                                     <div class="form-group">
                                         <label for="estado">Estado:</label>
-                                        <input class="controls" type="text" name="estado" id="estado" placeholder="Ingrese el estado" value="<?php echo htmlspecialchars($user['ESTADO']) ?>">
+                                        <input class="controls" type="text" name="estado" id="estado"
+                                            placeholder="Ingrese el estado"
+                                            value="<?php echo htmlspecialchars($cuota['ESTADO']); ?>">
                                     </div>
+
+                                    <!-- Campo Fecha Límite (solo lectura) -->
                                     <div class="form-group">
                                         <label for="fecha_limite">Fecha Límite:</label>
-                                        <input class="controls" type="date" name="fecha_limite" id="fecha_limite" placeholder="Ingrese la fecha límite" value="<?php echo htmlspecialchars($user['FECHA_LIMITE']) ?>">
+                                        <input class="controls" type="text" name="fecha_limite" id="fecha_limite"
+                                            value="<?php echo htmlspecialchars($cuota['FECHA_LIMITE']); ?>" readonly>
                                     </div>
+
+                                    <!-- Campo Precio (editable) -->
                                     <div class="form-group">
                                         <label for="precio">Precio:</label>
-                                        <input class="controls" type="text" name="precio" id="precio" placeholder="Ingrese el precio" value="<?php echo htmlspecialchars($user['PRECIO']) ?>">
+                                        <input class="controls" type="text" name="precio" id="precio"
+                                            placeholder="Ingrese el precio"
+                                            value="<?php echo htmlspecialchars(number_format($cuota['PRECIO'], 2, ',', '.')); ?>">
                                     </div>
+
+                                    <!-- Botones -->
                                     <div class="form-group">
                                         <input class="botons" type="submit" value="Actualizar">
                                         <a href="?c=cuota&m=index" class="btn btn-success">Volver</a>
                                     </div>
                                 </form>
                             </section>
+
                         </div>
                     </div>
                 </div>
