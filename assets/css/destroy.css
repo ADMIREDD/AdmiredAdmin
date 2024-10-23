@@ -21,6 +21,7 @@ h1.page-title {
     border: none;
     border-radius: 2px;
     box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.4);
+    margin-top: 10px;
 }
 
 .btn-success:hover {

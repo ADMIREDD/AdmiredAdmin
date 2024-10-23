@@ -34,6 +34,14 @@
                                         class="btn btn-success">
                                         <i class="fas fa-plus"></i> Crear Cuota Admin
                                     </button>
+                                    <!-- Formulario de búsqueda -->
+                                    <form method="GET" action="" class="search-form d-flex" onsubmit="return false;">
+                                        <input type="text" class="form-control search-input" id="search" name="search"
+                                            placeholder="Buscar por Unidad residencial"
+                                            value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>"
+                                            onkeyup="fetchResults()">
+
+                                    </form>
                                 </div>
                                 <hr>
                                 <div class="table-responsive">
@@ -52,27 +60,23 @@
                                         </thead>
                                         <tbody>
                                             <?php while ($rows = $resultado->fetch_assoc()) { ?>
-                                            <tr>
-                                                <td><?php echo $rows['ID']; ?></td>
-                                                <td><?php echo $rows['FECHA_MES']; ?></td>
-                                                <td><?php echo $rows['ESTADO']; ?></td>
-                                                <td><?php echo $rows['VALOR']; ?></td>
-                                                <td><?php echo $rows['NO_APTO']; ?></td>
-                                                <td><?php echo $rows['FECHA_PAGO']; ?></td>
-                                                <td><?php echo $rows['UNIDAD_RESIDENCIAL_ID']; ?></td>
-                                                <td>
-                                                    <div class="d-flex gap-1">
-                                                        <a href="?c=cuota&m=show&userId=<?php echo $rows['ID']; ?>"
-                                                            class="submit boton1">Ver</a>
-                                                        <a href="?c=cuota&m=edit&userId=<?php echo $rows['ID']; ?>"
-                                                            class="submit boton2">Editar</a>
-
-
-                                                        <a href="?c=cuota&m=delete&userId=<?php echo $rows['ID']; ?>"
-                                                            class="submit boton3">Eliminar</a>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                                <tr>
+                                                    <td><?php echo $rows['ID']; ?></td>
+                                                    <td><?php echo $rows['FECHA_MES']; ?></td>
+                                                    <td><?php echo $rows['ESTADO']; ?></td>
+                                                    <td><?php echo $rows['VALOR']; ?></td>
+                                                    <td><?php echo $rows['NO_APTO']; ?></td>
+                                                    <td><?php echo $rows['FECHA_PAGO']; ?></td>
+                                                    <td><?php echo $rows['UNIDAD_RESIDENCIAL_ID']; ?></td>
+                                                    <td>
+                                                        <div class="d-flex gap-1">
+                                                            <a href="?c=cuota&m=show&userId=<?php echo $rows['ID']; ?>"
+                                                                class="submit boton1">Ver</a>
+                                                            <a href="?c=cuota&m=edit&userId=<?php echo $rows['ID']; ?>"
+                                                                class="submit boton2">Editar</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
                                             <?php } ?>
                                         </tbody>
 
