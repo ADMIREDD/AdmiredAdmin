@@ -21,22 +21,23 @@ error_reporting(E_ALL);
         <div class="card-body_pqr mx-auto mt-4" style="max-width: 600px;">
             <div class="card-body">
                 <h4>Detalles del PQR</h4>
-                <p><strong>ID:</strong> <?php echo htmlspecialchars($user['ID']); ?></p>
-                <p><strong>Detalle:</strong> <?php echo htmlspecialchars($user['Detalle']); ?></p>
-                <p><strong>Estado:</strong> <?php echo htmlspecialchars($user['Estado']); ?></p>
+                <p><strong>ID:</strong> <?php echo htmlspecialchars($user['ID'] ?? 'ID no disponible'); ?></p>
+                <p><strong>Detalle:</strong> <?php echo htmlspecialchars($user['Detalle'] ?? 'Sin detalles'); ?></p>
+                <p><strong>Estado:</strong> <?php echo htmlspecialchars($user['Estado'] ?? 'Estado no disponible'); ?>
+                </p>
                 <p><strong>Usuario:</strong>
-                    <?php echo htmlspecialchars($user['UsuarioNombre'] ?? 'Usuario desconocido'); ?>
-                </p>
-
-                <p><strong>Tipo de PQR:</strong> <?php echo htmlspecialchars($user['Tipo de PQR']); ?></p>
-                <p><strong>Fecha de Solicitud:</strong> <?php echo htmlspecialchars($user['Fecha de Solicitud']); ?></p>
+                    <?php echo htmlspecialchars($user['UsuarioNombre'] ?? 'Usuario desconocido'); ?></p>
+                <p><strong>Tipo de PQR:</strong>
+                    <?php echo htmlspecialchars($user['Tipo de PQR'] ?? 'Tipo no disponible'); ?></p>
+                <p><strong>Fecha de Solicitud:</strong>
+                    <?php echo htmlspecialchars($user['Fecha de Solicitud'] ?? 'Fecha no disponible'); ?></p>
                 <p><strong>Fecha de Respuesta:</strong>
-                    <?php echo htmlspecialchars($user['Fecha de Respuesta'] ?? 'No hay respuesta aún'); ?>
-                </p>
-
+                    <?php echo htmlspecialchars($user['Fecha de Respuesta'] ?? 'No hay respuesta aún'); ?></p>
                 <p><strong>Respuesta:</strong>
-                    <?php echo htmlspecialchars($user['Respuesta'] ?? 'No hay respuesta aún'); ?>
-                </p>
+                    <?php echo htmlspecialchars($user['Respuesta'] ?? 'No hay respuesta aún'); ?></p>
+
+
+
 
             </div>
         </div>
@@ -48,7 +49,9 @@ error_reporting(E_ALL);
                     <input type="hidden" name="id" value="<?php echo htmlspecialchars($user['ID']); ?>">
 
 
-                    <input type="hidden" name="userId" value="<?php echo htmlspecialchars($user['Usuario']); ?>">
+                    <input type="hidden" name="userId" value="<?php echo htmlspecialchars($user['ID']); ?>">
+
+
 
 
                     <div class="mb-3">
@@ -84,23 +87,23 @@ error_reporting(E_ALL);
     </div>
 
     <script>
-    document.getElementById('responseForm').addEventListener('submit', function(event) {
-        var isEnviarRespuesta = event.submitter && event.submitter.value === 'customResponse';
-        var respuestaPersonalizada = document.getElementById('respuestaPersonalizada').value.trim();
+        document.getElementById('responseForm').addEventListener('submit', function(event) {
+            var isEnviarRespuesta = event.submitter && event.submitter.value === 'customResponse';
+            var respuestaPersonalizada = document.getElementById('respuestaPersonalizada').value.trim();
 
-        // Validar solo si es el botón "Enviar respuesta" el que se presionó
-        if (isEnviarRespuesta) {
-            if (!respuestaPersonalizada) {
-                // Mostrar un mensaje de alerta y evitar el envío
-                alert('Por favor, escribe tu respuesta personalizada antes de enviar.');
-                event.preventDefault(); // Evita el envío del formulario
-                return; // Salir de la función
-            } else {
-                // Asignar la respuesta personalizada para enviar
-                document.getElementById('respuestaPersonalizada').value = respuestaPersonalizada;
+            // Validar solo si es el botón "Enviar respuesta" el que se presionó
+            if (isEnviarRespuesta) {
+                if (!respuestaPersonalizada) {
+                    // Mostrar un mensaje de alerta y evitar el envío
+                    alert('Por favor, escribe tu respuesta personalizada antes de enviar.');
+                    event.preventDefault(); // Evita el envío del formulario
+                    return; // Salir de la función
+                } else {
+                    // Asignar la respuesta personalizada para enviar
+                    document.getElementById('respuestaPersonalizada').value = respuestaPersonalizada;
+                }
             }
-        }
-    });
+        });
     </script>
 
 </body>

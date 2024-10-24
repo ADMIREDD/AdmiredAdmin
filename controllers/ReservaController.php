@@ -3,6 +3,9 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 class ReservaController
 {
     private $conexion;
@@ -198,34 +201,87 @@ class ReservaController
         $observacionRecibe = $_POST['observacion_recibe'];
         $valor = $_POST['valor'];
 
-        // Validar si ya existe una reserva en el área común en la misma fecha y hora
-        $queryVerificar = "SELECT * FROM reservas 
-                   WHERE (FECHA_RESERVA BETWEEN ? AND ?) 
-                   AND ID_AREA_COMUN = ? 
-                   AND ID_ESTADO_RESERVA IN (1, 2) 
-                   AND ID != ?"; // Ignorar la reserva actual
-
-        $resultadoVerificacion = $this->ejecutarConsulta($queryVerificar, ["ssii", $fechaReserva, $fechaFin, $idAreaComun, $id]);
-
-        if ($resultadoVerificacion && $resultadoVerificacion->num_rows > 0) {
-            die("Error: Ya existe una reserva en esta fecha y hora para el área común seleccionada.");
-        }
-
         // Actualizar la reserva en la base de datos
         $queryActualizar = "UPDATE reservas SET 
-                   FECHA_RESERVA = ?, 
-                   FECHA_FIN = ?, 
-                   ID_AREA_COMUN = ?, 
-                   ID_ESTADO_RESERVA = ?, 
-                   OBSERVACION_ENTREGA = ?, 
-                   OBSERVACION_RECIBE = ?, 
-                   VALOR = ? 
-                   WHERE ID = ?";
+               FECHA_RESERVA = ?, 
+               FECHA_FIN = ?, 
+               ID_AREA_COMUN = ?, 
+               ID_ESTADO_RESERVA = ?, 
+               OBSERVACION_ENTREGA = ?, 
+               OBSERVACION_RECIBE = ?, 
+               VALOR = ? 
+               WHERE ID = ?";
 
         $this->ejecutarConsulta($queryActualizar, ["ssiiisdi", $fechaReserva, $fechaFin, $idAreaComun, $idEstadoReserva, $observacionEntrega, $observacionRecibe, $valor, $id]);
 
-        header("Location: /reservas"); // Redirigir a la lista de reservas
+        // Obtener el correo del usuario que hizo la reserva
+        $queryUsuario = "SELECT u.email, u.NOMBRE FROM usuarios u JOIN reservas r ON r.ID_USUARIO = u.ID WHERE r.ID = ?";
+        $resultadoUsuario = $this->ejecutarConsulta($queryUsuario, ["i", $id]);
+
+        if ($resultadoUsuario->num_rows > 0) {
+            $usuario = $resultadoUsuario->fetch_assoc();
+            $emailUsuario = $usuario['email'];
+            $nombreUsuario = $usuario['NOMBRE'];
+        } else {
+            die("No se encontró el usuario de la reserva.");
+        }
+
+        // Enviar correo de confirmación de actualización
+        $mail = new PHPMailer(true);
+
+        try {
+            // Cargar variables de entorno
+            $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+            $dotenv->load();
+
+            // Configuración de PHPMailer
+            $mail->isSMTP();
+            $mail->Host = $_ENV['email.SMTPHost'];
+            $mail->SMTPAuth = true;
+            $mail->Username = $_ENV['email.SMTPUser'];
+            $mail->Password = $_ENV['email.SMTPPass'];
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = $_ENV['email.SMTPPort'];
+
+            // Remitente y destinatario
+            $mail->setFrom($_ENV['email.SMTPUser'], 'Admired');
+            $mail->addAddress($emailUsuario);
+
+            // Cargar los estilos CSS
+            $styles = file_get_contents(__DIR__ . '/../assets/css/email.css');
+
+            // Contenido del correo
+            $mail->isHTML(true);
+            $mail->Subject = "Actualización de Reserva";
+            $mail->Body = '<html><head><style>' . $styles . '</style></head><body>';
+            $mail->Body .= '<div class="container">';
+            $mail->Body .= '<h1>Actualización de Reserva</h1>';
+            $mail->Body .= '<p>Estimado ' . htmlspecialchars($nombreUsuario) . ',</p>';
+            $mail->Body .= '<p>Su reserva ha sido actualizada con éxito. A continuación, encontrará los detalles de su reserva:</p>';
+            $mail->Body .= '<p><strong>Fecha de Inicio:</strong> ' . htmlspecialchars($fechaReserva) . '</p>';
+            $mail->Body .= '<p><strong>Fecha de Fin:</strong> ' . htmlspecialchars($fechaFin) . '</p>';
+            $mail->Body .= '<p><strong>Área Común:</strong> ' . $this->getNombreAreaComun($idAreaComun) . '</p>';
+            $mail->Body .= '<p><strong>Observación Entrega:</strong> ' . htmlspecialchars($observacionEntrega ?: 'No disponible') . '</p>';
+            $mail->Body .= '<p><strong>Observación Recibe:</strong> ' . htmlspecialchars($observacionRecibe ?: 'No disponible') . '</p>';
+            $mail->Body .= '<p><strong>Valor:</strong> ' . htmlspecialchars($valor) . '</p>';
+            $mail->Body .= '<p><strong>Estado de Reserva:</strong> ' . $this->getEstadoReserva($idEstadoReserva) . '</p>';
+            $mail->Body .= '<p>Gracias por utilizar nuestro servicio.</p>';
+            $mail->Body .= '<p>Atentamente,<br>El equipo de Admired</p>';
+            $mail->Body .= '</div>';
+            $mail->Body .= '</body></html>';
+
+            // Enviar el correo
+            $mail->send();
+        } catch (Exception $e) {
+            echo "El correo no pudo ser enviado. Mailer Error: {$mail->ErrorInfo}";
+        }
+
+        // Redirigir a la lista de reservas
+        header("Location: ?c=reserva&m=index");
+        exit();
     }
+
+
 
     public function delete($id)
     {

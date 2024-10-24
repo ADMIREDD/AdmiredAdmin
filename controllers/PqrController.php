@@ -69,19 +69,20 @@ class PqrController
         // Aquí podrías agregar más validaciones si lo consideras necesario
 
         $query = "SELECT 
-            pqr.ID, 
-            pqr.DETALLE AS 'Detalle', 
-            estados.TIPO AS 'Estado', 
-            pqr.USUARIO_ID AS 'Usuario', 
-            pqr_tipo.NOMBRE AS 'Tipo de PQR', 
-            pqr.FECHA_SOLICITUD AS 'Fecha de Solicitud', 
-            pqr.FECHA_RESPUESTA AS 'Fecha de Respuesta', 
-            pqr.RESPUESTA AS 'Respuesta'
-        FROM pqr 
-        JOIN estados ON pqr.ESTADO_ID = estados.ID
-        JOIN usuarios ON pqr.USUARIO_ID = usuarios.ID
-        JOIN pqr_tipo ON pqr.PQR_TIPO_ID = pqr_tipo.ID
-        WHERE pqr.ID = ?";
+    pqr.ID, 
+    pqr.DETALLE AS 'Detalle', 
+    estados.TIPO AS 'Estado', 
+    usuarios.NOMBRE AS 'UsuarioNombre', 
+    pqr_tipo.NOMBRE AS 'Tipo de PQR', 
+    pqr.FECHA_SOLICITUD AS 'Fecha de Solicitud', 
+    pqr.FECHA_RESPUESTA AS 'Fecha de Respuesta', 
+    pqr.RESPUESTA AS 'Respuesta'
+FROM pqr 
+JOIN estados ON pqr.ESTADO_ID = estados.ID
+JOIN usuarios ON pqr.USUARIO_ID = usuarios.ID
+JOIN pqr_tipo ON pqr.PQR_TIPO_ID = pqr_tipo.ID
+WHERE pqr.ID = ?";
+
 
         $stmt = $this->conexion->prepare($query);
         $stmt->bind_param('i', $userId);
@@ -105,11 +106,14 @@ class PqrController
 
     public function respond()
     {
-        if (isset($_POST['id'], $_POST['userId'])) {
+        if (isset($_POST['id'])) {
             $pqrId = $_POST['id'];
-            $userId = $_POST['userId'];
+
+            // Depuración
+            error_log("PQR ID: $pqrId");
+
             $respuesta = '';
-            $estadoId = 2; // Example for the new status
+            $estadoId = $_POST['estado'] === 'Solicitud aceptada' ? 2 : 3; // Ejemplo de asignación basada en el estado
 
             // Recoger la respuesta del botón o del campo personalizado
             if (isset($_POST['estado'])) {
@@ -121,17 +125,19 @@ class PqrController
                 return;
             }
 
-            // Obtener el correo del usuario
-            $queryUsuario = "SELECT email FROM users WHERE id = ?";
+            // Obtener el correo del usuario relacionado con la PQR
+            $queryUsuario = "SELECT users.email FROM users 
+                         JOIN pqr ON pqr.USUARIO_ID = users.id 
+                         WHERE pqr.ID = ?";
             $stmt = $this->conexion->prepare($queryUsuario);
-            $stmt->bind_param('i', $userId);
+            $stmt->bind_param('i', $pqrId);
             $stmt->execute();
             $resultUsuario = $stmt->get_result();
 
             if ($resultUsuario->num_rows > 0) {
                 $emailUsuario = $resultUsuario->fetch_assoc()['email'];
             } else {
-                echo "No se encontró el usuario con el ID especificado.";
+                echo "No se encontró el usuario relacionado con esta PQR.";
                 return; // Finaliza la ejecución si no se encuentra el usuario
             }
 
@@ -147,7 +153,13 @@ class PqrController
             // Envío de correo
             $mail = new PHPMailer(true);
             try {
-                // Carga las variables de entorno
+                // Iniciar el buffer de salida
+                ob_start();
+
+                // Habilitar la depuración del servidor SMTP
+                $mail->SMTPDebug = 2; // Cambia esto a 0 si no necesitas más depuración
+
+                // Cargar variables de entorno
                 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
                 $dotenv->load();
 
@@ -162,7 +174,7 @@ class PqrController
 
                 // Remitente y destinatario
                 $mail->setFrom($_ENV['email.SMTPUser'], 'Admired');
-                $mail->addAddress($emailUsuario);
+                $mail->addAddress($emailUsuario);  // Correo del usuario que creó la PQR
 
                 // Cargar los estilos CSS
                 $styles = file_get_contents(__DIR__ . '/../assets/css/email.css');
@@ -174,28 +186,27 @@ class PqrController
                 $mail->Body .= '<div class="container">';
                 $mail->Body .= '<h1>Tu PQR ha sido respondida</h1>';
                 $mail->Body .= '<p>Respuesta: ' . htmlspecialchars($respuesta) . '</p>';
-                $mail->Body .= '<a href="#" class="button">Ver PQR</a>'; // Modifica el enlace según sea necesario
                 $mail->Body .= '</div>';
                 $mail->Body .= '</body></html>';
 
                 // Enviar el correo
                 $mail->send();
 
+                // Limpiar el buffer de salida para evitar que se envíe contenido antes de redirigir
+                ob_end_clean();
+
                 // Redirigir a la página de PQR después de enviar el correo
                 header("Location: ?c=pqr&m=pqr");
                 exit(); // Asegúrate de detener la ejecución del script después de redirigir
             } catch (Exception $e) {
+                // Limpiar el buffer de salida en caso de error
+                ob_end_clean();
                 echo "El correo no pudo ser enviado. Mailer Error: {$mail->ErrorInfo}";
             }
         } else {
             echo "Error: datos no válidos.";
         }
     }
-
-
-
-
-
 
 
 
