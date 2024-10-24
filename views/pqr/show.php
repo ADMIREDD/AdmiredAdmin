@@ -1,3 +1,8 @@
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -19,11 +24,19 @@
                 <p><strong>ID:</strong> <?php echo htmlspecialchars($user['ID']); ?></p>
                 <p><strong>Detalle:</strong> <?php echo htmlspecialchars($user['Detalle']); ?></p>
                 <p><strong>Estado:</strong> <?php echo htmlspecialchars($user['Estado']); ?></p>
-                <p><strong>Usuario:</strong> <?php echo htmlspecialchars($user['Usuario']); ?></p>
+                <p><strong>Usuario:</strong>
+                    <?php echo htmlspecialchars($user['UsuarioNombre'] ?? 'Usuario desconocido'); ?>
+                </p>
+
                 <p><strong>Tipo de PQR:</strong> <?php echo htmlspecialchars($user['Tipo de PQR']); ?></p>
                 <p><strong>Fecha de Solicitud:</strong> <?php echo htmlspecialchars($user['Fecha de Solicitud']); ?></p>
-                <p><strong>Fecha de Respuesta:</strong> <?php echo htmlspecialchars($user['Fecha de Respuesta']); ?></p>
-                <p><strong>Respuesta:</strong> <?php echo htmlspecialchars($user['Respuesta']); ?></p>
+                <p><strong>Fecha de Respuesta:</strong>
+                    <?php echo htmlspecialchars($user['Fecha de Respuesta'] ?? 'No hay respuesta aún'); ?>
+                </p>
+
+                <p><strong>Respuesta:</strong>
+                    <?php echo htmlspecialchars($user['Respuesta'] ?? 'No hay respuesta aún'); ?>
+                </p>
 
             </div>
         </div>

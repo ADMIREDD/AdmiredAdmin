@@ -20,98 +20,87 @@ class ReservaController
         }
     }
 
-    // Obtener el nombre del área común
+    private function ejecutarConsulta($sql, $params = [])
+    {
+        $stmt = $this->conexion->prepare($sql);
+        if ($params) {
+            $stmt->bind_param(...$params);
+        }
+        $stmt->execute();
+        return $stmt->get_result();
+    }
+
     public function getNombreAreaComun($idAreaComun)
     {
-        $idAreaComun = $this->conexion->real_escape_string($idAreaComun);
-        $sql = "SELECT NOMBRE FROM areas_comunes WHERE ID = $idAreaComun";
-        $result = $this->conexion->query($sql);
+        $sql = "SELECT NOMBRE FROM areas_comunes WHERE ID = ?";
+        $resultado = $this->ejecutarConsulta($sql, ["i", $idAreaComun]);
 
-        if ($result && $result->num_rows > 0) {
-            $row = $result->fetch_assoc();
+        if ($resultado && $resultado->num_rows > 0) {
+            $row = $resultado->fetch_assoc();
             return $row['NOMBRE'];
         }
         return "Desconocido";
     }
 
-    // Obtener el estado de la reserva
     public function getEstadoReserva($idEstadoReserva)
     {
-        $sql = "SELECT DESCRIPCION FROM estados_reserva WHERE ID = $idEstadoReserva";
-        $result = $this->conexion->query($sql);
+        $sql = "SELECT DESCRIPCION FROM estados_reserva WHERE ID = ?";
+        $resultado = $this->ejecutarConsulta($sql, ["i", $idEstadoReserva]);
 
-        if ($result && $result->num_rows > 0) {
-            $row = $result->fetch_assoc();
+        if ($resultado && $resultado->num_rows > 0) {
+            $row = $resultado->fetch_assoc();
             return $row['DESCRIPCION'];
         }
         return "Desconocido";
     }
 
-    // Obtener el nombre del usuario
     public function getNombreUsuario($idUsuario)
     {
         if (empty($idUsuario)) {
             return "Usuario Desconocido";
         }
 
-        $idUsuario = $this->conexion->real_escape_string($idUsuario);
-        $sql = "SELECT CONCAT(NOMBRE, ' ', APELLIDO) AS NOMBRE_COMPLETO FROM usuarios WHERE ID = $idUsuario";
-        $result = $this->conexion->query($sql);
+        $sql = "SELECT CONCAT(NOMBRE, ' ', APELLIDO) AS NOMBRE_COMPLETO FROM usuarios WHERE ID = ?";
+        $resultado = $this->ejecutarConsulta($sql, ["i", $idUsuario]);
 
-        if ($result && $result->num_rows > 0) {
-            $row = $result->fetch_assoc();
+        if ($resultado && $resultado->num_rows > 0) {
+            $row = $resultado->fetch_assoc();
             return $row['NOMBRE_COMPLETO'];
         }
         return "Usuario Desconocido";
     }
 
-    // Crear una nueva reserva
-    public function createReserva($fechaReserva, $fechaFin, $idAreaComun, $idEstadoReserva, $idUsuario, $observacionEntrega, $observacionRecibe, $valor)
-    {
-        // Validar si ya existe una reserva en el área común en la misma fecha y hora
-        $queryVerificar = "SELECT * FROM reservas 
-                           WHERE (FECHA_RESERVA BETWEEN '$fechaReserva' AND '$fechaFin') 
-                           AND ID_AREA_COMUN = $idAreaComun 
-                           AND ID_ESTADO_RESERVA IN (1, 2)"; // 1 = Pendiente, 2 = Confirmada
-
-        $resultadoVerificacion = $this->conexion->query($queryVerificar);
-
-        // Si existe una reserva en esa fecha y hora para la misma área común, mostrar error
-        if ($resultadoVerificacion && $resultadoVerificacion->num_rows > 0) {
-            return "Ya existe una reserva en esta fecha y hora para el área común seleccionada.";
-        }
-
-        // Si no hay reservas en conflicto, procede a crear la nueva reserva
-        $queryInsertar = "INSERT INTO reservas (FECHA_RESERVA, FECHA_FIN, ID_AREA_COMUN, ID_USUARIO, OBSERVACION_ENTREGA, OBSERVACION_RECIBE, VALOR, ID_ESTADO_RESERVA) 
-                          VALUES ('$fechaReserva', '$fechaFin', $idAreaComun, $idUsuario, '$observacionEntrega', '$observacionRecibe', $valor, $idEstadoReserva)";
-
-        if ($this->conexion->query($queryInsertar)) {
-            return "Reserva creada exitosamente.";
-        } else {
-            return "Error al crear la reserva: " . $this->conexion->error;
-        }
-    }
-
     public function index()
     {
+        // Inicializar el array de reservas
+        $reservas = [];
+
+        // Comprobar si hay una búsqueda
+        $search = isset($_GET['search']) ? $_GET['search'] : '';
+
+        // Consulta para obtener las reservas
         $sql = "SELECT 
-                    ID, 
-                    FECHA_RESERVA AS 'Fecha Reserva', 
-                    FECHA_FIN AS 'Fecha Fin', 
-                    ID_AREA_COMUN AS 'Área Común', 
-                    ID_ESTADO_RESERVA AS 'Estado Reserva', 
-                    ID_USUARIO AS 'Usuario', 
-                    OBSERVACION_ENTREGA AS 'Observación Entrega', 
-                    OBSERVACION_RECIBE AS 'Observación Recibe', 
-                    VALOR AS 'Valor'
-                FROM reservas";
+                r.ID, 
+                r.FECHA_RESERVA AS 'Fecha Reserva', 
+                r.FECHA_FIN AS 'Fecha Fin', 
+                r.ID_AREA_COMUN AS 'Área Común', 
+                r.ID_ESTADO_RESERVA AS 'Estado Reserva', 
+                r.ID_USUARIO AS 'Usuario', 
+                r.OBSERVACION_ENTREGA AS 'Observación Entrega', 
+                r.OBSERVACION_RECIBE AS 'Observación Recibe', 
+                r.VALOR AS 'Valor'
+            FROM reservas r
+            JOIN usuarios u ON r.ID_USUARIO = u.ID 
+            WHERE u.NOMBRE LIKE '%$search%' OR u.APELLIDO LIKE '%$search%'
+            ORDER BY r.ID DESC";
+
         $resultado = $this->conexion->query($sql);
 
         if ($resultado === FALSE) {
             die("Error en la consulta: " . $this->conexion->error);
         }
 
-        $reservas = [];
+        // Recoger los resultados
         while ($row = $resultado->fetch_assoc()) {
             $row['Nombre Area'] = $this->getNombreAreaComun($row['Área Común']);
             $row['Estado Texto'] = $this->getEstadoReserva($row['Estado Reserva']);
@@ -119,10 +108,16 @@ class ReservaController
             $reservas[] = $row;
         }
 
+        // Pasar los datos a la vista
+        $data['reservas'] = $reservas;
+        $data['search'] = $search;
+
         require_once('views/components/layout/head.php');
         require_once('views/reservas/index.php');
         require_once('views/components/layout/footer.php');
     }
+
+
 
     public function show($id)
     {
@@ -144,9 +139,9 @@ class ReservaController
             JOIN areas_comunes a ON r.ID_AREA_COMUN = a.ID
             JOIN usuarios u ON r.ID_USUARIO = u.ID
             JOIN estados_reserva e ON r.ID_ESTADO_RESERVA = e.ID
-            WHERE r.ID = $id";
+            WHERE r.ID = ?";
 
-        $resultado = $this->conexion->query($sql);
+        $resultado = $this->ejecutarConsulta($sql, ["i", $id]);
         if ($resultado->num_rows === 0) {
             die("Reserva no encontrada.");
         }
@@ -176,9 +171,9 @@ class ReservaController
                 FROM reservas r
                 JOIN areas_comunes a ON r.ID_AREA_COMUN = a.ID
                 JOIN usuarios u ON r.ID_USUARIO = u.ID
-                WHERE r.ID = $id";
+                WHERE r.ID = ?";
 
-        $resultado = $this->conexion->query($sql);
+        $resultado = $this->ejecutarConsulta($sql, ["i", $id]);
         if ($resultado->num_rows === 0) {
             die("Reserva no encontrada.");
         }
@@ -205,38 +200,37 @@ class ReservaController
 
         // Validar si ya existe una reserva en el área común en la misma fecha y hora
         $queryVerificar = "SELECT * FROM reservas 
-                       WHERE (FECHA_RESERVA BETWEEN '$fechaReserva' AND '$fechaFin') 
-                       AND ID_AREA_COMUN = $idAreaComun 
-                       AND ID_ESTADO_RESERVA IN (1, 2) 
-                       AND ID != $id"; // Ignorar la reserva actual
+                   WHERE (FECHA_RESERVA BETWEEN ? AND ?) 
+                   AND ID_AREA_COMUN = ? 
+                   AND ID_ESTADO_RESERVA IN (1, 2) 
+                   AND ID != ?"; // Ignorar la reserva actual
 
-        $resultadoVerificacion = $this->conexion->query($queryVerificar);
+        $resultadoVerificacion = $this->ejecutarConsulta($queryVerificar, ["ssii", $fechaReserva, $fechaFin, $idAreaComun, $id]);
 
         if ($resultadoVerificacion && $resultadoVerificacion->num_rows > 0) {
             die("Error: Ya existe una reserva en esta fecha y hora para el área común seleccionada.");
         }
 
         // Actualizar la reserva en la base de datos
-        $queryActualizar = "UPDATE reservas 
-                        SET FECHA_RESERVA = '$fechaReserva', 
-                            FECHA_FIN = '$fechaFin', 
-                            ID_AREA_COMUN = $idAreaComun, 
-                            ID_ESTADO_RESERVA = $idEstadoReserva, 
-                            OBSERVACION_ENTREGA = '$observacionEntrega', 
-                            OBSERVACION_RECIBE = '$observacionRecibe', 
-                            VALOR = $valor 
-                        WHERE ID = $id";
+        $queryActualizar = "UPDATE reservas SET 
+                   FECHA_RESERVA = ?, 
+                   FECHA_FIN = ?, 
+                   ID_AREA_COMUN = ?, 
+                   ID_ESTADO_RESERVA = ?, 
+                   OBSERVACION_ENTREGA = ?, 
+                   OBSERVACION_RECIBE = ?, 
+                   VALOR = ? 
+                   WHERE ID = ?";
 
-        if ($this->conexion->query($queryActualizar)) {
-            header("Location: ?c=reserva&m=index"); // Redirigir a la lista de reservas
-        } else {
-            die("Error al actualizar la reserva: " . $this->conexion->error);
-        }
+        $this->ejecutarConsulta($queryActualizar, ["ssiiisdi", $fechaReserva, $fechaFin, $idAreaComun, $idEstadoReserva, $observacionEntrega, $observacionRecibe, $valor, $id]);
+
+        header("Location: /reservas"); // Redirigir a la lista de reservas
     }
 
-
-    public function __destruct()
+    public function delete($id)
     {
-        $this->conexion->close();
+        $sql = "DELETE FROM reservas WHERE ID = ?";
+        $this->ejecutarConsulta($sql, ["i", $id]);
+        header("Location: /reservas"); // Redirigir a la lista de reservas
     }
 }

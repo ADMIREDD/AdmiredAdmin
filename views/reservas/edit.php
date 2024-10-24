@@ -40,7 +40,7 @@
                             <label for="id_estado_reserva" class="form-label">Estado Reserva</label>
                             <select class="form-select" id="id_estado_reserva" name="id_estado_reserva" required>
                                 <option value="<?php echo $reserva['ID_ESTADO_RESERVA']; ?>" selected>
-
+                                    <?php echo $reserva['Estado Reserva']; ?>
                                 </option>
                                 <option value="1">Pendiente</option>
                                 <option value="2">Confirmada</option>

@@ -58,7 +58,6 @@ class PqrController
         require_once('views/components/layout/footer.php');
     }
 
-
     public function show()
     {
         if (!isset($_GET['id']) || empty($_GET['id'])) {
@@ -104,16 +103,13 @@ class PqrController
         require_once('views/components/layout/footer.php');
     }
 
-
-
-
-
     public function respond()
     {
         if (isset($_POST['id'], $_POST['userId'])) {
             $pqrId = $_POST['id'];
             $userId = $_POST['userId'];
             $respuesta = '';
+            $estadoId = 2; // Example for the new status
 
             // Recoger la respuesta del botón o del campo personalizado
             if (isset($_POST['estado'])) {
@@ -126,88 +122,80 @@ class PqrController
             }
 
             // Obtener el correo del usuario
-            $queryUsuario = "SELECT EMAIL FROM usuarios WHERE ID = ?";
+            $queryUsuario = "SELECT email FROM users WHERE id = ?";
             $stmt = $this->conexion->prepare($queryUsuario);
             $stmt->bind_param('i', $userId);
             $stmt->execute();
             $resultUsuario = $stmt->get_result();
 
             if ($resultUsuario->num_rows > 0) {
-                $emailUsuario = $resultUsuario->fetch_assoc()['EMAIL'];
+                $emailUsuario = $resultUsuario->fetch_assoc()['email'];
             } else {
-                $emailUsuario = null; // Manejo de casos donde no se encuentra el usuario
+                echo "No se encontró el usuario con el ID especificado.";
+                return; // Finaliza la ejecución si no se encuentra el usuario
             }
 
             $stmt->close();
 
-            if ($emailUsuario) {
-                // Mensaje de depuración para verificar el correo electrónico del usuario
-                echo "Correo electrónico del usuario: " . htmlspecialchars($emailUsuario);
+            // Actualizar el registro PQR con la respuesta y fecha
+            $fechaRespuesta = date('Y-m-d H:i:s'); // Define la fecha de respuesta
+            $queryUpdate = "UPDATE pqr SET RESPUESTA = ?, FECHA_RESPUESTA = ?, ESTADO_ID = ? WHERE ID = ?";
+            $stmtUpdate = $this->conexion->prepare($queryUpdate);
+            $stmtUpdate->bind_param('ssii', $respuesta, $fechaRespuesta, $estadoId, $pqrId); // Actualiza con respuesta, fecha, estado, y ID de PQR
+            $stmtUpdate->execute();
 
-                // Envío de correo
-                $mail = new PHPMailer(true);
-                try {
-                    // Configuración del servidor SMTP
-                    $mail->isSMTP();
-                    $mail->Host = 'smtp.gmail.com';
-                    $mail->SMTPAuth = true;
-                    $mail->Username = 'joserosellonl@gmail.com';
-                    $mail->Password = 'jeka plnp gluz hbiy'; // Recuerda manejar este valor de forma segura
-                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-                    $mail->Port = 587;
+            // Envío de correo
+            $mail = new PHPMailer(true);
+            try {
+                // Carga las variables de entorno
+                $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+                $dotenv->load();
 
-                    // Remitente y destinatario
-                    $mail->setFrom('joserosellonl@gmail.com', 'Admired');
-                    $mail->addAddress($emailUsuario);
+                // Configuración de PHPMailer
+                $mail->isSMTP();
+                $mail->Host = $_ENV['email.SMTPHost'];
+                $mail->SMTPAuth = true;
+                $mail->Username = $_ENV['email.SMTPUser'];
+                $mail->Password = $_ENV['email.SMTPPass'];
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                $mail->Port = $_ENV['email.SMTPPort'];
 
-                    // Contenido del correo
-                    $mail->isHTML(true);
-                    $mail->Subject = "Respuesta a tu PQR";
-                    $mail->Body = "Hola,<br><br>Esta es la respuesta a tu PQR:<br><br>" . nl2br(htmlspecialchars($respuesta));
+                // Remitente y destinatario
+                $mail->setFrom($_ENV['email.SMTPUser'], 'Admired');
+                $mail->addAddress($emailUsuario);
 
-                    // Manejar archivos adjuntos
-                    if (isset($_FILES['adjuntos']) && !empty($_FILES['adjuntos']['name'][0])) {
-                        foreach ($_FILES['adjuntos']['tmp_name'] as $key => $tmp_name) {
-                            $file_name = $_FILES['adjuntos']['name'][$key];
-                            $file_tmp = $_FILES['adjuntos']['tmp_name'][$key];
+                // Cargar los estilos CSS
+                $styles = file_get_contents(__DIR__ . '/../assets/css/email.css');
 
-                            $uploadDir = __DIR__ . '/../uploads/';
-                            if (!move_uploaded_file($file_tmp, $uploadDir . $file_name)) {
-                                echo "Error al mover el archivo: " . $_FILES['adjuntos']['error'][$key];
-                                return;
-                            }
-                            $mail->addAttachment($uploadDir . $file_name);
-                        }
-                    }
+                // Contenido del correo
+                $mail->isHTML(true);
+                $mail->Subject = "Respuesta a tu PQR";
+                $mail->Body = '<html><head><style>' . $styles . '</style></head><body>';
+                $mail->Body .= '<div class="container">';
+                $mail->Body .= '<h1>Tu PQR ha sido respondida</h1>';
+                $mail->Body .= '<p>Respuesta: ' . htmlspecialchars($respuesta) . '</p>';
+                $mail->Body .= '<a href="#" class="button">Ver PQR</a>'; // Modifica el enlace según sea necesario
+                $mail->Body .= '</div>';
+                $mail->Body .= '</body></html>';
 
-                    // Enviar el correo
-                    $mail->send();
+                // Enviar el correo
+                $mail->send();
 
-                    // Actualizar la PQR con la respuesta y la fecha de respuesta
-                    $queryUpdate = "UPDATE pqr SET RESPUESTA = ?, FECHA_RESPUESTA = ? WHERE ID = ?";
-                    $stmt = $this->conexion->prepare($queryUpdate);
-                    $fechaRespuesta = date('Y-m-d H:i:s');
-                    $stmt->bind_param('ssi', $respuesta, $fechaRespuesta, $pqrId);
-                    $stmt->execute();
-                    $stmt->close();
-
-                    // Redirigir después de enviar la respuesta
-                    if (headers_sent()) {
-                        echo "<script>window.location.href = '?c=pqr&m=show&id=$pqrId&success=1';</script>";
-                    } else {
-                        header("Location: ?c=pqr&m=show&id=$pqrId&success=1");
-                        exit();
-                    }
-                } catch (Exception $e) {
-                    echo "El correo no pudo ser enviado. Mailer Error: {$mail->ErrorInfo}";
-                }
-            } else {
-                echo "No se encontró un correo electrónico registrado para el usuario.";
+                // Redirigir a la página de PQR después de enviar el correo
+                header("Location: ?c=pqr&m=pqr");
+                exit(); // Asegúrate de detener la ejecución del script después de redirigir
+            } catch (Exception $e) {
+                echo "El correo no pudo ser enviado. Mailer Error: {$mail->ErrorInfo}";
             }
         } else {
             echo "Error: datos no válidos.";
         }
     }
+
+
+
+
+
 
 
 

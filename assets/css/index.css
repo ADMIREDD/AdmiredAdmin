@@ -287,6 +287,6 @@ table {
 .d-flex {
   display: flex;
   align-items: center;
-  justify-content: left;
+  justify-content: left !important;
   /* Ajusta el orden de los elementos */
 }

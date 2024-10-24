@@ -8,6 +8,18 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/index.css">
     <link type="image/x-icon" href="assets/img/logos/favicon.png" rel="icon">
+    <script>
+        // Función para buscar reservas por nombre de usuario
+        function buscarReservas() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            const rows = document.querySelectorAll("tbody tr");
+
+            rows.forEach(row => {
+                const nombreUsuario = row.cells[4].textContent.toLowerCase(); // La celda del nombre de usuario
+                row.style.display = nombreUsuario.includes(searchInput) ? "" : "none";
+            });
+        }
+    </script>
 </head>
 
 <body>
@@ -22,8 +34,9 @@
                         </div>
                         <div class="card">
                             <div class="card-body">
-                                <div class="d-flex justify-content-end mb-3">
-                                    <!-- Aquí puedes agregar botones para crear nuevas reservas, etc. -->
+                                <div class="search-form d-flex justify-content-end mb-3">
+                                    <input type="text" id="searchInput" placeholder="Buscar por nombre de usuario"
+                                        oninput="buscarReservas()" class="search-input" style="width: 300px;">
                                 </div>
                                 <hr>
                                 <div class="table-responsive">
@@ -57,11 +70,8 @@
                                                     <td>
                                                         <a href="?c=reserva&m=show&id=<?php echo $reserva['ID']; ?>"
                                                             class="submit boton1">Ver</a>
-
-
                                                         <a href="?c=reserva&m=edit&id=<?php echo $reserva['ID']; ?>"
                                                             class="submit boton2">Editar</a>
-
                                                     </td>
                                                 </tr>
                                             <?php endforeach; ?>

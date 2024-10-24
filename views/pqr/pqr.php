@@ -15,6 +15,18 @@ error_reporting(E_ALL);
     <link rel="stylesheet" href="./assets/css/index.css">
     <link type="image/x-icon" href="assets/img/logos/logo.png" rel="icon">
     <link type="image/x-icon" href="assets/img/logos/favicon.png" rel="icon">
+    <script>
+    // Función para buscar PQR por nombre de usuario
+    function buscarPQR() {
+        const searchInput = document.getElementById('search').value.toLowerCase();
+        const rows = document.querySelectorAll("tbody tr");
+
+        rows.forEach(row => {
+            const usuario = row.cells[3].textContent.toLowerCase(); // La celda del nombre de usuario
+            row.style.display = usuario.includes(searchInput) ? "" : "none";
+        });
+    }
+    </script>
 </head>
 
 <body>
@@ -29,6 +41,12 @@ error_reporting(E_ALL);
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="table-responsive mt-2">
+                                            <div class="d-flex justify-content-end mb-3">
+                                                <input type="text" class="form-control search-input" id="search"
+                                                    name="search" placeholder="Buscar por nombre de usuario"
+                                                    oninput="buscarPQR()"
+                                                    value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
+                                            </div>
                                             <hr>
                                             <table class="table table-beige table-striped table-hover">
                                                 <thead>
@@ -62,8 +80,6 @@ error_reporting(E_ALL);
                                                         <td>
                                                             <a href="?c=pqr&m=show&id=<?php echo $rows['ID']; ?>"
                                                                 class="submit boton1">Ver</a>
-
-
                                                             <a href="?c=pqr&m=delete&ID=<?php echo $rows['ID']; ?>"
                                                                 class="submit boton3"
                                                                 onclick="return confirm('¿Está seguro de eliminar esta PQR?');">Eliminar</a>

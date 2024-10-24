@@ -1,4 +1,5 @@
 <?php
+require 'vendor/autoload.php';
 // Obtén el controlador y método desde la URL, por defecto 'Dashboard' y 'dashboard'
 $controller = isset($_GET['c']) ? $_GET['c'] : 'Dashboard';
 $controller = ucfirst(strtolower($controller)) . 'Controller'; // Capitaliza y añade 'Controller'
