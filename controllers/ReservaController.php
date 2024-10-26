@@ -13,9 +13,9 @@ class ReservaController
     public function __construct()
     {
         $servidor = "localhost";
-        $usuario = "root"; // Cambia esto a tu usuario de base de datos
-        $password = ""; // Cambia esto a tu contraseña de base de datos
-        $bd = "base_proyecto"; // Asegúrate de que el nombre de la base de datos sea correcto
+        $usuario = "root";
+        $password = "";
+        $bd = "base_proyecto";
         $this->conexion = new mysqli($servidor, $usuario, $password, $bd);
 
         if ($this->conexion->connect_error) {
@@ -75,27 +75,22 @@ class ReservaController
 
     public function index()
     {
-        // Inicializar el array de reservas
         $reservas = [];
-
-        // Comprobar si hay una búsqueda
         $search = isset($_GET['search']) ? $_GET['search'] : '';
-
-        // Consulta para obtener las reservas
         $sql = "SELECT 
-                r.ID, 
-                r.FECHA_RESERVA AS 'Fecha Reserva', 
-                r.FECHA_FIN AS 'Fecha Fin', 
-                r.ID_AREA_COMUN AS 'Área Común', 
-                r.ID_ESTADO_RESERVA AS 'Estado Reserva', 
-                r.ID_USUARIO AS 'Usuario', 
-                r.OBSERVACION_ENTREGA AS 'Observación Entrega', 
-                r.OBSERVACION_RECIBE AS 'Observación Recibe', 
-                r.VALOR AS 'Valor'
-            FROM reservas r
-            JOIN usuarios u ON r.ID_USUARIO = u.ID 
-            WHERE u.NOMBRE LIKE '%$search%' OR u.APELLIDO LIKE '%$search%'
-            ORDER BY r.ID DESC";
+            r.ID, 
+            r.FECHA_RESERVA AS 'Fecha Reserva', 
+            r.FECHA_FIN AS 'Fecha Fin', 
+            r.ID_AREA_COMUN AS 'Área Común', 
+            r.ID_ESTADO_RESERVA AS 'Estado Reserva', 
+            r.ID_USUARIO AS 'Usuario', 
+            r.OBSERVACION_ENTREGA AS 'Observación Entrega', 
+            r.OBSERVACION_RECIBE AS 'Observación Recibe', 
+            r.VALOR AS 'Valor'
+        FROM reservas r
+        JOIN usuarios u ON r.ID_USUARIO = u.ID 
+        WHERE u.NOMBRE LIKE '%$search%' OR u.APELLIDO LIKE '%$search%'
+        ORDER BY r.ID DESC";
 
         $resultado = $this->conexion->query($sql);
 
@@ -103,7 +98,6 @@ class ReservaController
             die("Error en la consulta: " . $this->conexion->error);
         }
 
-        // Recoger los resultados
         while ($row = $resultado->fetch_assoc()) {
             $row['Nombre Area'] = $this->getNombreAreaComun($row['Área Común']);
             $row['Estado Texto'] = $this->getEstadoReserva($row['Estado Reserva']);
@@ -111,7 +105,6 @@ class ReservaController
             $reservas[] = $row;
         }
 
-        // Pasar los datos a la vista
         $data['reservas'] = $reservas;
         $data['search'] = $search;
 
@@ -120,9 +113,43 @@ class ReservaController
         require_once('views/components/layout/footer.php');
     }
 
-
-
     public function show($id)
+    {
+        $sql = "SELECT 
+            r.ID, 
+            r.FECHA_RESERVA, 
+            r.FECHA_FIN, 
+            r.ID_AREA_COMUN, 
+            r.ID_USUARIO, 
+            r.OBSERVACION_ENTREGA, 
+            r.OBSERVACION_RECIBE, 
+            r.VALOR, 
+            r.ID_ESTADO_RESERVA,
+            a.NOMBRE AS 'Nombre Area',
+            u.NOMBRE AS 'Nombre Usuario', 
+            u.APELLIDO AS 'Apellido Usuario', 
+            e.DESCRIPCION AS 'Estado Reserva'
+        FROM reservas r
+        JOIN areas_comunes a ON r.ID_AREA_COMUN = a.ID
+        JOIN usuarios u ON r.ID_USUARIO = u.ID
+        JOIN estados_reserva e ON r.ID_ESTADO_RESERVA = e.ID
+        WHERE r.ID = ?";
+
+        $resultado = $this->ejecutarConsulta($sql, ["i", $id]);
+
+        if ($resultado->num_rows === 0) {
+            die("Reserva no encontrada.");
+        }
+
+        $reserva = $resultado->fetch_assoc();
+
+        require_once('views/components/layout/head.php');
+        require_once('views/reservas/show.php');
+        require_once('views/components/layout/footer.php');
+    }
+
+
+    public function edit($id)
     {
         $sql = "SELECT 
                 r.ID, 
@@ -136,7 +163,7 @@ class ReservaController
                 r.ID_ESTADO_RESERVA,
                 a.NOMBRE AS 'Nombre Area',
                 u.NOMBRE AS 'Nombre Usuario', 
-                u.APELLIDO AS 'Apellido Usuario', 
+                u.APELLIDO AS 'Apellido Usuario',
                 e.DESCRIPCION AS 'Estado Reserva'
             FROM reservas r
             JOIN areas_comunes a ON r.ID_AREA_COMUN = a.ID
@@ -152,76 +179,59 @@ class ReservaController
         $reserva = $resultado->fetch_assoc();
 
         require_once('views/components/layout/head.php');
-        require_once('views/reservas/show.php');
-        require_once('views/components/layout/footer.php');
-    }
-
-    public function edit($id)
-    {
-        $sql = "SELECT 
-                    r.ID, 
-                    r.FECHA_RESERVA, 
-                    r.FECHA_FIN, 
-                    r.ID_AREA_COMUN, 
-                    r.ID_USUARIO, 
-                    r.OBSERVACION_ENTREGA, 
-                    r.OBSERVACION_RECIBE, 
-                    r.VALOR, 
-                    r.ID_ESTADO_RESERVA,
-                    a.NOMBRE AS 'Nombre Area',
-                    u.NOMBRE AS 'Nombre Usuario', 
-                    u.APELLIDO AS 'Apellido Usuario'
-                FROM reservas r
-                JOIN areas_comunes a ON r.ID_AREA_COMUN = a.ID
-                JOIN usuarios u ON r.ID_USUARIO = u.ID
-                WHERE r.ID = ?";
-
-        $resultado = $this->ejecutarConsulta($sql, ["i", $id]);
-        if ($resultado->num_rows === 0) {
-            die("Reserva no encontrada.");
-        }
-
-        $reserva = $resultado->fetch_assoc();
-
-        require_once('views/components/layout/head.php');
         require_once('views/reservas/edit.php');
         require_once('views/components/layout/footer.php');
     }
 
     public function update()
     {
-        $id = $_GET['id']; // Obtener el ID de la reserva de los parámetros de la URL
-
-        // Recoger los datos del formulario
+        $id = $_GET['id'];
         $fechaReserva = $_POST['fecha_reserva'];
         $fechaFin = $_POST['fecha_fin'];
         $idAreaComun = $_POST['id_area_comun'];
         $idEstadoReserva = $_POST['id_estado_reserva'];
-        $observacionEntrega = $_POST['observacion_entrega'];
-        $observacionRecibe = $_POST['observacion_recibe'];
+        $observacionEntrega = $this->conexion->real_escape_string(trim($_POST['observacion_entrega'] ?? ''));
+        $observacionRecibe = $this->conexion->real_escape_string(trim($_POST['observacion_recibe'] ?? ''));
         $valor = $_POST['valor'];
 
-        // Actualizar la reserva en la base de datos
+        // Confirma los valores que están siendo recibidos
+        var_dump("Valor recibido de observacion_entrega:", $observacionEntrega);
+        var_dump("Valor recibido de observacion_recibe:", $observacionRecibe);
+
+        // Crear la consulta directamente
         $queryActualizar = "UPDATE reservas SET 
-               FECHA_RESERVA = ?, 
-               FECHA_FIN = ?, 
-               ID_AREA_COMUN = ?, 
-               ID_ESTADO_RESERVA = ?, 
-               OBSERVACION_ENTREGA = ?, 
-               OBSERVACION_RECIBE = ?, 
-               VALOR = ? 
-               WHERE ID = ?";
+        FECHA_RESERVA = '$fechaReserva', 
+        FECHA_FIN = '$fechaFin', 
+        ID_AREA_COMUN = $idAreaComun, 
+        ID_ESTADO_RESERVA = $idEstadoReserva, 
+        OBSERVACION_ENTREGA = '$observacionEntrega', 
+        OBSERVACION_RECIBE = '$observacionRecibe', 
+        VALOR = $valor 
+        WHERE ID = $id";
 
-        $this->ejecutarConsulta($queryActualizar, ["ssiiisdi", $fechaReserva, $fechaFin, $idAreaComun, $idEstadoReserva, $observacionEntrega, $observacionRecibe, $valor, $id]);
+        if ($this->conexion->query($queryActualizar) === TRUE) {
+            if ($this->conexion->affected_rows > 0) {
+                echo "Actualización realizada correctamente.";
+            } else {
+                echo "No se realizaron cambios. Verifica que los datos a actualizar sean diferentes.";
+            }
+        } else {
+            echo "Error en la actualización: " . $this->conexion->error;
+        }
 
-        // Obtener el correo del usuario que hizo la reserva
-        $queryUsuario = "SELECT u.email, u.NOMBRE FROM usuarios u JOIN reservas r ON r.ID_USUARIO = u.ID WHERE r.ID = ?";
+
+        // Obtener el correo y el nombre completo del usuario que hizo la reserva
+        $queryUsuario = "SELECT u.email, concat(usu.NOMBRE, ' ', usu.APELLIDO) as nombre_completo
+                        FROM users u
+                        JOIN usuarios usu ON u.usuario_id = usu.ID
+                        JOIN reservas r ON r.ID_USUARIO = u.ID
+                        WHERE r.ID = ?";
         $resultadoUsuario = $this->ejecutarConsulta($queryUsuario, ["i", $id]);
 
         if ($resultadoUsuario->num_rows > 0) {
             $usuario = $resultadoUsuario->fetch_assoc();
             $emailUsuario = $usuario['email'];
-            $nombreUsuario = $usuario['NOMBRE'];
+            $nombreUsuario = $usuario['nombre_completo'];
         } else {
             die("No se encontró el usuario de la reserva.");
         }
@@ -281,12 +291,10 @@ class ReservaController
         exit();
     }
 
-
-
     public function delete($id)
     {
         $sql = "DELETE FROM reservas WHERE ID = ?";
         $this->ejecutarConsulta($sql, ["i", $id]);
-        header("Location: /reservas"); // Redirigir a la lista de reservas
+        header("Location: /reservas");
     }
 }

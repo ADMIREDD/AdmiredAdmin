@@ -32,7 +32,7 @@ class PqrController
                 pqr.ID, 
                 pqr.DETALLE AS 'Detalle', 
                 estados.TIPO AS 'Estado', 
-                usuarios.NOMBRE AS 'Usuario', 
+                CONCAT(usuarios.NOMBRE, ' ', usuarios.APELLIDO) AS 'Usuario', 
                 pqr_tipo.NOMBRE AS 'Tipo de PQR', 
                 pqr.FECHA_SOLICITUD AS 'Fecha de Solicitud', 
                 pqr.FECHA_RESPUESTA AS 'Fecha de Respuesta', 
@@ -66,23 +66,25 @@ class PqrController
 
         $userId = (int)$_GET['id']; // Asegúrate de que sea un entero
 
-        // Aquí podrías agregar más validaciones si lo consideras necesario
-
         $query = "SELECT 
-    pqr.ID, 
-    pqr.DETALLE AS 'Detalle', 
-    estados.TIPO AS 'Estado', 
-    usuarios.NOMBRE AS 'UsuarioNombre', 
-    pqr_tipo.NOMBRE AS 'Tipo de PQR', 
-    pqr.FECHA_SOLICITUD AS 'Fecha de Solicitud', 
-    pqr.FECHA_RESPUESTA AS 'Fecha de Respuesta', 
-    pqr.RESPUESTA AS 'Respuesta'
-FROM pqr 
-JOIN estados ON pqr.ESTADO_ID = estados.ID
-JOIN usuarios ON pqr.USUARIO_ID = usuarios.ID
-JOIN pqr_tipo ON pqr.PQR_TIPO_ID = pqr_tipo.ID
-WHERE pqr.ID = ?";
-
+            pqr.ID, 
+            pqr.DETALLE AS 'Detalle', 
+            estados.TIPO AS 'Estado', 
+            CONCAT(usuarios.NOMBRE, ' ', usuarios.APELLIDO) AS 'UsuarioNombre', 
+            pqr_tipo.NOMBRE AS 'Tipo de PQR', 
+            pqr.FECHA_SOLICITUD AS 'Fecha de Solicitud', 
+            pqr.FECHA_RESPUESTA AS 'Fecha de Respuesta', 
+            pqr.RESPUESTA AS 'Respuesta'
+        FROM 
+            pqr 
+        JOIN 
+            estados ON pqr.ESTADO_ID = estados.ID
+        JOIN 
+            usuarios ON pqr.USUARIO_ID = usuarios.ID
+        JOIN 
+            pqr_tipo ON pqr.PQR_TIPO_ID = pqr_tipo.ID
+        WHERE 
+            pqr.ID = ?";
 
         $stmt = $this->conexion->prepare($query);
         $stmt->bind_param('i', $userId);
@@ -103,6 +105,7 @@ WHERE pqr.ID = ?";
         require_once('views/pqr/show.php');
         require_once('views/components/layout/footer.php');
     }
+
 
     public function respond()
     {

@@ -51,8 +51,10 @@
                         <div class="mb-3">
                             <label for="observacion_entrega" class="form-label">Observación Entrega</label>
                             <textarea class="form-control" id="observacion_entrega" name="observacion_entrega"
-                                rows="3"><?php echo $reserva['OBSERVACION_ENTREGA']; ?></textarea>
+                                rows="3"><?php echo htmlspecialchars($reserva['OBSERVACION_ENTREGA']); ?></textarea>
+
                         </div>
+
                         <div class="mb-3">
                             <label for="observacion_recibe" class="form-label">Observación Recibe</label>
                             <textarea class="form-control" id="observacion_recibe" name="observacion_recibe"
