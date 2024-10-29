@@ -290,11 +290,4 @@ class ReservaController
         header("Location: ?c=reserva&m=index");
         exit();
     }
-
-    public function delete($id)
-    {
-        $sql = "DELETE FROM reservas WHERE ID = ?";
-        $this->ejecutarConsulta($sql, ["i", $id]);
-        header("Location: /reservas");
-    }
 }

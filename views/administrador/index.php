@@ -73,45 +73,85 @@
                                                 </thead>
                                                 <tbody id="tbody">
                                                     <?php
-                                                    // LOOP TILL END OF DATA
-                                                    while ($rows = $resultado->fetch_assoc()) {
-                                                        // Usamos las funciones del controlador para convertir los IDs en sus valores de texto
-                                                        $tipoDocumento = $this->getTipoDocumento($rows['TIPO_DOCUMENTO_ID']);
-                                                        $rol = $this->getRol($rows['ROL_ID']);
+                                                    if (!$resultado || mysqli_num_rows($resultado) == 0) {
+                                                        echo "<tr><td colspan='13'>No se encontraron usuarios.</td></tr>";
+                                                    } else {
+                                                        while ($rows = $resultado->fetch_assoc()) {
+                                                            // Convertir IDs a texto
+                                                            $tipoDocumento = $this->getTipoDocumento($rows['TIPO_DOCUMENTO_ID']);
+                                                            $rol = $this->getRol($rows['ROL_ID']);
                                                     ?>
-                                                        <tr class="text-center">
-                                                            <!-- FETCHING DATA FROM EACH ROW OF EVERY COLUMN -->
-                                                            <td><?php echo $rows['ID']; ?></td>
-                                                            <td><?php echo $rows['NOMBRE']; ?></td>
-                                                            <td><?php echo $rows['APELLIDO']; ?></td>
-                                                            <td><?php echo $tipoDocumento; ?></td>
-                                                            <!-- Aquí mostramos el tipo de documento en texto -->
-                                                            <td><?php echo $rows['NO_DOCUMENTO']; ?></td>
-                                                            <td><?php echo isset($rows['FECHA_NACIMIENTO']) ? $rows['FECHA_NACIMIENTO'] : ''; ?>
-                                                            </td>
-                                                            <td><?php echo $rows['EMAIL']; ?></td>
-                                                            <td><?php echo substr($rows['CONTRASENA'], 0, 20) . '...'; ?>
-                                                            </td>
-                                                            <td><?php echo $rows['TELEFONO']; ?></td>
-                                                            <td><?php echo $rol; ?></td>
-                                                            <!-- Aquí mostramos el rol en texto -->
-                                                            <td><?php echo $rows['TORRE']; ?></td>
-                                                            <td><?php echo $rows['APTO']; ?></td>
-                                                            <td>
-                                                                <div class="d-flex gap-1">
-                                                                    <a href="?c=administrador&m=show&userId=<?php echo $rows['ID']; ?>"
-                                                                        class="submit boton1">Ver</a>
-                                                                    <a href="?c=administrador&m=edit&userId=<?php echo $rows['ID']; ?>"
-                                                                        class="submit boton2">Editar</a>
-                                                                    <a href="?c=administrador&m=destroy&userId=<?php echo $rows['ID']; ?>"
-                                                                        class="submit boton3">Eliminar</a>
+                                                    <tr class="text-center">
+                                                        <td><?php echo $rows['ID']; ?></td>
+                                                        <td><?php echo $rows['NOMBRE']; ?></td>
+                                                        <td><?php echo $rows['APELLIDO']; ?></td>
+                                                        <td><?php echo $tipoDocumento; ?></td>
+                                                        <td><?php echo $rows['NO_DOCUMENTO']; ?></td>
+                                                        <td><?php echo isset($rows['FECHA_NACIMIENTO']) ? $rows['FECHA_NACIMIENTO'] : ''; ?>
+                                                        </td>
+                                                        <td><?php echo $rows['EMAIL']; ?></td>
+                                                        <td><?php echo substr($rows['CONTRASENA'], 0, 20) . '...'; ?>
+                                                        </td>
+                                                        <td><?php echo $rows['TELEFONO']; ?></td>
+                                                        <td><?php echo $rol; ?></td>
+                                                        <td><?php echo $rows['TORRE']; ?></td>
+                                                        <td><?php echo $rows['APTO']; ?></td>
+                                                        <td>
+                                                            <div class="d-flex gap-1">
+                                                                <a href="?c=administrador&m=show&userId=<?php echo $rows['ID']; ?>"
+                                                                    class="submit boton1">Ver</a>
+                                                                <a href="?c=administrador&m=edit&userId=<?php echo $rows['ID']; ?>"
+                                                                    class="submit boton2">Editar</a>
+                                                                <a href="#" class="submit boton3" data-toggle="modal"
+                                                                    data-target="#confirmDeleteModal-<?php echo $rows['ID']; ?>">Eliminar</a>
+
+                                                                <!-- Modal de confirmación -->
+                                                                <div class="modal fade"
+                                                                    id="confirmDeleteModal-<?php echo $rows['ID']; ?>"
+                                                                    tabindex="-1" role="dialog"
+                                                                    aria-labelledby="confirmDeleteModalLabel-<?php echo $rows['ID']; ?>"
+                                                                    aria-hidden="true">
+                                                                    <div class="modal-dialog" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title"
+                                                                                    id="confirmDeleteModalLabel-<?php echo $rows['ID']; ?>">
+                                                                                    Confirmar eliminación</h5>
+                                                                                <button type="button" class="close"
+                                                                                    data-dismiss="modal"
+                                                                                    aria-label="Close">
+                                                                                    <span
+                                                                                        aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                ¿Estás seguro que deseas eliminar este
+                                                                                usuario?
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button"
+                                                                                    class="btn btn-secondary"
+                                                                                    data-dismiss="modal">Cancelar</button>
+                                                                                <form action="?c=administrador&m=delete"
+                                                                                    method="POST">
+                                                                                    <input type="hidden" name="userId"
+                                                                                        value="<?php echo $rows['ID']; ?>">
+                                                                                    <button type="submit"
+                                                                                        class="btn btn-danger">Eliminar</button>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                            </td>
-                                                        </tr>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
                                                     <?php
+                                                        }
                                                     }
                                                     ?>
                                                 </tbody>
+
 
                                             </table>
                                         </div>
@@ -213,23 +253,23 @@
 
     <!-- Preloader -->
     <script>
-        window.onload = function() {
-            document.getElementById("preload").style.display = "none";
-        };
+    window.onload = function() {
+        document.getElementById("preload").style.display = "none";
+    };
     </script>
 
     <!-- Lógica de búsqueda -->
     <script>
-        function fetchResults() {
-            const searchQuery = document.getElementById("search").value.toLowerCase();
-            const rows = document.querySelectorAll("#tbody tr");
+    function fetchResults() {
+        const searchQuery = document.getElementById("search").value.toLowerCase();
+        const rows = document.querySelectorAll("#tbody tr");
 
-            rows.forEach(row => {
-                const cells = row.querySelectorAll("td");
-                const rowText = Array.from(cells).map(cell => cell.textContent.toLowerCase()).join(" ");
-                row.style.display = rowText.includes(searchQuery) ? "" : "none";
-            });
-        }
+        rows.forEach(row => {
+            const cells = row.querySelectorAll("td");
+            const rowText = Array.from(cells).map(cell => cell.textContent.toLowerCase()).join(" ");
+            row.style.display = rowText.includes(searchQuery) ? "" : "none";
+        });
+    }
     </script>
 </body>
 

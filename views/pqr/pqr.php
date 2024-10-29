@@ -80,9 +80,39 @@ error_reporting(E_ALL);
                                                         <td>
                                                             <a href="?c=pqr&m=show&id=<?php echo $rows['ID']; ?>"
                                                                 class="submit boton1">Ver</a>
-                                                            <a href="?c=pqr&m=delete&ID=<?php echo $rows['ID']; ?>"
-                                                                class="submit boton3"
-                                                                onclick="return confirm('¿Está seguro de eliminar esta PQR?');">Eliminar</a>
+                                                            <a href="#" class="submit boton3" data-toggle="modal"
+                                                                data-target="#confirmDeleteModal-<?php echo $rows['ID']; ?>">Eliminar</a>
+
+                                                            <!-- Modal de confirmación -->
+                                                            <div class="modal fade"
+                                                                id="confirmDeleteModal-<?php echo $rows['ID']; ?>"
+                                                                tabindex="-1" role="dialog"
+                                                                aria-labelledby="confirmDeleteModalLabel-<?php echo $rows['ID']; ?>"
+                                                                aria-hidden="true">
+                                                                <div class="modal-dialog" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title"
+                                                                                id="confirmDeleteModalLabel-<?php echo $rows['ID']; ?>">
+                                                                                Confirmar eliminación</h5>
+                                                                            <button type="button" class="close"
+                                                                                data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            ¿Estás seguro que deseas eliminar esta PQR?
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button"
+                                                                                class="btn btn-secondary"
+                                                                                data-dismiss="modal">Cancelar</button>
+                                                                            <a href="?c=pqr&m=delete&ID=<?php echo $rows['ID']; ?>"
+                                                                                class="btn btn-danger">Eliminar</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </td>
                                                     </tr>
                                                     <?php
@@ -101,6 +131,7 @@ error_reporting(E_ALL);
             </div>
         </div>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pb32HFr4npALxGLYPDnM/LoCz8MzOkXMy9QaFzHKIzZwVM28Osl7CTh5cFgq+LhS" crossorigin="anonymous">
     </script>

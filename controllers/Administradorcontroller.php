@@ -180,29 +180,6 @@ class AdministradorController
         }
     }
 
-    public function destroy()
-    {
-        $userId = (int) $_GET['userId'];
-
-        $query = "SELECT * FROM usuarios WHERE ID = ?";
-        $stmt = mysqli_prepare($this->conexion, $query);
-        if (!$stmt) {
-            die("Error en la preparación de la consulta: " . mysqli_error($this->conexion));
-        }
-        mysqli_stmt_bind_param($stmt, 'i', $userId);
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
-        $user = mysqli_fetch_assoc($result);
-
-        if (!$user) {
-            die("Usuario no encontrado");
-        }
-
-        require_once('views/components/layout/head.php');
-        require_once('views/administrador/destroy.php');
-        require_once('views/components/layout/footer.php');
-    }
-
     public function delete()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
