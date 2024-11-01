@@ -10,8 +10,9 @@ error_reporting(E_ALL);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listado de PQR</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
     <link rel="stylesheet" href="./assets/css/index.css">
     <link type="image/x-icon" href="assets/img/logos/logo.png" rel="icon">
     <link type="image/x-icon" href="assets/img/logos/favicon.png" rel="icon">
@@ -59,6 +60,7 @@ error_reporting(E_ALL);
                                                         <th>FECHA SOLICITUD</th>
                                                         <th>FECHA RESPUESTA</th>
                                                         <th>RESPUESTA</th>
+                                                        <th>ARCHIVO</th>
                                                         <th>FUNCIONES</th>
                                                     </tr>
                                                 </thead>
@@ -69,13 +71,23 @@ error_reporting(E_ALL);
                                                     ?>
                                                     <tr>
                                                         <td><?php echo $rows['ID']; ?></td>
-                                                        <td><?php echo substr($rows['Detalle'], 0, 20) . '...'; ?></td>
+                                                        <td><?php echo isset($rows['Detalle']) ? substr($rows['Detalle'], 0, 20) . '...' : 'Sin detalle'; ?>
+                                                        </td>
+
                                                         <td><?php echo $rows['Estado']; ?></td>
                                                         <td><?php echo $rows['Usuario']; ?></td>
                                                         <td><?php echo $rows['Tipo de PQR']; ?></td>
                                                         <td><?php echo $rows['Fecha de Solicitud']; ?></td>
                                                         <td><?php echo $rows['Fecha de Respuesta']; ?></td>
-                                                        <td><?php echo substr($rows['Respuesta'], 0, 20) . '...'; ?>
+                                                        <td><?php echo isset($rows['Respuesta']) ? substr($rows['Respuesta'], 0, 20) . '...' : 'Sin respuesta'; ?>
+                                                        </td>
+                                                        </td>
+                                                        <td>
+                                                            <?php if (!empty($rows['ARCHIVOS'])): ?>
+                                                            Disponible
+                                                            <?php else: ?>
+                                                            Sin archivo
+                                                            <?php endif; ?>
                                                         </td>
                                                         <td>
                                                             <a href="?c=pqr&m=show&id=<?php echo $rows['ID']; ?>"
@@ -120,6 +132,7 @@ error_reporting(E_ALL);
                                                     }
                                                     ?>
                                                 </tbody>
+
                                             </table>
                                         </div>
                                     </div>

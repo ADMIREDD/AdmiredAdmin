@@ -74,7 +74,8 @@ class PqrController
             pqr_tipo.NOMBRE AS 'Tipo de PQR', 
             pqr.FECHA_SOLICITUD AS 'Fecha de Solicitud', 
             pqr.FECHA_RESPUESTA AS 'Fecha de Respuesta', 
-            pqr.RESPUESTA AS 'Respuesta'
+            pqr.RESPUESTA AS 'Respuesta',
+            pqr.ARCHIVOS AS 'Archivo'
         FROM 
             pqr 
         JOIN 

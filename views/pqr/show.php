@@ -33,6 +33,18 @@ error_reporting(E_ALL);
                     <?php echo htmlspecialchars($user['Fecha de Solicitud'] ?? 'Fecha no disponible'); ?></p>
                 <p><strong>Fecha de Respuesta:</strong>
                     <?php echo htmlspecialchars($user['Fecha de Respuesta'] ?? 'No hay respuesta aún'); ?></p>
+                <p><strong>Archivo Adjunto:</strong>
+                    <?php if (!empty($user['Archivo'])): ?>
+                    <a href="/SENA/AdmiredLanding/<?php echo $user['Archivo']; ?>" target="_blank"
+                        class="btn btn-primary">Descargar</a>
+                    <?php else: ?>
+                    Sin archivo
+                    <?php endif; ?>
+                </p>
+
+
+
+
                 <p><strong>Respuesta:</strong>
                     <?php echo htmlspecialchars($user['Respuesta'] ?? 'No hay respuesta aún'); ?></p>
 
@@ -87,23 +99,23 @@ error_reporting(E_ALL);
     </div>
 
     <script>
-        document.getElementById('responseForm').addEventListener('submit', function(event) {
-            var isEnviarRespuesta = event.submitter && event.submitter.value === 'customResponse';
-            var respuestaPersonalizada = document.getElementById('respuestaPersonalizada').value.trim();
+    document.getElementById('responseForm').addEventListener('submit', function(event) {
+        var isEnviarRespuesta = event.submitter && event.submitter.value === 'customResponse';
+        var respuestaPersonalizada = document.getElementById('respuestaPersonalizada').value.trim();
 
-            // Validar solo si es el botón "Enviar respuesta" el que se presionó
-            if (isEnviarRespuesta) {
-                if (!respuestaPersonalizada) {
-                    // Mostrar un mensaje de alerta y evitar el envío
-                    alert('Por favor, escribe tu respuesta personalizada antes de enviar.');
-                    event.preventDefault(); // Evita el envío del formulario
-                    return; // Salir de la función
-                } else {
-                    // Asignar la respuesta personalizada para enviar
-                    document.getElementById('respuestaPersonalizada').value = respuestaPersonalizada;
-                }
+        // Validar solo si es el botón "Enviar respuesta" el que se presionó
+        if (isEnviarRespuesta) {
+            if (!respuestaPersonalizada) {
+                // Mostrar un mensaje de alerta y evitar el envío
+                alert('Por favor, escribe tu respuesta personalizada antes de enviar.');
+                event.preventDefault(); // Evita el envío del formulario
+                return; // Salir de la función
+            } else {
+                // Asignar la respuesta personalizada para enviar
+                document.getElementById('respuestaPersonalizada').value = respuestaPersonalizada;
             }
-        });
+        }
+    });
     </script>
 
 </body>
