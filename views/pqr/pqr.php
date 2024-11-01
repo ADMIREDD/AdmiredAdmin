@@ -11,8 +11,6 @@ error_reporting(E_ALL);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listado de PQR</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-
     <link rel="stylesheet" href="./assets/css/index.css">
     <link type="image/x-icon" href="assets/img/logos/logo.png" rel="icon">
     <link type="image/x-icon" href="assets/img/logos/favicon.png" rel="icon">
@@ -73,7 +71,6 @@ error_reporting(E_ALL);
                                                         <td><?php echo $rows['ID']; ?></td>
                                                         <td><?php echo isset($rows['Detalle']) ? substr($rows['Detalle'], 0, 20) . '...' : 'Sin detalle'; ?>
                                                         </td>
-
                                                         <td><?php echo $rows['Estado']; ?></td>
                                                         <td><?php echo $rows['Usuario']; ?></td>
                                                         <td><?php echo $rows['Tipo de PQR']; ?></td>
@@ -81,9 +78,8 @@ error_reporting(E_ALL);
                                                         <td><?php echo $rows['Fecha de Respuesta']; ?></td>
                                                         <td><?php echo isset($rows['Respuesta']) ? substr($rows['Respuesta'], 0, 20) . '...' : 'Sin respuesta'; ?>
                                                         </td>
-                                                        </td>
                                                         <td>
-                                                            <?php if (!empty($rows['ARCHIVOS'])): ?>
+                                                            <?php if (isset($rows['ARCHIVOS']) && !empty($rows['ARCHIVOS'])): ?>
                                                             Disponible
                                                             <?php else: ?>
                                                             Sin archivo
@@ -94,45 +90,43 @@ error_reporting(E_ALL);
                                                                 class="submit boton1">Ver</a>
                                                             <a href="#" class="submit boton3" data-toggle="modal"
                                                                 data-target="#confirmDeleteModal-<?php echo $rows['ID']; ?>">Eliminar</a>
-
-                                                            <!-- Modal de confirmación -->
-                                                            <div class="modal fade"
-                                                                id="confirmDeleteModal-<?php echo $rows['ID']; ?>"
-                                                                tabindex="-1" role="dialog"
-                                                                aria-labelledby="confirmDeleteModalLabel-<?php echo $rows['ID']; ?>"
-                                                                aria-hidden="true">
-                                                                <div class="modal-dialog" role="document">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <h5 class="modal-title"
-                                                                                id="confirmDeleteModalLabel-<?php echo $rows['ID']; ?>">
-                                                                                Confirmar eliminación</h5>
-                                                                            <button type="button" class="close"
-                                                                                data-dismiss="modal" aria-label="Close">
-                                                                                <span aria-hidden="true">&times;</span>
-                                                                            </button>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            ¿Estás seguro que deseas eliminar esta PQR?
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <button type="button"
-                                                                                class="btn btn-secondary"
-                                                                                data-dismiss="modal">Cancelar</button>
-                                                                            <a href="?c=pqr&m=delete&ID=<?php echo $rows['ID']; ?>"
-                                                                                class="btn btn-danger">Eliminar</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
                                                         </td>
                                                     </tr>
+
+                                                    <!-- Modal de confirmación -->
+                                                    <div class="modal fade"
+                                                        id="confirmDeleteModal-<?php echo $rows['ID']; ?>" tabindex="-1"
+                                                        role="dialog"
+                                                        aria-labelledby="confirmDeleteModalLabel-<?php echo $rows['ID']; ?>"
+                                                        aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title"
+                                                                        id="confirmDeleteModalLabel-<?php echo $rows['ID']; ?>">
+                                                                        Confirmar eliminación</h5>
+                                                                    <button type="button" class="close"
+                                                                        data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    ¿Estás seguro que deseas eliminar esta PQR?
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-dismiss="modal">Cancelar</button>
+                                                                    <a href="?c=pqr&m=delete&ID=<?php echo $rows['ID']; ?>"
+                                                                        class="btn btn-danger">Eliminar</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     <?php
                                                         }
                                                     }
                                                     ?>
                                                 </tbody>
-
                                             </table>
                                         </div>
                                     </div>
