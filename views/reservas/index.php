@@ -9,16 +9,16 @@
     <link rel="stylesheet" href="./assets/css/index.css">
     <link type="image/x-icon" href="assets/img/logos/favicon.png" rel="icon">
     <script>
-    // Función para buscar reservas por nombre de usuario
-    function buscarReservas() {
-        const searchInput = document.getElementById('searchInput').value.toLowerCase();
-        const rows = document.querySelectorAll("tbody tr");
+        // Función para buscar reservas por nombre de usuario
+        function buscarReservas() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            const rows = document.querySelectorAll("tbody tr");
 
-        rows.forEach(row => {
-            const nombreUsuario = row.cells[4].textContent.toLowerCase(); // La celda del nombre de usuario
-            row.style.display = nombreUsuario.includes(searchInput) ? "" : "none";
-        });
-    }
+            rows.forEach(row => {
+                const nombreUsuario = row.cells[4].textContent.toLowerCase(); // La celda del nombre de usuario
+                row.style.display = nombreUsuario.includes(searchInput) ? "" : "none";
+            });
+        }
     </script>
 </head>
 
@@ -57,30 +57,31 @@
                                         </thead>
                                         <tbody>
                                             <?php foreach ($reservas as $reserva): ?>
-                                            <tr class="text-center">
-                                                <td><?php echo $reserva['ID']; ?></td>
-                                                <td><?php echo $reserva['Fecha Reserva']; ?></td>
-                                                <td><?php echo $reserva['Fecha Fin']; ?></td>
-                                                <td><?php echo $reserva['Nombre Area']; ?></td>
-                                                <td><?php echo $reserva['Nombre Usuario']; ?></td>
-                                                <td><?php echo $reserva['Estado Texto']; ?></td>
-                                                <td><?php echo (!empty(trim($reserva['Observación Entrega'])) && $reserva['Observación Entrega'] !== "0") ? htmlspecialchars($reserva['Observación Entrega']) : 'No disponible'; ?>
-                                                </td>
+                                                <tr class="text-center">
+                                                    <td><?php echo $reserva['ID']; ?></td>
+                                                    <td><?php echo $reserva['Fecha Reserva']; ?></td>
+                                                    <td><?php echo $reserva['Fecha Fin']; ?></td>
+                                                    <td><?php echo $reserva['Nombre Area']; ?></td>
+                                                    <td><?php echo $reserva['Nombre Usuario']; ?></td>
+                                                    <td><?php echo $reserva['Estado Texto']; ?></td>
+                                                    <td><?php echo (!empty($reserva['Observación Entrega']) && trim((string)$reserva['Observación Entrega']) !== "0") ? htmlspecialchars($reserva['Observación Entrega']) : 'No disponible'; ?>
+                                                    </td>
 
-                                                <td><?php echo (!empty(trim($reserva['Observación Recibe'])) && $reserva['Observación Recibe'] !== "0") ? htmlspecialchars($reserva['Observación Recibe']) : 'No disponible'; ?>
-                                                </td>
-
-
+                                                    <td><?php echo (!empty($reserva['Observación Recibe']) && trim((string)$reserva['Observación Recibe']) !== "0") ? htmlspecialchars($reserva['Observación Recibe']) : 'No disponible'; ?>
+                                                    </td>
 
 
-                                                <td><?php echo $reserva['Valor']; ?></td>
-                                                <td>
-                                                    <a href="?c=reserva&m=show&id=<?php echo $reserva['ID']; ?>"
-                                                        class="submit boton1">Ver</a>
-                                                    <a href="?c=reserva&m=edit&id=<?php echo $reserva['ID']; ?>"
-                                                        class="submit boton2">Editar</a>
-                                                </td>
-                                            </tr>
+
+
+
+                                                    <td><?php echo $reserva['Valor']; ?></td>
+                                                    <td>
+                                                        <a href="?c=reserva&m=show&id=<?php echo $reserva['ID']; ?>"
+                                                            class="submit boton1">Ver</a>
+                                                        <a href="?c=reserva&m=edit&id=<?php echo $reserva['ID']; ?>"
+                                                            class="submit boton2">Editar</a>
+                                                    </td>
+                                                </tr>
                                             <?php endforeach; ?>
                                         </tbody>
                                     </table>
