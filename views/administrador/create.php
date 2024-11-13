@@ -44,16 +44,27 @@ error_reporting(E_ALL);
                                                                     <td><input class="controls" type="text"
                                                                             name="no_documento" id="no_documento"
                                                                             placeholder="Ingrese su Número de Documento"
-                                                                            required></td>
+                                                                            required>
+                                                                        <?php if (isset($error_message) && strpos($error_message, 'documento') !== false): ?>
+                                                                            <div class="error-message" style="color: red;">
+                                                                                <?php echo $error_message; ?></div>
+                                                                        <?php endif; ?>
+                                                                    </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td><input class="controls" type="date"
                                                                             name="fecha_nacimiento"
                                                                             id="fecha_nacimiento" required></td>
-                                                                    <td><input class="controls" type="email"
+                                                                    <td>
+                                                                        <input class="controls" type="email"
                                                                             name="email" id="email"
                                                                             placeholder="Ingrese su Correo Electrónico"
-                                                                            required></td>
+                                                                            required>
+                                                                        <?php if (isset($error_message) && strpos($error_message, 'correo') !== false): ?>
+                                                                            <div class="error-message" style="color: red;">
+                                                                                <?php echo $error_message; ?></div>
+                                                                        <?php endif; ?>
+                                                                    </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td><input class="controls" type="password"
@@ -62,7 +73,12 @@ error_reporting(E_ALL);
                                                                     <td><input class="controls" type="text"
                                                                             name="telefono" id="telefono"
                                                                             placeholder="Ingrese su Número de Teléfono"
-                                                                            required></td>
+                                                                            required>
+                                                                        <?php if (isset($error_message) && strpos($error_message, 'teléfono') !== false): ?>
+                                                                            <div class="error-message" style="color: red;">
+                                                                                <?php echo $error_message; ?></div>
+                                                                        <?php endif; ?>
+                                                                    </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>
@@ -85,6 +101,8 @@ error_reporting(E_ALL);
                                                             </table>
                                                         </div>
                                                     </form>
+
+
                                                 </section>
                                             </div>
                                         </div>

@@ -157,6 +157,61 @@ class AdministradorController
             $torre = mysqli_real_escape_string($this->conexion, $_POST['torre']);
             $apto = mysqli_real_escape_string($this->conexion, $_POST['apto']);
 
+            // Verificar si el número de documento ya existe
+            $query = "SELECT * FROM usuarios WHERE NO_DOCUMENTO = ?";
+            $stmt = mysqli_prepare($this->conexion, $query);
+            if (!$stmt) {
+                die("Error en la preparación de la consulta: " . mysqli_error($this->conexion));
+            }
+            mysqli_stmt_bind_param($stmt, 's', $no_documento);
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+
+            if (mysqli_num_rows($result) > 0) {
+                $error_message = "El número de documento ya está registrado. Por favor, use otro número.";
+                require_once('views/components/layout/head.php');
+                require_once('views/administrador/create.php');
+                require_once('views/components/layout/footer.php');
+                return;
+            }
+
+            // Verificar si el correo ya existe
+            $query = "SELECT * FROM usuarios WHERE EMAIL = ?";
+            $stmt = mysqli_prepare($this->conexion, $query);
+            if (!$stmt) {
+                die("Error en la preparación de la consulta: " . mysqli_error($this->conexion));
+            }
+            mysqli_stmt_bind_param($stmt, 's', $email);
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+
+            if (mysqli_num_rows($result) > 0) {
+                $error_message = "El correo electrónico ya está registrado. Por favor, use otro correo.";
+                require_once('views/components/layout/head.php');
+                require_once('views/administrador/create.php');
+                require_once('views/components/layout/footer.php');
+                return;
+            }
+
+            // Verificar si el número de teléfono ya existe
+            $query = "SELECT * FROM usuarios WHERE TELEFONO = ?";
+            $stmt = mysqli_prepare($this->conexion, $query);
+            if (!$stmt) {
+                die("Error en la preparación de la consulta: " . mysqli_error($this->conexion));
+            }
+            mysqli_stmt_bind_param($stmt, 's', $telefono);
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+
+            if (mysqli_num_rows($result) > 0) {
+                $error_message = "El número de teléfono ya está registrado. Por favor, use otro número.";
+                require_once('views/components/layout/head.php');
+                require_once('views/administrador/create.php');
+                require_once('views/components/layout/footer.php');
+                return;
+            }
+
+            // Si no hay duplicados, proceder con la inserción
             $contrasena_hash = password_hash($contrasena, PASSWORD_BCRYPT);
 
             $query = "INSERT INTO usuarios (NOMBRE, APELLIDO, TIPO_DOCUMENTO_ID, NO_DOCUMENTO, FECHA_NACIMIENTO, EMAIL, CONTRASENA, TELEFONO, ROL_ID, TORRE, APTO) 
@@ -179,6 +234,8 @@ class AdministradorController
             require_once('views/components/layout/footer.php');
         }
     }
+
+
 
     public function delete()
     {
