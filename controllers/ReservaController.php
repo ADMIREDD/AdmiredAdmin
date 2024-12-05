@@ -262,7 +262,7 @@ class ReservaController
 
             // Contenido del correo
             $mail->isHTML(true);
-            $mail->Subject = "Actualización de Reserva";
+            $mail->Subject = "Actualizacion de Reserva";
             $mail->Body = '<html><head><style>' . $styles . '</style></head><body>';
             $mail->Body .= '<div class="container">';
             $mail->Body .= '<h1>Actualización de Reserva</h1>';
